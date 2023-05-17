@@ -1,5 +1,7 @@
 <?php include_once "constants/header.php"; ?>
 <!--MAIN-->
+
+
 <div class="scrollable-content">
                         <div class ="greetings">
                             <div class="hello">
