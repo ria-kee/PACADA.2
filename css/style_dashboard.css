@@ -558,14 +558,66 @@ main .recent-leaves a:hover{
     transition: all 300ms ease;
 }
 
-.right .quick-action .item:hover {
+/*FILE-LEAVE HOVER ANIMATION*/
+.right .quick-action .item.file-leave:hover {
     box-shadow: none;
     cursor: pointer;
-    border: 2px solid var(--color-p1);
-
-
-
+    background-color:var(--color-p1);
+    border: 2px solid var(--color-p3);
+    color: var(--color-light);
 }
+
+.right .quick-action .item.file-leave:hover .text-muted{
+    color: var(--color-light);
+}
+
+.right .quick-action .item.file-leave:hover .icon{
+    background-color:var(--color-p3);
+}
+
+
+
+/*TIME-OFF HOVER ANIMATION*/
+.right .quick-action .item.time-off:hover {
+    box-shadow: none;
+    cursor: pointer;
+    background-color:var(--color-p1);
+    border: 2px solid var(--color-p3);
+    color: var(--color-light);
+}
+
+.right .quick-action .item.time-off:hover .text-muted{
+    color: var(--color-light);
+}
+
+.right .quick-action .item.time-off:hover .icon{
+    background-color:var(--color-p3);
+}
+
+
+/*TIME-OFF HOVER ANIMATION*/
+.right .quick-action .item.add-credits:hover {
+    box-shadow: none;
+    cursor: pointer;
+    background-color:var(--color-s2);
+    border: 2px solid var(--color-s1);
+    color: var(--color-light);
+}
+
+.right .quick-action .item.add-credits:hover .text-muted{
+    color: var(--color-light);
+}
+
+.right .quick-action .item.add-credits:hover .icon{
+    background-color:var(--color-s1);
+}
+
+
+
+
+
+
+
 
 .right .quick-action .item .right {
     display: flex;
