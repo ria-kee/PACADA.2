@@ -251,7 +251,6 @@ main{
     color: var(--color-light);
      position: fixed;
      margin-left: 200px;
-
 }
 
 .header{
@@ -279,12 +278,17 @@ main{
 main .greetings{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    height: 207px;
+    height: 180px;
     padding: var(--card-padding);
     border-radius: var(--card-border-radius);
 
     box-shadow: var(--box-shadow);
     background-color: var(--color-light);
+}
+
+main h2.date{
+    color: var(--color-p3);
+    font-size: 16px;
 }
 
 main .greetings:hover{
@@ -294,16 +298,16 @@ main .greetings:hover{
 /*Greetings photo*/
 main .greetings .greet{
     position: relative;
-    width: 294px;
-    height: 186px;
-    left: 50px;
+    width: 229px;
+    height: 145px;
+    left: 100px;
     bottom: 10px;
 }
 
  /*Greetings text*/
  .hello{
     color:var(--color-text);
-    padding: 40px;
+    padding: 0 40px;
 }
  .hello h2{
      font-size: 28px;

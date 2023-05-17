@@ -5,6 +5,7 @@
 <div class="scrollable-content">
                         <div class ="greetings">
                             <div class="hello">
+                                <h2 class="date">May 17, 2023</h2>
                                 <h2>Good Morning, Jaz!</h2>
                                 <h3>Have a nice day at work.</h3>
                             </div>
