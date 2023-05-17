@@ -18,16 +18,7 @@
 
     <div class="header">
         <h1 class="location">Dashboard</h1>
-        <div class="profile">
-            <div class="info">
-                <p>Hello, <b>Jaz!</b></p>
-                <small class="text-muted">Super Admin</small>
-            </div>
-            <div class="profile-photo">
-                <img src="./assets/img/no-profile.png" alt="">
-            </div>
-        </div>
-    </div>
+        <?php include_once "header_userInfo.php"?>
 
     <aside>
     <div class="top">
@@ -45,23 +36,23 @@
             <h3>Dashboard</h3>
         </a>
 
-        <a href="#">
+        <a href="departments.php">
             <span class="material-symbols-rounded">domain</span>
             <h3>Departments</h3>
         </a>
 
-        <a href="#">
+        <a href="employees.php">
             <span class="material-symbols-rounded">badge</span>
             <h3>Employees</h3>
             <!--                                <span class="material-symbols-rounded">expand_more</span>-->
         </a>
 
-        <a href="#">
+        <a href="leave.php">
             <span class="material-symbols-rounded">event_upcoming</span>
             <h3>Leave</h3>
         </a>
 
-        <a href="#">
+        <a href="timeOff.php">
             <span class="material-symbols-rounded">work_history</span>
             <h3>Time-Off</h3>
         </a>
@@ -70,11 +61,11 @@
             <span class="material-symbols-rounded">manage_accounts</span>
             <h3>Admins</h3>
         </a>
-        <a href="#">
+        <a href="profile.php">
             <span class="material-symbols-rounded">person</span>
             <h3>Profile</h3>
         </a>
-        <a href="#">
+        <a href="logout.php">
             <span class="material-symbols-rounded">logout</span>
             <h3>Logout</h3>
         </a>

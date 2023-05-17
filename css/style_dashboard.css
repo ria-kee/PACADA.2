@@ -5,6 +5,7 @@
     /*for nav bar*/
     --color-p1: #7D7DD2;
     --color-p2: #E9E9FF;
+    --color-danger: #DF4759;
     /*for buttons*/
     --color-p3: #5555A5;
     /*for background*/
@@ -20,6 +21,7 @@
     --color-submit: #4B4B4B;
     --color-light: #FAFAFA;
     --color-shadow: rgba(132, 139, 200, 0.18);
+
 
     --card-border-radius: 2rem;
     --border-radius-1: 0.4rem;
@@ -205,6 +207,10 @@ aside .sidebar a:last-child{
     position: absolute;
     bottom: 2rem;
     width: 100%;
+}
+
+aside .sidebar a:last-child:hover{
+    color:var(--color-danger);
 }
 
 aside .sidebar a.active{
