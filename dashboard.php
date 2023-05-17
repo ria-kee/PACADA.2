@@ -1,7 +1,8 @@
-<?php include_once "constants/header.php"; ?>
+<?php include_once "header/active_dashboard.php";?>
+
 <!--MAIN-->
 
-
+<main>
 <div class="scrollable-content">
                         <div class ="greetings">
                             <div class="hello">
@@ -135,8 +136,11 @@
                                 </div>
 </div>
                            </main>
+
+
                              <!---------------END OF MAIN--------------->
-                    <?php include_once "constants/footer.php"; ?>
+
+                                <div class="right">
                                 <!---------------START OF RECENT UPDATES--------------->
                                 <div class="recent-updates">
                                     <h2>Recent Updates</h2>
