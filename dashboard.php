@@ -6,12 +6,16 @@
 <div class="scrollable-content">
                         <div class ="greetings">
                             <div class="hello">
+                                <?php
+                                date_default_timezone_set('Asia/Manila');
+                                $currentDate = date('F d, Y');
+                                $currentTime = date('h:i:s A');
+                                ?>
                                 <?php date_default_timezone_set('Asia/Manila'); ?>
                                 <div class="datetime">
-                                    <h2 class="date"><?php echo date('F d, Y'); ?> </h2>
-                                    <h3><?php echo date('h:i A'); ?></h3>
+                                    <h2 class="date" id="date"><?php echo $currentDate; ?></h2>
+                                    <h3 class="date" id="time"><?php echo $currentTime; ?></h3>
                                 </div>
-<!--                                <h2 class="date">--><?php //echo date('F d, Y')." ". date('h:i A'); ?><!--</h2>-->
                                 <h2>Good Morning, Jaz!</h2>
                                 <h3>Have a nice day at work.</h3>
                             </div>
@@ -258,6 +262,31 @@
 
                             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                             <script src="js/script_dashboard.js"></script>
+                            <script>
+                                function updateTime() {
+                                    var currentTime = new Date();
+                                    var hours = currentTime.getHours();
+                                    var minutes = currentTime.getMinutes();
+                                    var seconds = currentTime.getSeconds();
+
+                                    // Add leading zeros to the hours, minutes, and seconds if necessary
+                                    hours = (hours < 10 ? "0" : "") + hours;
+                                    minutes = (minutes < 10 ? "0" : "") + minutes;
+                                    seconds = (seconds < 10 ? "0" : "") + seconds;
+
+                                    // Determine AM or PM
+                                    var ampm = (hours < 12) ? "AM" : "PM";
+
+                                    // Convert hours to 12-hour format
+                                    hours = (hours > 12) ? hours - 12 : hours;
+                                    hours = (hours == 0) ? 12 : hours;
+
+                                    // Update the time display
+                                    document.getElementById('time').innerHTML = hours + ":" + minutes + ":" + seconds + " " + ampm;
+                                }
+
+                                setInterval(updateTime, 1000); // Refresh the time every second
+                            </script>
 
                     </body>
                 </html>

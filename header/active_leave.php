@@ -11,16 +11,14 @@
 </head>
 <body>
 <div class="container">
-    <div class="header"></div>
     <div class="background"></div>
-
-    <!--END OF ASIDE-->
-
-    <div class="header">
-        <h1 class="location">Leave</h1>
+    <div class="header header-grid">
+        <div class="location">
+            <h1 class="location">Leave</h1>
+        </div>
         <?php include_once "header_userInfo.php"?>
-
-        <aside>
+    </div>
+    <aside>
             <div class="top">
                 <div class="logo">
                     <img src="assets/PACADA/PACADA.png" alt="PACADA icon">

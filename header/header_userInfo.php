@@ -7,4 +7,3 @@
         <img src="./assets/img/no-profile.png" alt="">
     </div>
 </div>
-</div>

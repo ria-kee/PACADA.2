@@ -11,15 +11,13 @@
 </head>
 <body>
 <div class="container">
-    <div class="header"></div>
-    <div class="background"></div>
-
-    <!--END OF ASIDE-->
-
-    <div class="header">
+        <div class="background"></div>
+    <div class="header header-grid">
+        <div class="location">
         <h1 class="location">Dashboard</h1>
+        </div>
         <?php include_once "header_userInfo.php"?>
-
+    </div>
     <aside>
     <div class="top">
         <div class="logo">
@@ -30,6 +28,7 @@
             <span class="material-symbols-rounded">close</span>
         </div>
     </div>
+
     <div class="sidebar">
         <a href="dashboard.php" class="active">
             <span class="material-symbols-rounded">grid_view</span>
@@ -44,7 +43,6 @@
         <a href="employees.php">
             <span class="material-symbols-rounded">badge</span>
             <h3>Employees</h3>
-            <!--                                <span class="material-symbols-rounded">expand_more</span>-->
         </a>
 
         <a href="leave.php">

@@ -11,24 +11,13 @@
 </head>
 <body>
 <div class="container">
-    <div class="header"></div>
     <div class="background"></div>
-
-    <!--END OF ASIDE-->
-
-    <div class="header">
-        <h1 class="location">Departments</h1>
-        <div class="profile">
-            <div class="info">
-                <p>Hello, <b>Jaz!</b></p>
-                <small class="text-muted">Super Admin</small>
-            </div>
-            <div class="profile-photo">
-                <img src="./assets/img/no-profile.png" alt="">
-            </div>
+    <div class="header header-grid">
+        <div class="location">
+            <h1 class="location">Departments</h1>
         </div>
+        <?php include_once "header_userInfo.php"?>
     </div>
-
     <aside>
         <div class="top">
             <div class="logo">

@@ -70,7 +70,6 @@ body{
     gap: 1.8rem;
     grid-template-columns: 14rem auto 23rem;
 
-
 }
 
 a{
@@ -118,8 +117,6 @@ small{
     border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
-
-
 }
 
 .profile-photo img {
@@ -148,8 +145,6 @@ small{
 
 aside{
     height: 100vh;
-
-
 }
 
 aside .top{
@@ -158,7 +153,6 @@ aside .top{
     justify-content: space-between;
     margin-top: 1.4rem;
     position: fixed;
-
 }
 
 aside .logo{
@@ -183,7 +177,6 @@ aside .sidebar{
     top: 1rem;
     position: fixed;
     margin-top: 5rem;
-
 }
 
 aside .h3{
@@ -222,6 +215,7 @@ aside .sidebar a.active{
     color: var(--color-p1);
     margin-left: 0;
 }
+
 aside .sidebar a.active:before{
     content:"";
     width: 6px;
@@ -256,24 +250,48 @@ main{
     height: 700px;
 }
 
- h1.location{
+ .header .location{
     color: var(--color-light);
-     position: fixed;
-}
 
+}
 
 .header{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    padding: 20px;
+    grid-template-columns: 1fr 1fr;
+    padding: 5px;
     height: 70px;
-    width: 100%;
     background-color: var(--color-p1);
     z-index: -1001;
     position: fixed;
-    border-radius: 50px;
-    margin-left: 180px;
+    border-radius: 50px 0px 0px 50px;
+    width: calc(100% - 250px); /* Subtracting 180px from 100% */
+    left: 250px; /* Set the left position to 180px */
 }
+
+.header > * {
+    padding: 10px; /* Add padding for better visibility */
+}
+
+.profile{
+    justify-self: end;
+    display: flex;
+    gap: 1rem;
+    text-align: right;
+    color: var(--color-light);
+}
+
+.profile .text-muted{
+    color: var(--color-light);
+}
+
+
+
+
+
+
+
+
+
 
 .background{
     background-color: var(--color-p4);
@@ -349,9 +367,6 @@ main .greetings .greet{
  .hello h2{
      font-size: 28px;
  }
-
-
-
 
 main .insights {
     margin-top: 1.5rem;
@@ -447,8 +462,6 @@ main .insights small{
     display: block;
 }
 
-
-
 .insights .Leaves{
     background-color: var(--color-p3);
     color: var(--color-light);
@@ -532,21 +545,6 @@ main .recent-leaves a:hover{
 
 .right .top button{
     display: none;
-}
-
-
-.header .profile{
-    margin-left: 75rem;
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-    text-align: right;
-    color: var(--color-light);
-    position: fixed;
-}
-
- .profile .text-muted{
-    color: var(--color-light);
 }
 
 
