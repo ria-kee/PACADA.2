@@ -11,11 +11,8 @@
     height: min-content;
 }
 
-.body-item {
-    display: flex;
-    align-items: center;
-    justify-items: center;
-}
+
+
 
 .body-item{
     display: flex;
@@ -125,10 +122,7 @@
     box-shadow: var(--box-shadow);
 }
 
-.grid-container .grid-item {
-    display: flex;
-    align-items: center;
-}
+
 
 .grid-container .grid-item .search {
     display: flex;
