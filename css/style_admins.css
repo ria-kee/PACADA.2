@@ -1,0 +1,92 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    background-color: var(--color-light);
+    width: 52rem;
+    height: 7rem;
+    border-radius: var(--border-radius-3);
+    margin-left: 10rem;
+    margin-top: 12rem;
+    padding: 10px 15px 10px 15px;
+    box-shadow: var(--box-shadow);
+}
+
+.grid-container .grid-item {
+    display: flex;
+    align-items: center;
+}
+
+.grid-container .grid-item .search {
+    display: flex;
+    height: 40px;
+    width: 400px;
+    padding: 5px;
+    border-radius: var(--border-radius-2);
+    background-color: var(--color-p2);
+}
+
+.grid-item span {
+    margin-top: 2px;
+    color: var(--color-input);
+}
+
+.searchField {
+    background-color: var(--color-p2);
+    width: 400px;
+    height: 30px;
+    font-size: 14px;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.category {
+    background-color: var(--color-light);
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    width: 100px;
+    height: 30px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    border-radius: var(--border-radius-2);
+    width: 160px;
+    height: 40px;
+}
+
+.dropdown::after {
+    content: "\f078"; /* Font Awesome chevron-down icon */
+    font-family: "Font Awesome 5 Free";
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.dropdown select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius-2);
+    padding: 5px 30px 5px 10px;
+    width: 160px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.grid-container button {
+    background-color: var(--color-p3);
+    color: var(--color-light);
+    padding: 10px;
+    border-radius: var(--border-radius-2);
+    height: 40px;
+    width: 120px;
+    font-size: 14px;
+    font-weight: 400;
+}

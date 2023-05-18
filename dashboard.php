@@ -6,7 +6,12 @@
 <div class="scrollable-content">
                         <div class ="greetings">
                             <div class="hello">
-                                <h2 class="date">May 17, 2023</h2>
+                                <?php date_default_timezone_set('Asia/Manila'); ?>
+                                <div class="datetime">
+                                    <h2 class="date"><?php echo date('F d, Y'); ?> </h2>
+                                    <h3><?php echo date('h:i A'); ?></h3>
+                                </div>
+<!--                                <h2 class="date">--><?php //echo date('F d, Y')." ". date('h:i A'); ?><!--</h2>-->
                                 <h2>Good Morning, Jaz!</h2>
                                 <h3>Have a nice day at work.</h3>
                             </div>
@@ -203,6 +208,8 @@
                                     <!---------------START OF QUICK ACTIONS--------------->
                                     <div class="quick-action">
                                         <h2>Quick Actions</h2>
+
+                                        <a href="#">
                                         <div class="item file-leave">
                                             <div class="icon">
                                                 <span class="material-symbols-rounded">event</span>
@@ -214,7 +221,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        </a>
 
+                                        <a href="#">
                                         <div class="item time-off">
                                             <div class="icon">
                                                 <span class="material-symbols-rounded">acute</span>
@@ -226,8 +235,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        </a>
 
-
+                                        <a href="#">
                                         <div class="item add-credits">
                                             <div class="icon">
                                                 <span class="material-symbols-rounded">add_card</span>
@@ -239,8 +249,7 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
+                                        </a>
                                     </div>
 
                                 </div>

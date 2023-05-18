@@ -6,6 +6,7 @@
     --color-p1: #7D7DD2;
     --color-p2: #E9E9FF;
     --color-danger: #DF4759;
+    --color-background: #FFFFFF;
     /*for buttons*/
     --color-p3: #5555A5;
     /*for background*/
@@ -55,7 +56,7 @@ body{
     height: 100vh;
     font-family: "Poppins", sans-serif;
     font-size: 0.88rem;
-    background: var(--color-light);
+    background: var(--color-background);
     user-select: none;
     overflow-x: hidden;
     color: var(--color-text);
@@ -111,10 +112,13 @@ small{
 }
 
 .profile-photo{
+    border: 2px solid var(--color-p3);
     width: 2.8rem;
     height:  2.8rem;
     border-radius: 50%;
     overflow: hidden;
+    cursor: pointer;
+
 
 }
 
@@ -292,9 +296,36 @@ main .greetings{
     background-color: var(--color-light);
 }
 
+
+.datetime {
+    white-space: nowrap;
+}
+
+.datetime h2,
+.datetime h3 {
+    display: inline;
+    margin: 0;
+}
+
+.datetime h2.date {
+    margin-right: 10px;
+}
+
+.datetime h3 {
+    color:var(--color-light);
+    background-color:var(--color-p3);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 30px;
+}
+
+
 main h2.date{
     color: var(--color-p3);
     font-size: 16px;
+    display: inline;
 }
 
 main .greetings:hover{
@@ -360,10 +391,16 @@ main .insights > div.Employees span {
     color: var(--color-light);
 }
 
+main .insights > div.Departments span {
+    background-color: var(--color-p3);
+    color: var(--color-light);
+}
+
 main .insights > div .middle{
     display: flex;
     align-items: center;
     justify-content: space-between;
+
 }
 
 main .insights h3{
@@ -425,7 +462,7 @@ main .insights small{
 }
 
 .insights .Departments{
-    background-color: var(--color-s1);
+    background-color: var(--color-p1);
     color: var(--color-light);
     fill: var(--color-light);
 }
@@ -434,7 +471,6 @@ main .insights small{
 /* ==================RECENT LEAVES===================== */
 main .recent-leaves{
     margin-top: 2rem;
-
 }
 
 main .recent-leaves h2{
