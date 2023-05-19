@@ -1,4 +1,19 @@
 
+.whole-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    padding: 10px;
+    gap: 10px;
+    border: 2px solid red;
+    margin-top: 8rem;
+}
+
+.table{
+    border: 2px solid red;
+}
+
+
 .body-container{
     display: grid;
     grid-template-columns: auto auto;
@@ -6,13 +21,10 @@
     justify-content: center;
     gap: 40px;
     padding: 5px;
-    margin-top: 8rem;
+    /*margin-top: 8rem;*/
     width: calc(100vw - 20rem);
     height: min-content;
 }
-
-
-
 
 .body-item{
     display: flex;
@@ -30,6 +42,7 @@
     background-color: var(--color-light);
     padding: 10px 15px 10px 15px;
     box-shadow: var(--box-shadow);
+    cursor: pointer;
 
 }
 
@@ -78,7 +91,7 @@
     display: flex;
     position: relative;
     justify-content: center;
-    background-color: var(--color-b3);
+    background-color: var(--color-excel1);
     color: var(--color-light);
     border-radius: var(--border-radius-2);
     height: 40px;
@@ -88,8 +101,9 @@
 }
 
 .button2:hover{
-    background-color: var(--color-b2);
+    background-color: var(--color-excel2);
     box-shadow: none;
+    cursor: pointer;
 }
 
 .button2 button{
@@ -164,7 +178,6 @@
     border-radius: var(--border-radius-2);
     width: 160px;
     height: 40px;
-
 }
 
 .dropdown::after {
@@ -181,14 +194,13 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-color: transparent;
+    background-color: #fff;
     border: 1px solid #ccc;
     border-radius: var(--border-radius-2);
     padding: 5px 30px 5px 10px;
     width: 160px;
     height: 40px;
     cursor: pointer;
-    box-shadow: var(--box-shadow);
 }
 
 .grid-container button {
