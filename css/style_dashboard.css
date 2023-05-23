@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
-
+@import 'node_modules/material-symbols/rounded.scss';
 :root {
     /*VARIABLES*/
     /*for nav bar*/
@@ -53,6 +53,7 @@
     list-style: none;
     box-sizing: border-box;
 }
+
 
 html{
     font-size: 14px;
@@ -293,15 +294,6 @@ main{
     color: var(--color-light);
 }
 
-
-
-
-
-
-
-
-
-
 .background{
     background-color: var(--color-p4);
     height: 100%;
@@ -322,7 +314,6 @@ main .greetings{
     box-shadow: var(--box-shadow);
     background-color: var(--color-light);
 }
-
 
 .datetime {
     white-space: nowrap;
@@ -362,6 +353,7 @@ main .greetings:hover{
 /*Greetings photo*/
 main .greetings .greet{
     position: relative;
+    display: flex;
     width: 229px;
     height: 145px;
     left: 100px;
@@ -372,9 +364,10 @@ main .greetings .greet{
  .hello{
     color:var(--color-text);
     padding: 0 40px;
+
 }
  .hello h2{
-     font-size: 28px;
+     font-size: 25px;
  }
 
 main .insights {

@@ -16,8 +16,8 @@
                                     <h2 class="date" id="date"><?php echo $currentDate; ?></h2>
                                     <h3 class="date" id="time"><?php echo $currentTime; ?></h3>
                                 </div>
-                                <h2>Good Morning, Jaz!</h2>
-                                <h3>Have a nice day at work.</h3>
+                                <h2 id="greeting"> <span id="name"></span>!</h2>
+                                <h3 id="randomText"></h3>
                             </div>
                             <div class="greet">
                                 <img src="assets/svg/greetings.svg" alt="">
@@ -262,6 +262,8 @@
 
                             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                             <script src="js/script_dashboard.js"></script>
+
+
                             <script>
                                 function updateTime() {
                                     var currentTime = new Date();

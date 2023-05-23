@@ -205,7 +205,7 @@
     };
 
 
-    //ADMIN: Create Admin
+    //Employee: Create Employee
     function createEmployee($conn, $employee_Uid,$employee_FirstName,$employee_MiddleName,$employee_LastName,$employee_Department,$employee_AppointmentDate,$employee_leaveCreditBalance,$employee_Email,$employee_pw){
         $sql = "INSERT INTO employees (employees_uid, employees_FirstName, employees_MiddleName, employees_LastName, employees_Department, employee_appointmentDate, employee_leaveCreditBalance, employees_Email, employees_Password)values (?,?,?,?,?,?,?,?,?);";
         //submit sql into db in proper way (statement); initialize new prepared statement to avoid injections
@@ -217,7 +217,7 @@
 
         $employee_hashedPwd = password_hash($employee_pw,password_default);
 
-        mysqli_stmt_bind_param($stmt, "ssssss",$admin_Uid,$admin_FirstName,$admin_MiddleName,$admin_LastName,$admin_email,$employee_hashedPwd);
+        mysqli_stmt_bind_param($stmt, "sssssssss",$employee_Uid,$employee_FirstName,$employee_MiddleName,$employee_LastName,$employee_Department,$employee_AppointmentDate, $employee_leaveCreditBalance, $employee_Email,$employee_pw);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         header("location:../addEmployee.php?error=none");
@@ -226,3 +226,40 @@
 
 
 
+
+//    FOR SIGN IN
+
+function admin_emptyInputSignin ($email,$pwd){
+    $result;
+    if (empty($email || $pwd)){
+        $result=true;
+    }
+    else {
+        $result=false;
+    }
+
+    return $result;
+};
+
+function signinUser($conn, $email, $pwd){
+    $adminExists = adminExists($conn,$admin_Uid, $admin_email);
+
+    if($adminExists === false){
+        header("location: ../index.php?error=incorrectemail");
+    }
+
+    $pwdHashed = $adminExists["adminsPassword"];
+
+    $checkPwd = password_verify($pwd, $pwdHashed);
+
+    if($checkPwd === false) {
+        header("location: ../index.php?error=incorrectpassword");
+    }
+    else if ($checkPwd === true){
+        session_start();
+        $_SESSION["userid"] = $adminExists["adminsUid"];
+        $_SESSION["userid"] = $adminExists["adminsFirstName"];
+        header("location: ../dashboard.php");
+        exit();
+    }
+}

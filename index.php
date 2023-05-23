@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -33,7 +33,9 @@
                         <div class="input-wrap">
 <!--SIGN IN FORM-->
                             <form action ="includes/signin.inc.php" method="post">
+
                             <input
+                                name="email"
                                 type="email"
                                 class="input-field"
                                 autocomplete="off"
@@ -46,7 +48,6 @@
                             <input
                                 type="password"
                                 name="password"
-                                minlength="8"
                                 class="input-field"
                                 autocomplete="off"
                                 required
@@ -55,7 +56,11 @@
 
                         </div>
 
-                        <input type="submit" value="Sign In" class="sign-btn" />
+                        <button type="submit" name="submit" value="Sign In" class="sign-btn" > Sign In</button>
+
+<!--                        if($_GET["error] =="invalidemail"-->
+
+
                 </form>
                         <p class="text">
                             Forgotten your password?

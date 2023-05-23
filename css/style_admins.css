@@ -1,3 +1,26 @@
+#dropdownMenuButton1 {
+    /* Add your custom styles here */
+    border-radius: var(--border-radius-1);
+}
+
+.whole-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    grid-gap: 10px;
+    padding: 10px;
+    /*border: 2px solid red;*/
+    margin-top: 8rem;
+    height: calc(100vh - 9rem);
+}
+
+.tablead{
+    padding: 20px;
+    background-color: #fff;
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: auto;
+}
 
 .body-container{
     display: grid;
@@ -6,9 +29,9 @@
     justify-content: center;
     gap: 40px;
     padding: 5px;
-    margin-top: 8rem;
     width: calc(100vw - 20rem);
     height: min-content;
+    /*border: 2px solid red;*/
 }
 
 
@@ -114,10 +137,10 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     background-color: var(--color-light);
-    width: 52rem;
+    width: min-content;
     height: 7rem;
     border-radius: var(--border-radius-3);
     padding: 10px 15px 10px 15px;
