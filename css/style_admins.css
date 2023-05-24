@@ -1,6 +1,19 @@
 #dropdownMenuButton1 {
-    /* Add your custom styles here */
     border-radius: var(--border-radius-1);
+}
+
+/* Style for the disabled "Add as Admin" button */
+#addAdminButton[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    cursor: no-drop;
+    pointer-events: auto;
+}
+
+.vl {
+    border-left: 2px solid var(--color-shadow);
+    height: 100%;
 }
 
 .whole-container{
@@ -27,7 +40,7 @@
     grid-template-columns: auto auto;
     grid-template-rows: auto;
     justify-content: center;
-    gap: 40px;
+    gap: 20px;
     padding: 5px;
     width: calc(100vw - 20rem);
     height: min-content;
@@ -44,7 +57,7 @@
 
 .button-container{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     height: 7rem;
     width: min-content;
@@ -152,7 +165,7 @@
 .grid-container .grid-item .search {
     display: flex;
     height: 40px;
-    width: 400px;
+    width: calc(100vw - 59.5rem);
     padding: 5px;
     border-radius: var(--border-radius-2);
     background-color: var(--color-p2);
@@ -165,7 +178,7 @@
 
 .searchField {
     background-color: var(--color-p2);
-    width: 400px;
+    width: 100%;
     height: 30px;
     font-size: 14px;
     font-weight: 300;
@@ -185,34 +198,52 @@
     position: relative;
     display: inline-block;
     border-radius: var(--border-radius-2);
-    width: 160px;
+    /*width: 160px;*/
+    /*height: 40px;*/
+}
+
+.actions{
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    width: fit-content;
+    /*border: 2px solid red;*/
+}
+
+.actions span{
+    color:var(--color-p1);
+}
+
+.actions h3{
+    color: var(--color-input);
+}
+
+.dropdown .btn{
     height: 40px;
-
+    width: 140px;
 }
+/*.dropdown::after {*/
+/*    content: "\f078"; !* Font Awesome chevron-down icon *!*/
+/*    font-family: "Font Awesome 5 Free";*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    right: 10px;*/
+/*    transform: translateY(-50%);*/
+/*    pointer-events: none;*/
+/*}*/
 
-.dropdown::after {
-    content: "\f078"; /* Font Awesome chevron-down icon */
-    font-family: "Font Awesome 5 Free";
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    pointer-events: none;
-}
-
-.dropdown select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-color: transparent;
-    border: 1px solid #ccc;
-    border-radius: var(--border-radius-2);
-    padding: 5px 30px 5px 10px;
-    width: 160px;
-    height: 40px;
-    cursor: pointer;
-    box-shadow: var(--box-shadow);
-}
+/*.dropdown select {*/
+/*    appearance: none;*/
+/*    -webkit-appearance: none;*/
+/*    -moz-appearance: none;*/
+/*    background-color: transparent;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: var(--border-radius-2);*/
+/*    padding: 5px 30px 5px 10px;*/
+/*    width: 160px;*/
+/*    height: 40px;*/
+/*    cursor: pointer;*/
+/*    box-shadow: var(--box-shadow);*/
+/*}*/
 
 .grid-container button {
     background-color: var(--color-p1);
@@ -230,5 +261,6 @@
 .grid-container button:hover{
     background-color: var(--color-p3);
     box-shadow: none;
+
 }
 

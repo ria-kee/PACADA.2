@@ -3912,13 +3912,13 @@ textarea.form-control-lg {
 
 .dropdown-item:focus,.dropdown-item:hover {
     color: #1e2125;
-    background-color: #e9ecef;
+    background-color: var(--color-p2);
 }
 
 .dropdown-item.active,.dropdown-item:active {
     color: #fff;
     text-decoration: none;
-    background-color: #0d6efd;
+    background-color: var(--color-p1);
 }
 
 .dropdown-item.disabled,.dropdown-item:disabled {
@@ -5845,6 +5845,7 @@ textarea.form-control-lg {
 .modal.fade .modal-dialog {
     transition: transform .3s ease-out;
     transform: translate(0,-50px);
+
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -5889,7 +5890,7 @@ textarea.form-control-lg {
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(0,0,0,.2);
-    border-radius: .3rem;
+    border-radius: var(--border-radius-3);
     outline: 0;
 }
 
@@ -5912,14 +5913,16 @@ textarea.form-control-lg {
 }
 
 .modal-header {
+    background-color: var(--color-p1);
+    color: #fff;
     display: flex;
     flex-shrink: 0;
     align-items: center;
     justify-content: space-between;
     padding: 1rem 1rem;
     border-bottom: 1px solid #dee2e6;
-    border-top-left-radius: calc(.3rem - 1px);
-    border-top-right-radius: calc(.3rem - 1px);
+    border-top-left-radius: var(--border-radius-3);
+    border-top-right-radius: var(--border-radius-3);
 }
 
 .modal-header .btn-close {
