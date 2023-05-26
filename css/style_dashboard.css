@@ -1,5 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
-@import 'node_modules/material-symbols/rounded.scss';
+
+/* material-symbols-rounded-regular - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Material Symbols Rounded';
+    font-style: normal;
+    font-weight: 400;
+    src: url('assets/fonts/material-symbols/material-symbols-rounded-v113-latin-regular.eot'); /* IE9 Compat Modes */
+    src: url('assets/fonts/material-symbols/material-symbols-rounded-v113-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('assets/fonts/material-symbols/material-symbols-rounded-v113-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('assets/fonts/material-symbols/material-symbols-rounded-v113-latin-regular.woff') format('woff'), /* Modern Browsers */
+    url('assets/fonts/material-symbols/material-symbols-rounded-v113-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('assets/fonts/material-symbols/material-symbols-rounded-v113-latin-regular.svg#MaterialSymbolsRounded') format('svg'); /* Legacy iOS */
+}
+
 :root {
     /*VARIABLES*/
     /*for nav bar*/
@@ -52,6 +65,7 @@
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 

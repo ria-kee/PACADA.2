@@ -2,7 +2,10 @@
 include('includes/dbh.inc.php');
 
 
-$sql = "SELECT *, TIMESTAMPDIFF(YEAR, employees_birthdate, CURDATE()) AS age FROM employees WHERE is_admin = 1";
+$sql = "SELECT employees.*, departments.dept_uid, TIMESTAMPDIFF(YEAR, employees.employees_birthdate, CURDATE()) AS age FROM employees
+        LEFT JOIN departments ON employees.employees_Department = departments.uid
+        WHERE employees.is_admin = 1";
+
 
 if (isset($_POST['search']['value'])) {
     $search_value = $_POST['search']['value'];
@@ -27,23 +30,24 @@ if (isset($_POST['order'])) {
             $column = 'employees_uid';
             break;
         case 1:
-            $column = 'employees_FirstName';
-            break;
-        case 2:
-            $column = 'employees_MiddleName';
-            break;
-        case 3:
-            $column = 'employees_LastName';
-            break;
-        case 4:
-            $column = 'employees_sex';
-            break;
-        case 5:
-            $column = 'age';
-            break;
-        case 6:
             $column = 'employees_Department';
             break;
+        case 2:
+            $column = 'employees_FirstName';
+            break;
+        case 3:
+            $column = 'employees_MiddleName';
+            break;
+        case 4:
+            $column = 'employees_LastName';
+            break;
+        case 5:
+            $column = 'employees_sex';
+            break;
+        case 6:
+            $column = 'age';
+            break;
+
         // Add cases for other columns as needed
 
         // Use employees_uid as the default column
@@ -61,7 +65,7 @@ $data = array();
 $query = mysqli_query($conn, $sql);
 $count_all_rows = mysqli_num_rows($query);
 
-// Apply search filter if there is any
+// Apply search filter
 if (isset($_POST['search']['value'])) {
     $filtered_query = mysqli_query($conn, $sql);
     $filtered_rows = mysqli_num_rows($filtered_query);
@@ -69,25 +73,22 @@ if (isset($_POST['search']['value'])) {
     $filtered_rows = $count_all_rows;
 }
 
-if ($_POST['length'] != -1) {
-    $start = $_POST['start'];
-    $length = $_POST['length'];
-    $sql .= " LIMIT " . $start . ", " . $length;
-}
 
-$query = mysqli_query($conn, $sql);
 while ($row = mysqli_fetch_assoc($query)) {
     $subarray = array();
     $subarray[] = strtoupper($row['employees_uid']);
+    $subarray[] = $row['dept_uid']; // Fetching department name from the join
     $subarray[] = ucwords(strtolower($row['employees_FirstName']));
     $subarray[] = ucwords(strtolower($row['employees_MiddleName']));
     $subarray[] = ucwords(strtolower($row['employees_LastName']));
     $subarray[] = strtoupper($row['employees_sex']);
     $subarray[] = $row['age'];
-    $subarray[] = $row['employees_Department'];
-    $subarray[] = '<a href="javascript:void();" class="btn btn-sm btn-danger" data-employee-id="'.$row['employees_uid'].'"><i class="bi bi-person-dash-fill"></i> Remove</a>';
+    $adminName = ucwords(strtolower($row['employees_FirstName'])) . ' ' . strtoupper(substr($row['employees_MiddleName'], 0, 1)) . '. ' . ucwords(strtolower($row['employees_LastName']));
+    $subarray[] = '<button type="button" id="removeBtn_'.$row['employees_uid'].'" class="btn btn-sm btn-danger remove-admin-button" data-toggle="modal" data-target="#confirmModal" data-employeeid="'.$row['employees_uid'].'" data-adminname="'.$adminName.'"><i class="bi bi-person-dash-fill"></i> Remove</button>';
+
     $data[] = $subarray;
 }
+
 
 $output = array(
     'data' => $data,

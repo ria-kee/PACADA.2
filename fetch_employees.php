@@ -7,7 +7,7 @@ $selectedDepartment = $_POST['department'];
 // Prepare and execute the query to fetch employees based on the selected department and exclude those in the admins table
 $query = "SELECT * FROM employees WHERE employees_Department = ? AND is_admin = 0 AND is_superadmin = 0";
 $stmt = $conn->prepare($query);
-$stmt->bind_param("s", $selectedDepartment);
+$stmt->bind_param("i", $selectedDepartment);
 $stmt->execute();
 $result = $stmt->get_result();
 
