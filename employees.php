@@ -85,7 +85,7 @@
             </div>
             <div class="grid-item button1" data-bs-toggle="modal" data-bs-target="#AddAdmin">
                 <span class="material-symbols-rounded">add</span>
-                <button>Add Admin</button>
+                <button>Add Employee</button>
             </div>
 
             <div class="vl"></div>

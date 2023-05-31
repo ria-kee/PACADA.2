@@ -177,4 +177,4 @@
 </div>
 
 <!-- JAVASCRIPT -->
-<script src="/js/script_admins.js"></script>
+<script src="js/script_admins.js"></script>

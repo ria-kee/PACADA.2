@@ -4,6 +4,6 @@
         <small class="text-muted">Super Admin</small>
     </div>
     <div class="profile-photo">
-        <img src="../assets/img/no-profile.png" alt="">
+        <img src="assets/img/no-profile.png" alt="">
     </div>
 </div>
