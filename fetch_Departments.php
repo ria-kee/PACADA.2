@@ -71,5 +71,4 @@ $output = array(
     'recordsFiltered' => $filtered_rows,
 );
 
-// Send the output as JSON
 echo json_encode($output);

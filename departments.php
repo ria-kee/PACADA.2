@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <script src="js/bootstrap/bootstrap.bundle.min.js"></script>
 <!-- DATATABLE LIBRARY -->
-<link rel="stylesheet" href="/css/bootstrap/datatables.min.css">
+<link rel="stylesheet" href="css/bootstrap/datatables.min.css">
 <script src="js/bootstrap/datatables.min.js"></script>
 <!-- CUSTOM CSS -->
 <link rel="stylesheet" href="css/style_department.css">

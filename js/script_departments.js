@@ -1,3 +1,4 @@
+
 var deptTable = $('#deptTable').DataTable({
     serverSide: true,
     processing: true,

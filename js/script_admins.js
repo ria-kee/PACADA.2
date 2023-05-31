@@ -1,6 +1,3 @@
-
-//script_admins.js
-
 // POPULATE ADMIN TABLE
 var table = $('#adminTable').DataTable({
     serverSide: true,
