@@ -8,7 +8,7 @@
     <link rel="icon" href="../assets/PACADA/PACADA.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-    <link rel="stylesheet" href="css/style_dashboard.css">
+    <link rel="stylesheet" href="../css/style_dashboard.css">
 
 </head>
 <body>
@@ -23,7 +23,7 @@
     <aside>
             <div class="top">
                 <div class="logo">
-                    <img src="assets/PACADA/PACADA.png" alt="PACADA icon">
+                    <img src="../assets/PACADA/PACADA.png" alt="PACADA icon">
                     <h2 >PACADA</h2>
                 </div>
                 <div class="close" id="close-btn">

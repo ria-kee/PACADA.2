@@ -17,7 +17,7 @@ var table = $('#adminTable').DataTable({
         $(row).attr('employees_uid', data[0]);
     },
     columnDefs: [{
-        targets: [6],
+        targets: [7],
         orderable: false
     }],
     buttons: [
@@ -103,7 +103,7 @@ $('#excelExport').click(function() {
 
 
     $(document).ready(function() {
-    var table = $('#adminTable').DataTable();
+
 
     $('.searchField').on('keyup', function() {
     table.search(this.value).draw();
@@ -197,6 +197,7 @@ departmentSelect.addEventListener('change', function () {
     input.value = value;
 }
 
+
     // Check if hyphen is already present
     if (value.indexOf('-') !== -1) {
     var parts = value.split('-');
@@ -208,9 +209,18 @@ departmentSelect.addEventListener('change', function () {
     input.value = prefix + '-' + suffix;
 }
 
-    if (value.length === 4 && event.inputType !== 'deleteContentBackward') {
+    if (value.length === 3 && event.inputType !== 'deleteContentBackward') {
     input.value = value + '-';
 }
+
+        // Add or remove "is-valid" class based on conditions
+        var dataListOptions = document.getElementById('datalistOptions').options;
+        var matchedOption = Array.from(dataListOptions).find(option => option.value === value);
+        if (matchedOption) {
+            input.classList.add('is-valid');
+        } else {
+            input.classList.remove('is-valid');
+        }
 }
 
     // Event listener to prevent input beyond 8 characters
@@ -221,11 +231,6 @@ departmentSelect.addEventListener('change', function () {
     event.preventDefault();
 }
 });
-
-
-
-
-
 
 
 
@@ -281,7 +286,7 @@ $('#addAdminButton').click(function() {
             data: { employeeID: employeeID, isAdmin: 1 },
             success: function(response) {
                 // Show the success alert
-                $('#successAlert').removeClass('d-none').addClass('show').html('<i class="bi-check-circle-fill me-2"></i><strong>Success!</strong> New admin has been added');
+                $('#successAlert').removeClass('d-none').addClass('show').html('<i class="bi-check-circle-fill me-2"></i><strong>Success!</strong> New admin has been added.');
                 $('#adminTable').DataTable().ajax.reload();
                 // Close the success alert after 3 seconds
                 setTimeout(function() {
@@ -290,7 +295,7 @@ $('#addAdminButton').click(function() {
             },
             error: function() {
                 // Show the error alert
-                $('#errorAlert').removeClass('d-none').addClass('show').html('<i class="bi-exclamation-octagon-fill me-2"></i><strong>Error!</strong> An error occurred while updating the employee is_admin value.');
+                $('#errorAlert').removeClass('d-none').addClass('show').html('<i class="bi-exclamation-octagon-fill me-2"></i><strong>Error!</strong> An error occurred while assigning the employee as admin.');
 
                 // Close the error alert after 3 seconds
                 setTimeout(function() {
@@ -302,9 +307,11 @@ $('#addAdminButton').click(function() {
         // Close the modal or perform any other actions
         $('#AddAdmin').modal('hide');
     } else {
-        // Display an error message or take appropriate action
-        var errorMessage = $('<div class="alert alert-danger">Invalid employee selected. Please choose a valid employee.</div>');
+        // Display an error message
+        var errorMessage = $('<div>Invalid employee selected. Please choose a valid employee.</div>');
         $('#InvalidEmployeeError').html(errorMessage);
+        const inputElement = document.getElementById("Employee");
+        inputElement.classList.add("is-invalid");
     }
 });
 $('#AddAdmin').on('hidden.bs.modal', function () {

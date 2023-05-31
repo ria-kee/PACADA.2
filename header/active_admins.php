@@ -14,7 +14,7 @@
                 <!--    <link rel="stylesheet" href="/css/bootstrap/datatables.min.css">-->
                 <!--    <link rel="stylesheet" href="/css/bootstrap/style.css">-->
 
-    <link rel="stylesheet" href="/css/style_dashboard.css">
+    <link rel="stylesheet" href="../css/style_dashboard.css">
 </head>
 <body>
 <div class="container">
@@ -28,7 +28,7 @@
     <aside>
             <div class="top">
                 <div class="logo">
-                    <img src="assets/PACADA/PACADA.png" alt="PACADA icon">
+                    <img src="../assets/PACADA/PACADA.png" alt="PACADA icon">
                     <h2 >PACADA</h2>
                 </div>
                 <div class="close" id="close-btn">

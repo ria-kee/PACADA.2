@@ -1,0 +1,224 @@
+
+
+
+#dropdownMenuButton1 {
+    border-radius: var(--border-radius-1);
+}
+
+/* Style for the disabled "Add as " button */
+#addDepartmentButton[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    cursor: no-drop;
+    pointer-events: auto;
+}
+
+#EditDepartmentButton[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    cursor: no-drop;
+    pointer-events: auto;
+}
+
+.vl {
+    border-left: 2px solid var(--color-shadow);
+    height: 100%;
+}
+
+.whole-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    grid-gap: 10px;
+    padding: 10px;
+    /*border: 2px solid red;*/
+    margin-top: 8rem;
+    height: calc(100vh - 9rem);
+}
+
+.tablead{
+    padding: 20px;
+    background-color: #fff;
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: auto;
+}
+
+.form-select{
+    width:15rem;
+    border-radius: var(--border-radius-2);
+    height: 40px;
+}
+
+.body-container{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
+    justify-content: center;
+    gap: 20px;
+    padding: 5px;
+    width: calc(100vw - 20rem);
+    height: min-content;
+
+}
+
+
+.body-item{
+    display: flex;
+    align-items: center;
+}
+
+.button-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    height: 7rem;
+    width: min-content;
+    padding: 5px;
+    border-radius: var(--border-radius-2);
+    background-color: var(--color-light);
+    padding: 10px 15px 10px 15px;
+    box-shadow: var(--box-shadow);
+
+
+}
+
+/*ADD ADMIN*/
+
+.button1{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    background-color: var(--color-s2);
+    color: var(--color-light);
+    border-radius: var(--border-radius-2);
+    height: 40px;
+    width: 140px;
+    cursor: pointer;
+    box-shadow: var(--box-shadow);
+}
+
+.button1:hover{
+    background-color: var(--color-s1);
+    box-shadow: none;
+}
+
+.button1 button{
+    color: var(--color-light);
+    font-size: 14px;
+    font-weight: 400;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.button1 .material-symbols-rounded{
+    color: var(--color-light);
+    margin-top:8px;
+    height: min-content;
+    margin-right: 4px;
+}
+
+.button1 span{
+    margin-top: 2px;
+}
+
+
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+    background-color: var(--color-light);
+    width: min-content;
+    height: 7rem;
+    border-radius: var(--border-radius-3);
+    padding: 10px 15px 10px 15px;
+    box-shadow: var(--box-shadow);
+}
+
+
+
+.grid-container .grid-item .search {
+    display: flex;
+    height: 40px;
+    width: calc(100vw - 48rem);
+    padding: 5px;
+    border-radius: var(--border-radius-2);
+    background-color: var(--color-p2);
+
+}
+
+.grid-item span {
+    margin-top: 2px;
+    color: var(--color-input);
+}
+
+.searchField {
+    background-color: var(--color-p2);
+    width: 100%;
+    height: 30px;
+    font-size: 14px;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.category {
+    background-color: var(--color-light);
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    width: 100px;
+    height: 30px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    border-radius: var(--border-radius-2);
+    /*width: 160px;*/
+    /*height: 40px;*/
+}
+
+.actions{
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    width: fit-content;
+    /*border: 2px solid red;*/
+}
+
+.actions span{
+    color:var(--color-p1);
+}
+
+.actions h3{
+    color: var(--color-input);
+}
+
+.dropdown .btn{
+    height: 40px;
+    width: 140px;
+}
+
+
+.grid-container button {
+    background-color: var(--color-p1);
+    color: var(--color-light);
+    padding: 10px;
+    border-radius: var(--border-radius-2);
+    height: 40px;
+    width: 120px;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    box-shadow: var(--box-shadow);
+}
+
+.grid-container button:hover{
+    background-color: var(--color-p3);
+    box-shadow: none;
+
+}
+

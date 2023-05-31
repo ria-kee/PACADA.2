@@ -110,7 +110,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <span class="material-symbols-rounded">add_circle</span>
-                <h1 class="modal-title" id="exampleModalLabel">Add an Admin</h1>
+                <h1 class="modal-title" id="exampleModalLabel">New Admin</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -131,21 +131,25 @@
                                 ?>
                             </select>
                         </div>
-
+                        <div class="form-group">
                         <div class="mb-3" id="employeeField" style="display: none;">
                             <label for="Employee" class="form-label">Which Employee?</label>
                             <input class="form-control" list="datalistOptions" id="Employee" placeholder="Enter Employee ID"
                                    autocomplete="off" oninput="autoInputHyphen(event)" />
                             <datalist id="datalistOptions">
                             </datalist>
+                            <div class="mb-3">
+                            <span id="InvalidEmployeeError" class="text-danger">
+                            </span>
+                            </div>
                         </div>
-                        <div id="InvalidEmployeeError"></div>
+                        </div>
                     </fieldset>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="addAdminButton">Add as Admin</button>
+                <button type="submit" class="btn btn-primary" id="addAdminButton">Add as Admin</button>
             </div>
         </div>
     </div>

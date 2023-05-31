@@ -1,11 +1,12 @@
 <?php
 include('includes/dbh.inc.php');
 
+$pageLength = $_POST['length'];
+$start = $_POST['start'];
 
 $sql = "SELECT employees.*, departments.dept_uid, TIMESTAMPDIFF(YEAR, employees.employees_birthdate, CURDATE()) AS age FROM employees
         LEFT JOIN departments ON employees.employees_Department = departments.uid
-        WHERE employees.is_admin = 1";
-
+        WHERE employees.is_admin = 1 ";
 
 if (isset($_POST['search']['value'])) {
     $search_value = $_POST['search']['value'];
@@ -60,7 +61,6 @@ if (isset($_POST['order'])) {
 } else {
     $sql .= " ORDER BY employees_uid ASC";
 }
-
 $data = array();
 $query = mysqli_query($conn, $sql);
 $count_all_rows = mysqli_num_rows($query);
@@ -72,6 +72,10 @@ if (isset($_POST['search']['value'])) {
 } else {
     $filtered_rows = $count_all_rows;
 }
+
+$sql .= " LIMIT $start, $pageLength";
+
+$query = mysqli_query($conn, $sql);
 
 
 while ($row = mysqli_fetch_assoc($query)) {
@@ -89,12 +93,10 @@ while ($row = mysqli_fetch_assoc($query)) {
     $data[] = $subarray;
 }
 
-
 $output = array(
     'data' => $data,
     'draw' => intval($_POST['draw']),
     'recordsTotal' => $count_all_rows,
     'recordsFiltered' => $filtered_rows,
 );
-
 echo json_encode($output);

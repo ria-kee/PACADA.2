@@ -47,7 +47,7 @@ var name = "Jaz";
 
 // Array of greetings
 var greetings = [
-    "Kamusta, " + name + "!",
+    "Kamusta, " + name + "?",
     "Hello, " + name + "!",
     "Hi there, " + name + "!",
     "Greetings, " + name + "!",
