@@ -1,14 +1,14 @@
 <!-- jQuery CDN Library -->
-<script src="/js/bootstrap/jquery-3.6.0.min.js"></script>
+<script src="js/bootstrap/jquery-3.6.0.min.js"></script>
 <!-- BOOTSTRAP LIBRARY -->
-<link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-<script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="js/bootstrap/bootstrap.bundle.min.js"></script>
 <!-- DATATABLE LIBRARY -->
 <link rel="stylesheet" href="/css/bootstrap/datatables.min.css">
-<script src="/js/bootstrap/datatables.min.js"></script>
+<script src="js/bootstrap/datatables.min.js"></script>
 <!-- CUSTOM CSS -->
-<link rel="stylesheet" href="/css/style_department.css">
+<link rel="stylesheet" href="css/style_department.css">
 
 <!--EXPORT-->
 <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>

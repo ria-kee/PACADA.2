@@ -126,3 +126,7 @@
         </table>
     </div>
 </div>
+
+
+<!-- JAVASCRIPT -->
+<script src="js/script_employees.js"></script>
