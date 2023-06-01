@@ -44,18 +44,16 @@
             <div class="grid-item">
                 <div class="search">
                     <span class="material-symbols-rounded">search</span>
-                    <input type="text" class="searchField" placeholder="Search for name, id, or etc.">
+                    <input type="text" class="searchField" placeholder="Search for acronym, department, or etc.">
                 </div>
             </div>
         </div>
-
-
-
         <div class="button-container body-item">
             <div class="grid-item actions">
                 <span class="material-symbols-rounded">sprint</span>
                 <h3>Quick Action</h3>
             </div>
+            <div class="grid-tem"></div>
             <div class="grid-tem"></div>
             <div class="grid-tem actions">
                 <span class="material-symbols-rounded">download</span>
@@ -65,6 +63,13 @@
                 <span class="material-symbols-rounded">add</span>
                 <button><h4  style="font-weight: normal;">Add Department</h4></button>
             </div>
+            <div class="grid-item button2">
+                <span class="material-symbols-rounded">Inventory_2</span>
+                <button>Archive</button>
+            </div>
+
+
+
 
             <div class="vl"></div>
             <div class="grid-item">
@@ -74,8 +79,16 @@
                         File Type
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" type="button" id="excelExport">Excel</a></li>
-                        <li><a class="dropdown-item" type="button" id="pdfExport">PDF</a></li>
+                        <li><a class="dropdown-item d-flex justify-content-between align-items-center" type="button" id="excelExport">
+                                <span>Excel</span>
+                                <i class="bi bi-filetype-xlsx"></i>
+                            </a>
+                        </li>
+                        <li><a class="dropdown-item d-flex justify-content-between align-items-center" type="button" id="pdfExport">
+                                <span>PDF</span>
+                                <i class="bi bi-filetype-pdf"></i>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -177,23 +190,22 @@
 </div>
 
 <!--REMOVE DEPT MODAL-->
-
-<!-- REMOVE ADMIN MODAL -->
 <div class="modal fade" id="RemoveDept" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <span class="material-symbols-rounded">gpp_bad</span>
-                <h1 class="modal-title" id="confirmModalLabel">Confirm Removal</h1>
+                <span class="material-symbols-rounded">inventory_2</span>
+                <h1 class="modal-title" id="confirmModalLabel">Confirm Deactivation</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h3>Are you sure you want to remove Department: <b><span id="deptName"></span></b>?</h3>
+                <h3>Are you sure you want to archive Department: <b><span id="deptName"></span></b>?</h3>
+                <h5 style="font-family: 'Poppins Light'">You can view the deactivated departments by clicking the "Archive" button.</h5>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" onclick="confirmRemoveAdmin()">Yes, Remove</button>
+                <button type="button" class="btn btn-danger" onclick="">Yes, Deactivate</button>
             </div>
         </div>
     </div>

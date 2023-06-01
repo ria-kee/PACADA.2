@@ -94,13 +94,14 @@ $('#excelExport').click(function() {
     deptTable.button('.buttons-excel').trigger();
     console.log('Export Excel clicked');
 });
+
 $(document).ready(function() {
 
     $('.searchField').on('keyup', function() {
-        table.search(this.value).draw();
-    });
+        deptTable.search(this.value).draw();
 });
-$('.dataTables_filter').hide();
+});
+    $('.dataTables_filter').hide();
 
 
 // ADD MODAL
@@ -476,22 +477,23 @@ edit_acronym.addEventListener('input', function() {
 
 //DELETE DEPT
 $(document).on('click', '.remove-button', function() {
-    var uID = $(this).data('uID');
+    var uID = $(this).data('id');
     var acronyms = $(this).data('acronyms');
     $('#deptName').text(acronyms);
     $('#RemoveDept').modal('show'); // Show the confirmation modal
-    // Store the employee ID to be used later for removal
+    // Store the dept ID to be used later for archive;
     $('#RemoveDept').data('uID', uID);
 });
 
 
 $(document).on('click', '#RemoveDept .btn-danger', function() {
-    var uID = $('#RemoveDept').data('uID');
+    var UID = $('#RemoveDept').data('uID');
+
     // Perform the AJAX request to remove the admin
     $.ajax({
         url: 'remove_department.php',
         type: 'POST',
-        data: { uID: uID },
+        data: { uID: UID },
         success: function(response) {
             // Show the success alert
             $('#successAlert').removeClass('d-none').addClass('show').html('<i class="bi-check-circle-fill me-2"></i><strong>Success!</strong> ' + response);
@@ -505,9 +507,9 @@ $(document).on('click', '#RemoveDept .btn-danger', function() {
                 $('#successAlert').removeClass('show').addClass('d-none');
             }, 3000);
         },
-        error: function() {
-            // Show the error alert
-            $('#errorAlert').removeClass('d-none').addClass('show').html('<i class="bi-exclamation-octagon-fill me-2"></i><strong>Error!</strong> An error occurred while removing the admin.');
+        error: function(xhr, status, error) {
+            // Show the error alert with the custom error message
+            $('#errorAlert').removeClass('d-none').addClass('show').html('<i class="bi-exclamation-octagon-fill me-2"></i><strong>Error!</strong> ' + xhr.responseText);
 
             // Close the modal
             $('#RemoveDept').modal('hide');
@@ -515,8 +517,9 @@ $(document).on('click', '#RemoveDept .btn-danger', function() {
             // Close the error alert after 3 seconds
             setTimeout(function() {
                 $('#errorAlert').removeClass('show').addClass('d-none');
-            }, 3000);
+            }, 5000);
         }
+
     });
 });
 

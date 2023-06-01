@@ -77,8 +77,16 @@
                         File Type
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" type="button" id="excelExport">Excel</a></li>
-                        <li><a class="dropdown-item" type="button" id="pdfExport">PDF</a></li>
+                        <li><a class="dropdown-item d-flex justify-content-between align-items-center" type="button" id="excelExport">
+                                <span>Excel</span>
+                                <i class="bi bi-filetype-xlsx"></i>
+                            </a>
+                        </li>
+                        <li><a class="dropdown-item d-flex justify-content-between align-items-center" type="button" id="pdfExport">
+                                <span>PDF</span>
+                                <i class="bi bi-filetype-pdf"></i>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -121,7 +129,7 @@
                             <select id="Department" class="form-select">
                                 <option value="0" selected disabled>Select Department</option>
                                 <?php
-                                $query = mysqli_query($conn, "SELECT * FROM departments ORDER BY dept_uid");
+                                $query = mysqli_query($conn, "SELECT * FROM departments WHERE is_active=1 ORDER BY dept_uid");
 
                                 while ($row = mysqli_fetch_array($query)) {
                                     $departmentName = $row['dept_uid'];
@@ -170,7 +178,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" onclick="confirmRemoveAdmin()">Yes, Remove</button>
+                <button type="button" class="btn btn-danger" onclick="">Yes, Remove</button>
             </div>
         </div>
     </div>

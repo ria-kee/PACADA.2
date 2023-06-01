@@ -1,5 +1,5 @@
 
-
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
 
 #dropdownMenuButton1 {
     border-radius: var(--border-radius-1);
@@ -70,9 +70,10 @@
     align-items: center;
 }
 
+
 .button-container{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     height: 7rem;
     width: min-content;
@@ -81,8 +82,6 @@
     background-color: var(--color-light);
     padding: 10px 15px 10px 15px;
     box-shadow: var(--box-shadow);
-
-
 }
 
 /*ADD ADMIN*/
@@ -127,6 +126,49 @@
 
 
 
+/*ARCHIVE*/
+.button2{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    background-color: var(--color-b3);
+    color: var(--color-light);
+    border-radius: var(--border-radius-2);
+    height: 40px;
+    width: 140px;
+    cursor: pointer;
+    box-shadow: var(--box-shadow);
+}
+
+.button2:hover{
+    background-color: var(--color-b2);
+    box-shadow: none;
+}
+
+.button2 button{
+    color: var(--color-light);
+    font-size: 14px;
+    font-weight: 400;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.button2 .material-symbols-rounded{
+    color: var(--color-light);
+    margin-top:8px;
+    height: min-content;
+    margin-right: 4px;
+}
+
+.button2 span{
+    margin-top: 2px;
+}
+
+
+
+
+
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
@@ -144,7 +186,7 @@
 .grid-container .grid-item .search {
     display: flex;
     height: 40px;
-    width: calc(100vw - 48rem);
+    width: calc(100vw - 59.5rem);
     padding: 5px;
     border-radius: var(--border-radius-2);
     background-color: var(--color-p2);

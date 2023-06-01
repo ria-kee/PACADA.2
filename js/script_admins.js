@@ -119,6 +119,9 @@ function resetSelectedOption() {
     departmentSelect.value = "0";
     document.getElementById('employeeField').style.display = 'none';
     document.getElementById('Employee').value = '';
+    const inputElement = document.getElementById("Employee");
+    inputElement.classList.remove("is-valid");
+    inputElement.classList.remove("is-invalid");
 }
 
 // Execute the reset function when the modal is closed
@@ -303,6 +306,7 @@ $('#addAdminButton').click(function() {
 
         // Close the modal or perform any other actions
         $('#AddAdmin').modal('hide');
+
     } else {
         // Display an error message
         var errorMessage = $('<div>Invalid employee selected. Please choose a valid employee.</div>');

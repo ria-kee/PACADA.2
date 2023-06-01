@@ -1,17 +1,16 @@
 <?php
-// Database connection file
 include('includes/dbh.inc.php');
 
 $pageLength = $_POST['length'];
 $start = $_POST['start'];
 
-$sql = "SELECT * FROM departments";
+$sql = "SELECT * FROM departments WHERE is_active=1";
 
 if (isset($_POST['search']['value'])) {
     $search_value = $_POST['search']['value'];
-    $sql .= " WHERE (dept_uid LIKE '%" . $search_value . "%' ";
+    $sql .= " AND (dept_uid LIKE '%" . $search_value . "%' ";
     $sql .= " OR dept_Description LIKE '%" . $search_value . "%') ";
-}
+   }
 
 if (isset($_POST['order'])) {
     $column = $_POST['order'][0]['column'];
@@ -36,7 +35,6 @@ if (isset($_POST['order'])) {
     $sql .= " ORDER BY dept_uid ASC";
 }
 
-
 $data = array();
 $query = mysqli_query($conn, $sql);
 $count_all_rows = mysqli_num_rows($query);
@@ -53,14 +51,14 @@ $sql .= " LIMIT $start, $pageLength";
 
 $query = mysqli_query($conn, $sql);
 
+
 while ($row = mysqli_fetch_assoc($query)) {
     // Create a temporary array to store each row's data
     $subarray = array();
     $subarray[] = $row['dept_uid'];
     $subarray[] = $row['dept_Description'];
     $subarray[] = '<button type="button" id="edit" class="btn btn-sm btn-secondary edit-button" data-toggle="modal" data-target="#EditDept" data-deptid="'.$row['uID'].'"><i class="bi bi-pencil-fill"></i> Edit</button>
-                   <button type="button" id="remove" class="btn btn-sm btn-danger remove-button" data-toggle="modal" data-target="#RemoveDept" data-deptid="'.$row['uID'].'" data-acronyms="'.$row['dept_uid'].'"  data-department="'.$row['dept_Description'].'"><i class="bi bi-person-dash-fill"></i> Remove</button>';
-
+                   <button type="button" id="remove" class="btn btn-sm btn-danger remove-button" data-toggle="modal" data-target="#RemoveDept" data-id="'.$row['uID'].'" data-acronyms="'.$row['dept_uid'].'"  data-department="'.$row['dept_Description'].'"><i class="bi bi-building-slash"></i> Deactivate</button>';
     $data[] = $subarray;
 }
 

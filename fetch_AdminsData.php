@@ -49,8 +49,6 @@ if (isset($_POST['order'])) {
             $column = 'age';
             break;
 
-        // Add cases for other columns as needed
-
         // Use employees_uid as the default column
         default:
             $column = 'employees_uid';
