@@ -7,11 +7,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['acronym']) && isset($_POST['department'])) {
         $acronym = $_POST['acronym'];
         $department = $_POST['department'];
+        $active = 1;
 
         // Insert the department into the database
-        $query = "INSERT INTO departments (dept_uid, dept_Description) VALUES (?, ?)";
+        $query = "INSERT INTO departments (dept_uid, dept_Description,is_active) VALUES (?, ?,?)";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("ss", $acronym, $department);
+        $stmt->bind_param("ssi", $acronym, $department,$active);
 
         if ($stmt->execute()) {
             // Department added successfully

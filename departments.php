@@ -51,7 +51,7 @@
         <div class="button-container body-item">
             <div class="grid-item actions">
                 <span class="material-symbols-rounded">sprint</span>
-                <h3>Quick Action</h3>
+                <h3>Quick Actions</h3>
             </div>
             <div class="grid-tem"></div>
             <div class="grid-tem"></div>
@@ -63,10 +63,12 @@
                 <span class="material-symbols-rounded">add</span>
                 <button><h4  style="font-weight: normal;">Add Department</h4></button>
             </div>
+            <a href="archived_departments.php">
             <div class="grid-item button2">
                 <span class="material-symbols-rounded">Inventory_2</span>
-                <button>Archive</button>
+               <h3>Archive</h3>
             </div>
+            </a>
 
 
 
@@ -95,6 +97,9 @@
         </div>
     </div>
     <div class="tablead">
+        <div class="table-top">
+            <h3><b>ACTIVE DEPARTMENTS</b></h3>
+        </div>
         <table id="deptTable" class="table table-striped" style="width:100%">
             <thead class="table-dark">
                 <th>Acronym</th>

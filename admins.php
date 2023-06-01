@@ -93,6 +93,9 @@
         </div>
     </div>
     <div class="tablead">
+        <div class="table-top">
+            <h3><b>ADMINISTRATORS</b></h3>
+        </div>
         <table id="adminTable" class="table table-striped" style="width:100%">
             <thead class="table-dark">
             <tr>
