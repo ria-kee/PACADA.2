@@ -4,6 +4,7 @@
     vertical-align: middle;
 }
 
+
 #dropdownMenuButton1 {
     border-radius: var(--border-radius-1);
 }
@@ -126,6 +127,7 @@
 .button2{
     display: flex;
     position: relative;
+    align-items: center;
     justify-content: center;
     background-color: var(--color-b3);
     color: var(--color-light);
@@ -151,7 +153,6 @@
 
 .button2 .material-symbols-rounded{
     color: var(--color-light);
-    margin-top:8px;
     height: min-content;
     margin-right: 4px;
 }

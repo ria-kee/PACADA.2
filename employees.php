@@ -85,10 +85,12 @@
                 <span class="material-symbols-rounded">person_add</span>
                 <button><h4  style="font-weight: normal;">Add Employee</h4></button>
             </div>
-            <div class="grid-item button2">
-                <span class="material-symbols-rounded">Inventory_2</span>
-                <button>Archive</button>
-            </div>
+            <a href="archived_employees.php">
+                <div class="grid-item button2">
+                    <span class="material-symbols-rounded">Inventory_2</span>
+                    <h3>Archive</h3>
+                </div>
+            </a>
 
 
 

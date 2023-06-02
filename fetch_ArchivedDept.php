@@ -59,10 +59,10 @@ while ($row = mysqli_fetch_assoc($query)) {
     // Create a temporary array to store each row's data
     $subarray = array();
     $subarray[] = '<input class="form-check-input" type="checkbox" value="'.$row['uID'].'" data-id="'.$row['uID'].'" >';
-
     $subarray[] = $row['dept_uid'];
     $subarray[] = $row['dept_Description'];
-    $subarray[] = '<button type="button" id="remove" class="btn btn-sm btn-danger remove-button" data-toggle="modal" data-target="#DeleteDept" data-id="'.$row['uID'].'" data-acronyms="'.$row['dept_uid'].'"  data-department="'.$row['dept_Description'].'"><i class="bi bi-trash"></i>Delete</button>';
+    $subarray[] = '<button type="button" id="remove" class="btn btn-sm btn-success activate-button" data-toggle="modal" data-target="#ActivateDept" data-act_id="'.$row['uID'].'" data-act_acronyms="'.$row['dept_uid'].'"  data-act_department="'.$row['dept_Description'].'"><i class="bi bi-building-check"></i>Activate</button>
+    <button type="button" id="remove" class="btn btn-sm btn-danger remove-button" data-toggle="modal" data-target="#DeleteDept" data-id="'.$row['uID'].'" data-acronyms="'.$row['dept_uid'].'"  data-department="'.$row['dept_Description'].'"><i class="bi bi-trash"></i>Delete</button>';
     $data[] = $subarray;
 }
 
