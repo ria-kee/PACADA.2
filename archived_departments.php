@@ -17,11 +17,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/vfs_fonts.js"></script>
 
-<!--<link rel="stylesheet" href="//cdn.datatables.net/select/1.3.3/css/select.dataTables.min.css">-->
-<!--<script src="//cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>-->
-<!--<link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" />-->
-<!--<script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>-->
-
 
 <?php include_once "header/active_departments.php"; ?>
 <?php include('includes/dbh.inc.php'); ?>
@@ -69,9 +64,14 @@
     <div class="tablead">
         <div class="table-top">
             <h3 class="title"><b>ARCHIVED DEPARTMENTS</b></h3>
-           <div class="delete">
-            <button class="deleteall" data-toggle="modal" data-target="#DeleteAll" id="deleteAllButton" title="No checkbox selected"> <h2><i class="bi bi-trash"></i> </h2></button>
-           </div>
+            <div class="buttons-right">
+                <div class="activate">
+                    <button class="activateall" data-toggle="modal" data-target="#ActivateAll" id="activateAllButton" title="Activate all selected"> <h2><i class="bi bi-building-check"></i> </h2></button>
+                </div>
+               <div class="delete">
+                <button class="deleteall" data-toggle="modal" data-target="#DeleteAll" id="deleteAllButton" title="Delete all selected"> <h2><i class="bi bi-trash"></i> </h2></button>
+               </div>
+            </div>
         </div>
         <table id="deptTable" class="table table-striped" style="width:100%">
             <thead class="table-dark">
@@ -122,7 +122,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h3>Are you sure you want to  <b class="text-danger">permanently delete</b> all selected <span id="deptName"></span> departments ?</h3>
+                <h3>Are you sure you want to  <b class="text-danger">permanently delete</b> all selected departments ?</h3>
                 <h5 style="font-family: 'Poppins Light'">This action cannot be undone.</h5>
             </div>
             <div class="modal-footer">
@@ -152,6 +152,27 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" id="activate-yes" class="btn btn-success" onclick="">Yes, Activate</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ActivateAll" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="material-symbols-rounded">done_outline</span>
+                <h1 class="modal-title" id="confirmModalLabel"> Confirm Activation</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h3>Are you sure you want to <b class="text-success">activate</b> selected departments?</h3>
+                <h5 style="font-family: 'Poppins Light'">When activated, selected departments will be displayed in the "Active Departments" table.</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" id="activate-all-yes" class="btn btn-success" onclick="">Yes, Activate</button>
             </div>
         </div>
     </div>

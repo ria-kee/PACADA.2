@@ -7,14 +7,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve the department IDs from the POST data
     $deptIds = $_POST['deptIds'];
 
-    // deletion
+    // activation
     $successCount = 0;
     $errorCount = 0;
     $errorMessages = array();
 
     foreach ($deptIds as $deptId) {
         // Perform the deletion query
-        $sql_delete = "DELETE FROM departments WHERE uID = '$deptId'";
+        $sql_delete = "UPDATE departments SET is_active = 1 WHERE uID = '$deptId'";
         $result_delete = mysqli_query($conn, $sql_delete);
 
         if ($result_delete) {
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             // Increment the error count and store the error message
             $errorCount++;
-            $errorMessages[] = "Failed to delete department with ID $deptId: " . mysqli_error($conn);
+            $errorMessages[] = "Failed to activate department with ID $deptId: " . mysqli_error($conn);
         }
     }
 
@@ -31,11 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($errorCount > 0) {
         // Return an error message with the count and individual error messages
         http_response_code(500); // Set the HTTP response code to indicate an error
-        echo "Failed to delete $errorCount department(s).";
+        echo "Failed to activate $errorCount department(s).";
         echo " Error message(s): " . implode(' ', $errorMessages);
     } else {
         // Return a success message with the count
-        echo "Successfully deleted $successCount department(s).";
+        echo "Successfully activated $successCount department(s).";
     }
 } else {
     // Return an error message if the request method is not POST

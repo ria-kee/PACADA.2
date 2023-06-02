@@ -33,6 +33,7 @@ $(document).ready(function() {
     $('.dataTables_filter').hide();
 
     var deleteAllButton = $('#deleteAllButton');
+    var activateAllButton = $('#activateAllButton');
     var selectedData = []; // Array to store the selected data
 
     // Function to check the checkbox state and enable/disable the button
@@ -42,8 +43,10 @@ $(document).ready(function() {
 
         if (checkedCount === 0) {
             deleteAllButton.prop('disabled', true); // Disable the button
+            activateAllButton.prop('disabled', true);
         } else {
-            deleteAllButton.prop('disabled', false); // Enable the button
+            deleteAllButton.prop('disabled', false);
+            activateAllButton.prop('disabled', false); // Enable the button
         }
     }
 
@@ -74,6 +77,9 @@ $(document).ready(function() {
         checkCheckboxState();
         selectedData = getSelectedValues(); // Update the selectedData array
     });
+
+
+    // DELETE ALL
 
     deleteAllButton.on('click', function() {
         // Clear any previous values
@@ -116,7 +122,7 @@ $(document).ready(function() {
                 $('#deptTable').DataTable().ajax.reload();
 
                 // Close the modal
-                $('#RemoveDept').modal('hide');
+                $('#DeleteAll').modal('hide');
                 // Uncheck the selectAllCheckbox
                 $('#selectAllCheckbox').prop('checked', false);
 
@@ -130,7 +136,7 @@ $(document).ready(function() {
                 $('#errorAlert').removeClass('d-none').addClass('show').html('<i class="bi-exclamation-octagon-fill me-2"></i><strong>Error!</strong> ' + xhr.responseText);
 
                 // Close the modal
-                $('#RemoveDept').modal('hide');
+                $('#DeleteAll').modal('hide');
                 // Uncheck the selectAllCheckbox
                 $('#selectAllCheckbox').prop('checked', false);
 
@@ -147,6 +153,90 @@ $(document).ready(function() {
         $('#selectAllCheckbox').prop('checked', false);
 
     });
+
+
+
+    // ACTIVATE ALL
+
+    activateAllButton.on('click', function() {
+        // Clear any previous values
+        $('#selectedValues').empty();
+
+        // Display the selected values
+        if (selectedData.length > 0) {
+            for (var i = 0; i < selectedData.length; i++) {
+                var value = selectedData[i];
+                var row = $('<div>').text('Dept UID: ' + value.deptUid);
+                $('#selectedValues').append(row);
+            }
+
+            // Show the modal
+            $('#ActivateAll').modal('show');
+        }
+    });
+
+    $('#activate-all-yes').on('click', function() {
+        // Array to store the department IDs to be deleted
+        var deptIdsToActivate = [];
+
+        // Extract the department IDs from selectedData, ignoring the value 0
+        for (var i = 0; i < selectedData.length; i++) {
+            var deptUid = selectedData[i].deptUid;
+            if (deptUid !== '0') {
+                deptIdsToActivate.push(deptUid);
+            }
+        }
+
+
+        // Perform the activation action using the deptIdsToActivate array
+        $.ajax({
+            url: 'activate_departments.php',
+            type: 'POST',
+            data: { deptIds: deptIdsToActivate },
+            success: function(response) {
+                // Show the success alert
+                $('#successAlert').removeClass('d-none').addClass('show').html('<i class="bi-check-circle-fill me-2"></i><strong>Success!</strong> ' + response);
+                $('#deptTable').DataTable().ajax.reload();
+
+                // Close the modal
+                $('#ActivateAll').modal('hide');
+                // Uncheck the selectAllCheckbox
+                $('#selectAllCheckbox').prop('checked', false);
+
+                // Close the success alert after 3 seconds
+                setTimeout(function() {
+                    $('#successAlert').removeClass('show').addClass('d-none');
+                }, 3000);
+            },
+            error: function(xhr, status, error) {
+                // Show the error alert with the custom error message
+                $('#errorAlert').removeClass('d-none').addClass('show').html('<i class="bi-exclamation-octagon-fill me-2"></i><strong>Error!</strong> ' + xhr.responseText);
+
+                // Close the modal
+                $('#ActivateAll').modal('hide');
+                // Uncheck the selectAllCheckbox
+                $('#selectAllCheckbox').prop('checked', false);
+
+                // Close the error alert after 5 seconds
+                setTimeout(function() {
+                    $('#errorAlert').removeClass('show').addClass('d-none');
+                }, 5000);
+            }
+        });
+
+        // Close the modal or perform any other necessary actions
+        $('#ActivateAll').modal('hide');
+        // Uncheck the selectAllCheckbox
+        $('#selectAllCheckbox').prop('checked', false);
+
+    });
+
+
+
+
+
+
+
 
     $('#selectAllCheckbox').on('change', function() {
         var checkboxes = $('#deptTable').find('.form-check-input');
@@ -268,17 +358,19 @@ $(document).ready(function() {
 
 
 
-    // Function to check the checkbox state and enable/disable the button
-    function checkCheckboxState() {
-        var checkboxes = $('#deptTable').find('.form-check-input');
-        var checkedCount = checkboxes.filter(':checked').length;
-        var rowCount = deptTable.rows().count(); // Get the number of rows in the DataTable
-
-        if (checkedCount === 0 || rowCount === 0) {
-            deleteAllButton.prop('disabled', true); // Disable the button
-        } else {
-            deleteAllButton.prop('disabled', false); // Enable the button
-        }
-    }
+    // // Function to check the checkbox state and enable/disable the button
+    // function checkCheckboxState() {
+    //     var checkboxes = $('#deptTable').find('.form-check-input');
+    //     var checkedCount = checkboxes.filter(':checked').length;
+    //     var rowCount = deptTable.rows().count(); // Get the number of rows in the DataTable
+    //
+    //     if (checkedCount === 0 || rowCount === 0) {
+    //         deleteAllButton.prop('disabled', true);
+    //         activateAllButton.prop('disabled', true); // Disable the button
+    //     } else {
+    //         deleteAllButton.prop('disabled', false);
+    //         activateAllButton.prop('disabled', false);// Enable the button
+    //     }
+    // }
 
 });

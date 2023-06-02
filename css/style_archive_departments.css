@@ -19,6 +19,13 @@
 }
 
 
+#activateAllButton[disabled] {
+    /*border: 1px solid #999999;*/
+    background-color: #cccccc;
+    color: #666666;
+    cursor: no-drop;
+    pointer-events: auto;
+}
 
 
 .centered-button {
@@ -39,7 +46,6 @@
     justify-self: end;
 }
 .deleteall{
-
     border-radius: var(--border-radius-1);
     background-color: #666666;
     box-shadow: var(--box-shadow);
@@ -47,12 +53,38 @@
     /*border: 2px solid red;*/
 }
 
+.activateall{
+    margin-left: 5px;
+    border-radius: var(--border-radius-1);
+    background-color: #666666;
+    box-shadow: var(--box-shadow);
+    padding: 0px 4px 4px 4px;
+    /*border: 2px solid red;*/
+}
+
+.activate i{
+    color: #fff;
+}
+
+
+.buttons-right{
+    justify-self: right;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+
+
 .table-top i.bi-trash {
     color:#fff;
 }
 
 .deleteall:hover{
     background-color:#DC3545;
+}
+
+
+.activateall:hover{
+    background-color:#198754;
 }
 /*.table-top button:hover i.bi-trash-fill {*/
 /*    color:#DC3545;*/
