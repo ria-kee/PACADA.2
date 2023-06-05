@@ -279,7 +279,7 @@
 
                             <div class="upload">
                                 <div class="upload-placeholder">
-                                    <img id="preview-image" src="assets/img/no-profile.png" alt="Placeholder Image">
+                                    <img id="review-preview-image" src="assets/img/no-profile.png" alt="Placeholder Image">
                                 </div>
                             </div>
                             <div class="row">
@@ -359,8 +359,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Wait , Edit Details</button>
-                    <button type="button" class="btn btn-primary" id="addDepartmentButton">Proceed , Add Employee</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel & Edit Details</button>
+                    <button type="button" class="btn btn-primary" id="addDepartmentButton">Confirm & Add Employee</button>
                 </div>
             </div>
         </div>

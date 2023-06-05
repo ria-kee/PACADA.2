@@ -1,5 +1,3 @@
-
-
 // FOR PERSONAL INPUT
 const firstNameInput = document.getElementById('fname');
 const middleNameInput = document.getElementById('mname');
@@ -36,6 +34,9 @@ const reviewSpl = document.getElementById('review_spl');
 const reviewEmail = document.getElementById('review_email');
 const reviewPassword = document.getElementById('review_password');
 const reviewID = document.getElementById('review_id');
+const reviewProfile = document.getElementById('review-preview-image');
+
+
 // Validation feedback elements
 const firstNameFeedback = document.getElementById('fname-invalid-feedback');
 const lastNameFeedback = document.getElementById('lname-invalid-feedback');
@@ -957,6 +958,9 @@ const force =workDetails.force;
 const spl = workDetails.spl;
 
 
+// const profilepic = currentImage.currentImage;
+//
+
 
 // Retrieve the accountDetails object from localStorage
 const accountDetailsJSON = localStorage.getItem('personalDetails');
@@ -1021,7 +1025,7 @@ nextButton3.addEventListener('click',function(){
         xhr.send();
 
 
-
+        reviewProfile.src = profile;
         reviewAppDate.innerHTML = appdate;
 
         reviewVacation.innerHTML = vacation;
