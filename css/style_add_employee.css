@@ -3,6 +3,143 @@
 
 
 
+#ReviewModal .modal-body span{
+    font-size: 14px;
+}
+
+#ReviewModal label{
+    font-size: 14px;
+}
+
+#save{
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--color-light);
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: var(--color-s2);
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    border-radius: 6px;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+}
+
+#save:hover{
+    background-color: var(--color-s1);
+    box-shadow: 0 0 0 .25rem rgba(151,151,71,.5);
+}
+
+
+#save:focus{
+    background-color: var(--color-s1);
+    box-shadow: 0 0 0 .25rem rgba(151,151,71,.5);
+}
+
+
+
+.containers{
+    max-width: 600px;
+    width: 100%;
+}
+.containers .steps{
+    position: relative;
+     display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+.steps .circle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    color:#999 ;
+    border: 4px solid #e0e0e0 ;
+    border-radius: 50%;
+    font-size: 22px;
+    font-weight: 500;
+    background-color: #fff;
+    z-index: +1;
+    transition: background-color 0.3s ease-in-out;
+}
+ .label{
+     font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color:#999 ;
+}
+
+
+#dept {
+    margin-top: -7px;
+    width: 100%;
+    height: 45px;
+    border-radius:0.25rem;
+
+}
+
+.steps .progress{
+    position: absolute;
+    height: 4px;
+    width: 100%;
+    background-color: #e0e0e0;
+}
+
+.progress .indicator{
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    background: var(--color-p1);
+    transition: width 0.3s ease-in-out;
+}
+
+#c1{
+    border-color: var(--color-p1);
+    background-color: var(--color-p1);
+    color: #ffffff;
+    transition: 0.3s ease-in-out;
+}
+
+#l1{
+    color: var(--color-p1) ;
+    font-weight: bold;
+}
+
+.label{
+    transition: color 0.3s ease-in-out;
+}
+
+.upload{
+    display: grid;
+    grid-template-columns: repeat(1, 2fr);
+    /*border: 2px solid red;*/
+    place-items: center;
+
+    padding: 10px;
+
+}
+
+#preview-image{
+    border-radius: 50%;
+}
+
+.upload .upload-placeholder{
+    border: 2px solid #e0e0e0;
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+    margin-bottom: 10px;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+
+}
+
 
 
 .actions h3 a:hover{
@@ -11,6 +148,32 @@
 
 .text-right {
     text-align: right;
+}
+
+
+
+#divider{
+    margin-bottom: 15px;
+}
+
+.row input{
+    height: 45px;
+}
+
+#sex {
+    margin-top: -7px;
+    width: 100%;
+    height: 45px;
+    border-radius:0.25rem;
+
+}
+
+#prev-button[disabled] {
+    /*border: 1px solid #999999;*/
+    background-color: #cccccc;
+    color: #666666;
+    cursor: no-drop;
+    pointer-events: auto;
 }
 
 #deleteAllButton[disabled] {
@@ -72,29 +235,29 @@
 .buttons-right{
     justify-self: right;
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: auto 1fr;
+    align-content: center;
 }
 
-
-.table-top i.bi-trash {
-    color:#fff;
+.prev{
+    width: 65px;
+    padding: 5px;
+    border-radius: var(--border-radius-1);
+    margin-right: 10px;
 }
 
-
-
-.deleteall:hover{
-    background-color:#DC3545;
-}
-.activateall:hover{
-    background-color:#198754;
-}
-/*.table-top button:hover i.bi-trash-fill {*/
-/*    color:#DC3545;*/
-/*}*/
-
-#dropdownMenuButton1 {
+.next{
+    width: 65px;
+    padding: 5px;
     border-radius: var(--border-radius-1);
 }
+
+
+
+
+
+
+
 
 /* Style for the disabled "Add as " button */
 #addDepartmentButton[disabled] {
@@ -256,11 +419,11 @@
 }
 
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    display: flex;
+    justify-content: center;
     gap: 10px;
     background-color: var(--color-light);
-    width: min-content;
+    width: calc(100vw - 38rem);
     height: 7rem;
     border-radius: var(--border-radius-3);
     padding: 10px 15px 10px 15px;

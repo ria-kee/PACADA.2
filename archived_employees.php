@@ -40,7 +40,7 @@
         <div class="button-container body-item">
             <div class="grid-item actions">
 
-                <h3>Employees<i class="bi bi-chevron-right"></i><b style="color: var(--color-p3">Archive</b> </h3>
+                <h3><a href="employees.php">Employees</a><i class="bi bi-chevron-right"></i><b style="color: var(--color-p3">Archive</b> </h3>
             </div>
             <a href="employees.php">
                 <div class="grid-item button2">
@@ -64,9 +64,14 @@
     </div>
     <div class="tablead">
         <div class="table-top">
-            <h3 class="title"><b>ARCHIVED EMPLOYEES</b></h3>
-            <div class="delete">
-                <button class="deleteall" data-toggle="modal" data-target="#DeleteAll" id="deleteAllButton" title="No checkbox selected"> <h2><i class="bi bi-trash"></i> </h2></button>
+            <h3 class="title"><b>ARCHIVED DEPARTMENTS</b></h3>
+            <div class="buttons-right">
+                <div class="activate">
+                    <button class="activateall" data-toggle="modal" data-target="#ActivateAll" id="activateAllButton" title="Activate all selected"> <h2><i class="bi bi-building-check"></i> </h2></button>
+                </div>
+                <div class="delete">
+                    <button class="deleteall" data-toggle="modal" data-target="#DeleteAll" id="deleteAllButton" title="Delete all selected"> <h2><i class="bi bi-trash"></i> </h2></button>
+                </div>
             </div>
         </div>
         <table id="empTable" class="table table-striped" style="width:100%">

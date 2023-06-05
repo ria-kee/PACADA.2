@@ -97,9 +97,6 @@ var empTable = $('#empTable').DataTable({
     ]
 });
 
-
-
-
 // Export PDF
 $('#pdfExport').click(function() {
     empTable.button('.buttons-pdf').trigger();
@@ -118,7 +115,16 @@ $(document).ready(function() {
 });
 $('.dataTables_filter').hide();
 
-
+//ADD EMP
+// $(document).on('click', '.addEmployee', function() {
+//     // var uID = $(this).data('id');
+//     // var acronyms = $(this).data('acronyms');
+//     // $('#deptName').text(acronyms);
+//     $('#addEmployee').modal('show'); // Show the confirmation modal
+//     // Store the dept ID to be used later for archive;
+//     // $('#addEmployee').data('uID', uID);
+// });
+//
 
 
 

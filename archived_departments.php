@@ -39,7 +39,7 @@
         <div class="button-container body-item">
             <div class="grid-item actions">
 
-                <h3>Departments<i class="bi bi-chevron-right"></i><b style="color: var(--color-p3">Archive</b> </h3>
+                <h3><a href="departments.php">Departments</a><i class="bi bi-chevron-right"></i><b style="color: var(--color-p3">Archive</b> </h3>
             </div>
             <a href="departments.php">
                 <div class="grid-item button2">

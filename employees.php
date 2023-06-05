@@ -81,10 +81,12 @@
                 <span class="material-symbols-rounded">download</span>
                 <h3>Export Table</h3>
             </div>
-            <div class="grid-item button1" data-bs-toggle="modal" data-bs-target="#AddDept">
+            <a href="add_employee.php">
+            <div class="grid-item button1" id="addEmployee">
                 <span class="material-symbols-rounded">person_add</span>
                 <button><h4  style="font-weight: normal;">Add Employee</h4></button>
             </div>
+            </a>
             <a href="archived_employees.php">
                 <div class="grid-item button2">
                     <span class="material-symbols-rounded">Inventory_2</span>
@@ -144,6 +146,7 @@
         </table>
     </div>
 </div>
+
 
 
 <!-- JAVASCRIPT -->

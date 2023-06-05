@@ -196,8 +196,6 @@ departmentSelect.addEventListener('change', function () {
     value = value.toUpperCase();
     input.value = value;
 }
-
-
     // Check if hyphen is already present
     if (value.indexOf('-') !== -1) {
     var parts = value.split('-');
