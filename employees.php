@@ -81,7 +81,7 @@
                 <span class="material-symbols-rounded">download</span>
                 <h3>Export Table</h3>
             </div>
-            <a href="add_employee.php">
+            <a href="new_employee.php">
             <div class="grid-item button1" id="addEmployee">
                 <span class="material-symbols-rounded">person_add</span>
                 <button><h4  style="font-weight: normal;">Add Employee</h4></button>

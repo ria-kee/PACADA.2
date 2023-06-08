@@ -1,3 +1,5 @@
+
+
 // FOR PERSONAL INPUT
 const firstNameInput = document.getElementById('fname');
 const middleNameInput = document.getElementById('mname');
@@ -188,13 +190,6 @@ function calculateAge(dob) {
     return age;
 }
 
-
-
-
-
-
-
-
 var isSexIncreaseDone = false;
 // Validate Sex Selection Event
 sexSelect.addEventListener('change', function() {
@@ -211,10 +206,6 @@ sexSelect.addEventListener('change', function() {
         isSexIncreaseDone = false;
     }
 });
-
-
-
-
 
 // WORK
 
@@ -314,10 +305,6 @@ sickInput.addEventListener('change',function (){
     }
 });
 
-
-
-
-
 // Validate ID Event
 var isIdIncreaseDone = false;
 idInput.addEventListener('change', function (){
@@ -336,11 +323,6 @@ idInput.addEventListener('change', function (){
     }
 
 });
-
-
-
-
-
 
 // Validate Force Event
 var isForceIncreaseDone = false;
@@ -380,10 +362,6 @@ splInput.addEventListener('change',function (){
 emailInput.addEventListener('change',function () {
     validateEmail();
 });
-
-
-
-
 
 // Validate Email
 function validateEmail(){
@@ -439,7 +417,7 @@ function validateEmail(){
 });
 }
 
-// var validID = false;
+
 // Validate ID
 function validateId() {
     return new Promise((resolve, reject) => {
@@ -489,10 +467,6 @@ function validateId() {
     });
 }
 
-
-
-
-
 // Validate SPL
 function validateSpl() {
     if (splInput.value.trim() === '') {
@@ -505,7 +479,6 @@ function validateSpl() {
         return true;
     }
 }
-
 
 // Validate Force
 function validateForce() {
@@ -705,29 +678,45 @@ function validateBirthdate() {
 
 
 
+let blob;
+let thereisFile = false;
+let uploaded ='assets/img/no-profile.png';
 // Form File Input Change Event
 formFile.addEventListener('change', function() {
+
     const file = this.files[0];
+    const fallbackImage = 'assets/img/no-profile.png';
 
     if (file) {
         const fileSize = file.size / (1024 * 1024); // Convert file size to MB
         const fileExtension = file.name.split('.').pop().toLowerCase();
 
         // Check if file is an image, within size limit, and has a valid extension
-        if (file.type.startsWith('image/') && fileSize <= 5 && (fileExtension === 'jpg' || fileExtension === 'jpeg' || fileExtension === 'png' || fileExtension === 'gif')) {
+        if (
+            file.type.startsWith('image/') &&
+            fileSize <= 5 &&
+            (fileExtension === 'jpg' ||
+                fileExtension === 'jpeg' ||
+                fileExtension === 'png' ||
+                fileExtension === 'gif')
+        ) {
             const reader = new FileReader();
 
-            reader.addEventListener('load', function() {
+            reader.addEventListener('load', function () {
                 previewImage.src = this.result;
                 invalidFeedback.textContent = ''; // Clear any previous error message
                 currentImage = this.result; // Update the current image variable
             });
 
             reader.readAsDataURL(file);
+
+            thereisFile =true;
+            uploaded=file;
+
         } else {
             // Display error message for invalid file type, size, or extension
             invalidFeedback.textContent = 'Please select a valid image file (up to 5MB).';
-            this.value = ''; // Reset the file input
+            formFile.value = ''; // Reset the file input
             if (currentImage) {
                 previewImage.src = currentImage; // Restore the previous image
             } else {
@@ -739,6 +728,7 @@ formFile.addEventListener('change', function() {
         previewImage.src = 'assets/img/no-profile.png';
         invalidFeedback.textContent = '';
         currentImage = ''; // Reset the current image variable
+        thereisFile =false;
     }
 });
 
@@ -778,14 +768,8 @@ idInput.addEventListener('keydown', function(event) {
     }
 });
 
-
-
-
-
-
-
-
-
+var profile = '';
+let imageData;
 
 // WHEN NEXT BUTTON IS CLICKED
 nextButton.addEventListener('click', function() {
@@ -795,6 +779,7 @@ nextButton.addEventListener('click', function() {
     const isBirthdateValid = validateBirthdate();
     const isSexValid = validateSex();
 
+    console.error('is there a file', thereisFile);
 
 
     // Check if all required fields are valid
@@ -810,10 +795,27 @@ nextButton.addEventListener('click', function() {
 
         localStorage.setItem('personalDetails', JSON.stringify(personalDetails));
 
-        // Save the uploaded image if available
-        if (currentImage) {
-            localStorage.setItem('currentImage', currentImage);
+        // Retrieve the currentImage from localStorage
+         profile = currentImage || 'assets/img/no-profile.png';
+
+         const fallbackImage = 'assets/img/no-profile.png';
+        if (!thereisFile){
+            fetch(fallbackImage)
+                .then(response => response.blob())
+                .then(blob => {
+                    const fileData = new File([blob], 'no-profile.png', { type: 'image/png' });
+                    console.error(fileData);
+                    imageData = fileData;
+                })
+                .catch(error => {
+                    console.error('Error fetching fallback image:', error);
+                });
         }
+        else {
+            imageData = uploaded;
+        }
+
+
 
         // Show the next section (Work Information)
         personalSection.style.display = 'none';
@@ -958,18 +960,13 @@ const force =workDetails.force;
 const spl = workDetails.spl;
 
 
-// const profilepic = currentImage.currentImage;
-//
-
-
 // Retrieve the accountDetails object from localStorage
 const accountDetailsJSON = localStorage.getItem('personalDetails');
 const accountDetails = JSON.parse(accountDetailsJSON);
 
 
-// Retrieve the currentImage from localStorage
-const profile = localStorage.getItem('currentImage');
-
+var email_acc = '';
+var password_acc = '';
 
 // WHEN NEXT BUTTON3 IS CLICKED
 nextButton3.addEventListener('click',function(){
@@ -982,13 +979,13 @@ nextButton3.addEventListener('click',function(){
             email: emailInput.value,
             password: passwordInput.value
         };
-        localStorage.setItem('accountDetails', JSON.stringify(accountDetails));
-// Update num to check
-        c3Element.innerHTML = '<span class="material-symbols-rounded">done</span>';
 
+        localStorage.setItem('accountDetails', JSON.stringify(accountDetails));
+        // Update num to check
+        c3Element.innerHTML = '<span class="material-symbols-rounded">done</span>';
         // Retrieve  accountDetails
-        const email_acc = accountDetails.email;
-        const password_acc = accountDetails.password;
+         email_acc = accountDetails.email;
+         password_acc = accountDetails.password;
 
         reviewID.innerHTML = idInput.value;
         reviewName.innerHTML =  fullName;
@@ -1048,4 +1045,140 @@ nextButton3.addEventListener('click',function(){
 
 $('#ReviewModal').on('hidden.bs.modal', function () {
     c3Element.innerHTML = '3';
+});
+
+
+
+//ADD EMPLOYEE (SERVER-SIDE)
+// $('#addDepartmentButton').click(function() {
+//
+//     console.error('employees_image:',imageData)
+//     const employeeData = {
+//         employees_image:imageData ,
+//         employees_uid: idInput.value,
+//         employees_FirstName: personalDetails.firstName ,
+//         employees_MiddleName: personalDetails.middleName,
+//         employees_LastName:personalDetails.lastName,
+//         employees_sex:sex,
+//         employees_birthdate:birthdate,
+//         employees_Department:department,
+//         employees_appointmentDate:appdate,
+//         Leave_Vacation:vacation,
+//         Leave_Sick:sick,
+//         Leave_Force:force,
+//         Leave_Special:spl,
+//         employees_Email:email_acc,
+//         employees_Password:password_acc
+//     };
+//
+//     // Send the employee data to the PHP file using an AJAX request
+//     $.ajax({
+//         url: 'add_employee.php',
+//         method: 'POST',
+//         data: { employeeData: employeeData },
+//         success: function(response) {
+//             // Show the success alert
+//             $('#successAlert').removeClass('d-none').addClass('show').html('<i class="bi-check-circle-fill me-2"></i><strong>Success!</strong> New employee has been added.');
+//
+//             // // Close the success alert after 3 seconds
+//             // setTimeout(function() {
+//             //     $('#successAlert').removeClass('show').addClass('d-none');
+//             // }, 3000);
+//             //
+//             // // Go to employees.php after a short delay
+//             // setTimeout(function() {
+//             //     window.location.href = 'employees.php';
+//             // }, 3000);
+//         },
+//         error: function() {
+//             // Show the error alert
+//             $('#errorAlert').removeClass('d-none').addClass('show').html('<i class="bi-exclamation-octagon-fill me-2"></i><strong>Error!</strong> An error occurred while assigning the employee as admin.');
+//
+//             // Close the error alert after 3 seconds
+//             setTimeout(function() {
+//                 $('#errorAlert').removeClass('show').addClass('d-none');
+//             }, 3000);
+//
+//             // Go to employees.php after a short delay
+//             setTimeout(function() {
+//                 window.location.href = 'employees.php';
+//             }, 2000);
+//         }
+//     });
+//     // Close the modal
+//     $('#ReviewModal').modal('hide');
+//
+// });
+$('#addDepartmentButton').click(function() {
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+        const arrayBuffer = event.target.result;
+
+        // Convert the ArrayBuffer to a Blob
+        const imageBlob = new Blob([arrayBuffer], { type: imageData.type });
+
+        // Retrieve the file name from the File object
+        const fileName = imageData.name;
+        console.error('blob:', imageBlob);
+        // Create a File object with the Blob and set the name
+        const file = new File([imageBlob], fileName, { type: imageData.type });
+
+        console.error('employees_image:', file);
+        // Create a new FormData object
+        const formData = new FormData();
+        formData.append('employees_image', file);
+        formData.append('employees_uid', idInput.value);
+        formData.append('employees_FirstName', personalDetails.firstName);
+        formData.append('employees_MiddleName', personalDetails.middleName);
+        formData.append('employees_LastName', personalDetails.lastName);
+        formData.append('employees_sex', sex);
+        formData.append('employees_birthdate', birthdate);
+        formData.append('employees_Department', department);
+        formData.append('employees_appointmentDate', appdate);
+        formData.append('Leave_Vacation', vacation);
+        formData.append('Leave_Sick', sick);
+        formData.append('Leave_Force', force);
+        formData.append('Leave_Special', spl);
+        formData.append('employees_Email', email_acc);
+        formData.append('employees_Password', password_acc);
+
+        // Send the employee data to the PHP file using an AJAX request
+        $.ajax({
+            url: 'add_employee.php',
+            method: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // Show the success alert
+                $('#successAlert').removeClass('d-none').addClass('show').html('<i class="bi-check-circle-fill me-2"></i><strong>Success!</strong> New employee has been added.');
+
+                // Close the modal
+                $('#ReviewModal').modal('hide');
+
+                // Go to employees.php after a short delay
+                setTimeout(function() {
+                    window.location.href = 'employees.php';
+                }, 2000);
+            },
+            error: function() {
+                // Show the error alert
+                $('#errorAlert').removeClass('d-none').addClass('show').html('<i class="bi-exclamation-octagon-fill me-2"></i><strong>Error!</strong> An error occurred while assigning the employee as admin.');
+
+                // Close the error alert after 3 seconds
+                setTimeout(function() {
+                    $('#errorAlert').removeClass('show').addClass('d-none');
+                }, 3000);
+
+                // Go to employees.php after a short delay
+                setTimeout(function() {
+                    window.location.href = 'employees.php';
+                }, 2000);
+            }
+        });
+    };
+
+    // Start reading the image file as ArrayBuffer
+    reader.readAsArrayBuffer(imageData);
 });
