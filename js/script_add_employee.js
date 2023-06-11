@@ -1141,10 +1141,10 @@ $('#addDepartmentButton').click(function() {
                     $('#successAlert').removeClass('show').addClass('d-none');
                 }, 2000);
 
-                // // Go to employees.php after a short delay
-                // setTimeout(function() {
-                //     window.location.href = 'employees.php';
-                // }, 2000);
+                // Go to employees.php after a short delay
+                setTimeout(function() {
+                    window.location.href = 'employees.php';
+                }, 2000);
             },
             error: function() {
                 // Show the error alert
