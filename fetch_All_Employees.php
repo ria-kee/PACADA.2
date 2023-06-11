@@ -6,12 +6,13 @@ $start = $_POST['start'];
 if (isset($_GET['department'])) {
 $selectedDepartment = $_GET['department'];
 
-$sql = "SELECT employees.*, departments.dept_uid, TIMESTAMPDIFF(YEAR, employees.employees_birthdate, CURDATE()) AS age FROM employees
+$sql = "SELECT employees.*,departments.dept_uid, TIMESTAMPDIFF(YEAR, employees.employees_birthdate, CURDATE()) AS age FROM employees
 LEFT JOIN departments ON employees.employees_Department = departments.uid
 WHERE employees.is_superadmin = 0 AND employees.is_active = 1";
 
 if ($selectedDepartment != 0) {
 $sql .= " AND employees.employees_Department = '$selectedDepartment'";
+
 }
 } else {
 // Handle the case when 'department' is not set
@@ -90,20 +91,84 @@ $sql .= " LIMIT $start, $pageLength";
 $query = mysqli_query($conn, $sql);
 
 while ($row = mysqli_fetch_assoc($query)) {
-$subarray = array();
-$subarray[] = strtoupper($row['employees_uid']);
-$subarray[] = $row['dept_uid']; // Fetching department name from the join
-$subarray[] = ucwords(strtolower($row['employees_FirstName'])) . ' ' . strtoupper(substr($row['employees_MiddleName'], 0, 1)) . '. ' . ucwords(strtolower($row['employees_LastName']));
-$empName = ucwords(strtolower($row['employees_FirstName'])) . ' ' . strtoupper(substr($row['employees_MiddleName'], 0, 1)) . '. ' . ucwords(strtolower($row['employees_LastName']));
-$subarray[] = $row['Leave_Vacation'];
-$subarray[] = $row['Leave_Sick'];
-$subarray[] = $row['Leave_Force'];
-$subarray[] = $row['Leave_Special'];
-$subarray[] = '<button type="button" id="edit" class="btn btn-sm btn-info edit-button" data-toggle="modal" data-target="#EditDept" data-deptid="'.$row['uID'].'"><i class="bi bi-info-circle-fill"></i> View</button>
-<button type="button" id="edit" class="btn btn-sm btn-secondary edit-button" data-toggle="modal" data-target="#EditDept" data-deptid="'.$row['uID'].'"><i class="bi bi-pencil-fill"></i> Edit</button>
-<button type="button" id="removeBtn_'.$row['employees_uid'].'" class="btn btn-sm btn-danger remove-admin-button" data-toggle="modal" data-target="#confirmModal" data-employeeid="'.$row['employees_uid'].'" data-empname="'.$empName.'"><i class="bi bi-person-dash-fill"></i> Remove</button>';
+    $empName = ucwords(strtolower($row['employees_FirstName'])) . ' ';
 
-$data[] = $subarray;
+    if (!empty($row['employees_MiddleName'])) {
+        $empName .= strtoupper(substr($row['employees_MiddleName'], 0, 1)) . '. ';
+    }
+
+    $empName .= ucwords(strtolower($row['employees_LastName']));    $review_Image = $row['employees_image'];
+    $review_Name = $empName;
+    $review_Department = $row['dept_uid'];
+    $review_Uid = strtoupper($row['employees_uid']);
+    $review_Email = $row['employees_Email'];
+    $review_Sex =$row['employees_sex'];
+    $review_Age =$row['age'];
+    $review_AppDate = $row['employees_appointmentDate'];
+    $review_Vacation = $row['Leave_Vacation'];
+    $review_Sick = $row['Leave_Sick'];
+    $review_Force =  $row['Leave_Force'];
+    $review_SPL =  $row['Leave_Special'];
+    $review_birth =  $row['employees_birthdate'];
+
+    $review_ID = $row['uID'];
+    $review_fname = ucwords(strtolower($row['employees_FirstName']));
+    $review_mname = ucwords(strtolower($row['employees_MiddleName']));
+    $review_lname = ucwords(strtolower($row['employees_LastName']));
+
+    $review_DepartmentUID = $row['employees_Department'];
+    $subarray = array();
+    $subarray[] = strtoupper($row['employees_uid']);
+    $subarray[] = $row['dept_uid']; // Fetching department name from the join
+    $subarray[] = $empName;
+    $subarray[] = $row['Leave_Vacation'];
+    $subarray[] = $row['Leave_Sick'];
+    $subarray[] = $row['Leave_Force'];
+    $subarray[] = $row['Leave_Special'];
+    $subarray[] =
+
+    '<button type="button" id="edit" class="btn btn-sm btn-info view-button" data-toggle="modal" data-target="#ViewModal" 
+        data-image="'.$review_Image.'" 
+        data-name="'.$review_Name.'"
+        data-department="'.$review_Department.'"
+        data-uid="'.$review_Uid.'"
+        data-email="'.$review_Email.'"
+        data-sex="'.$review_Sex.'"
+        data-age="'.$review_Age.'"
+        data-appdate="'.$review_AppDate.'"
+        data-vacation="'.$review_Vacation.'"
+        data-sick="'.$review_Sick.'"
+        data-force="'.$review_Force.'"
+        data-spl="'.$review_SPL.'"
+    ><i class="bi bi-info-circle-fill"></i> View</button>
+    
+   
+    <button type="button" id="edit" class="btn btn-sm btn-secondary edit-button" data-toggle="modal" data-target="#EditDept" 
+        data-image="'.$review_Image.'" 
+        data-fname="'.$review_fname.'"
+        data-mname="'.$review_mname.'"
+        data-lname="'.$review_lname.'"
+        data-birthdate ="'.$review_birth.'"
+        data-department = "'.$review_DepartmentUID.'"
+        data-uid="'.$review_ID.'"
+        data-empid="'.$review_Uid.'"
+        data-email="'.$review_Email.'"
+        data-sex="'.$review_Sex.'"
+        data-age="'.$review_Age.'"
+        data-appdate="'.$review_AppDate.'"
+        data-vacation="'.$review_Vacation.'"
+        data-sick="'.$review_Sick.'"
+        data-force="'.$review_Force.'"
+        data-spl="'.$review_SPL.'"
+    ><i class="bi bi-pencil-fill"></i> Edit</button>
+    
+
+    <button type="button" id="archive" class="btn btn-sm btn-danger archive-button" data-toggle="modal" data-target="#confirmModal" 
+        data-uID='.$row['uID'].'" 
+        data-empname="'.$empName.'"
+    ><i class="bi bi-person-dash-fill"></i> Remove</button>';
+
+    $data[] = $subarray;
 }
 
 $output = array(

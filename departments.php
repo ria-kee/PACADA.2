@@ -10,6 +10,7 @@
 <!-- CUSTOM CSS -->
 <link rel="stylesheet" href="css/style_department.css">
 
+
 <!--EXPORT-->
 <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>

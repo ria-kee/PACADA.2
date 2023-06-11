@@ -82,14 +82,14 @@ var progress = 0;
 
 
 // Buttons
-    //Personal
-        const nextButton = document.getElementById('next-button');
-    //Work
-        const prevButton2 = document.getElementById('prev-button2');
-        const nextButton2 = document.getElementById('next-button2');
-    //Account
-        const prevButton3 = document.getElementById('prev-button3');
-        const nextButton3 = document.getElementById('save');
+//Personal
+const nextButton = document.getElementById('next-button');
+//Work
+const prevButton2 = document.getElementById('prev-button2');
+const nextButton2 = document.getElementById('next-button2');
+//Account
+const prevButton3 = document.getElementById('prev-button3');
+const nextButton3 = document.getElementById('save');
 
 
 // Capitalize the first letter of every word in a string
@@ -101,51 +101,66 @@ function capitalizeWords(string) {
 
 
 // Validate First Name Event
-var isFirstNameIncreaseDone = false;
-firstNameInput.addEventListener('keyup', function() {
-    this.value = capitalizeWords(this.value);
-    validateFirstName();
-
-     if (this.value.trim() !== '' && !isFirstNameIncreaseDone) {
+let isFirstNameIncreaseDone = false;
+function fname_updateProgress() {
+    if (firstNameInput.value.trim() !== '' && !isFirstNameIncreaseDone) {
         progress += 12.5;
         progressIndicator.style.width = progress + '%';
         isFirstNameIncreaseDone = true;
     }
-         if (this.value.trim() === '') {
-             progress -= 12.5;
-             progressIndicator.style.width = progress + '%';
-             isFirstNameIncreaseDone = false;
-         }
-
-
-
+    if (firstNameInput.value.trim() === '') {
+        progress -= 12.5;
+        progressIndicator.style.width = progress + '%';
+        isFirstNameIncreaseDone = false;
+    }
+}
+// Validate First Name Event
+firstNameInput.addEventListener('input', function() {
+    this.value = capitalizeWords(this.value);
+    validateFirstName();
+    fname_updateProgress();
 });
 
+// Update progress indicator on focus out
+firstNameInput.addEventListener('focusout', function() {
+    fname_updateProgress();
+});
 // Capitalize Middle Name Event
 middleNameInput.addEventListener('keyup', function() {
     this.value = capitalizeWords(this.value);
 });
 
 
-var isLastNameIncreaseDone = false;
-// Validate Last Name Event
-lastNameInput.addEventListener('keyup', function() {
-    this.value = capitalizeWords(this.value);
-    validateLastName();
+let isLastNameIncreaseDone = false;
 
-    if (this.value.trim() !== '' && !isLastNameIncreaseDone) {
+// Function to update the progress indicator
+function lname_updateProgress() {
+    if (lastNameInput.value.trim() !== '' && !isLastNameIncreaseDone) {
         progress += 12.5;
         progressIndicator.style.width = progress + '%';
         isLastNameIncreaseDone = true;
     }
-    if (this.value.trim() === '') {
+    if (lastNameInput.value.trim() === '') {
         progress -= 12.5;
         progressIndicator.style.width = progress + '%';
         isLastNameIncreaseDone = false;
     }
+}
+
+// Validate Last Name Event
+lastNameInput.addEventListener('input', function() {
+    this.value = capitalizeWords(this.value);
+    validateLastName();
+    lname_updateProgress();
 });
 
-var isBirthdateIncreaseDone = false;
+// Update progress indicator on focus out
+lastNameInput.addEventListener('focusout', function() {
+    lname_updateProgress();
+});
+
+
+let isBirthdateIncreaseDone = false;
 // Validate Date of Birth Event
 birthdateInput.addEventListener('change', function() {
     validateBirthdate();
@@ -190,7 +205,7 @@ function calculateAge(dob) {
     return age;
 }
 
-var isSexIncreaseDone = false;
+let isSexIncreaseDone = false;
 // Validate Sex Selection Event
 sexSelect.addEventListener('change', function() {
     validateSex();
@@ -210,7 +225,7 @@ sexSelect.addEventListener('change', function() {
 // WORK
 
 // Validate Department Event
-var isDeptIncreaseDone = false;
+let isDeptIncreaseDone = false;
 deptSelect.addEventListener('change',function (){
     validateDept();
 
@@ -241,83 +256,83 @@ deptSelect.addEventListener('change',function (){
 
 });
 
-var isApptdateIncreaseDone = false;
+let isApptdateIncreaseDone = false;
 // Validate Appointment Event
 apptdateInput.addEventListener('change',function (){
     validateAppDate();
 
     if(this.value !== '' && !isApptdateIncreaseDone){
-        progress += 8;
+        progress += 5.5;
         progressIndicator.style.width = progress + '%';
         isApptdateIncreaseDone = true;
     }
 
     if (vacationInput.value.trim() !== '' && !isVacationIncreaseDone) {
-        progress += 8;
+        progress += 5.5;
         progressIndicator.style.width = progress + '%';
         isVacationIncreaseDone = true;
     }
 
 
     if (forceInput.value.trim() !== '' && !isForceIncreaseDone) {
-        progress += 5;
+        progress += 5.5;
         progressIndicator.style.width = progress + '%';
         isForceIncreaseDone = true;
     }
 
     if(this.value === ''){
-        progress -= 8;
+        progress -= 5.5;
         progressIndicator.style.width = progress + '%';
         isApptdateIncreaseDone = false;
     }
 });
 
 // Validate Vacation Event
-var isVacationIncreaseDone = false;
+let isVacationIncreaseDone = false;
 vacationInput.addEventListener('change',function (){
     validateVacation();
 
     if (this.value.trim() !== '' && !isVacationIncreaseDone) {
-        progress += 8;
+        progress += 5.5;
         progressIndicator.style.width = progress + '%';
         isVacationIncreaseDone = true;
     }
     if (this.value.trim() === '') {
-        progress -= 8;
+        progress -= 5.5;
         progressIndicator.style.width = progress + '%';
         isVacationIncreaseDone = false;
     }
 });
 
 // Validate Sick Event
-var isSickIncreaseDone = false;
+let isSickIncreaseDone = false;
 sickInput.addEventListener('change',function (){
     validateSick();
     if (this.value.trim() !== '' && !isSickIncreaseDone) {
-        progress += 8;
+        progress += 5.5;
         progressIndicator.style.width = progress + '%';
         isSickIncreaseDone = true;
     }
     if (this.value.trim() === '') {
-        progress -= 8;
+        progress -= 5.5;
         progressIndicator.style.width = progress + '%';
         isSickIncreaseDone = false;
     }
 });
 
 // Validate ID Event
-var isIdIncreaseDone = false;
+let isIdIncreaseDone = false;
 idInput.addEventListener('change', function (){
 
     validateId();
 
     if (this.value.trim() !== '' && !isIdIncreaseDone) {
-        progress += 8;
+        progress += 5.5;
         progressIndicator.style.width = progress + '%';
         isIdIncreaseDone = true;
     }
     if (this.value.trim() === '') {
-        progress -= 8;
+        progress -= 5.5;
         progressIndicator.style.width = progress + '%';
         isIdIncreaseDone = false;
     }
@@ -325,32 +340,32 @@ idInput.addEventListener('change', function (){
 });
 
 // Validate Force Event
-var isForceIncreaseDone = false;
+let isForceIncreaseDone = false;
 forceInput.addEventListener('change',function (){
     validateForce();
     if (this.value.trim() !== '' && !isForceIncreaseDone) {
-        progress += 5;
+        progress += 5.5;
         progressIndicator.style.width = progress + '%';
         isForceIncreaseDone = true;
     }
     if (this.value.trim() === '') {
-        progress -= 5;
+        progress -= 5.5;
         progressIndicator.style.width = progress + '%';
         isForceIncreaseDone = false;
     }
 });
 
-var isSplIncreaseDone = false;
+let isSplIncreaseDone = false;
 // Validate SPL Event
 splInput.addEventListener('change',function (){
     validateSpl();
     if (this.value.trim() !== '' && !isSplIncreaseDone) {
-        progress += 5;
+        progress += 5.5;
         progressIndicator.style.width = progress + '%';
         isSplIncreaseDone = true;
     }
     if (this.value.trim() === '') {
-        progress -= 5;
+        progress -= 5.5;
         progressIndicator.style.width = progress + '%';
         isSplIncreaseDone = false;
     }
@@ -366,104 +381,104 @@ emailInput.addEventListener('change',function () {
 // Validate Email
 function validateEmail(){
     return new Promise((resolve, reject) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    var email = emailInput.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var email = emailInput.value.trim();
 
-    if (emailInput.value.trim() === '') {
-        emailInput.classList.add('is-invalid');
-        emailFeedback.textContent = 'Email is required.';
-        return false;
-    } else if (!emailRegex.test(emailInput.value.trim())) {
-        emailInput.classList.add('is-invalid');
-        emailFeedback.textContent = 'Invalid email format.';
-        return false;
-    }
-    else {
-        // Make an AJAX request to check if the ID exists in the database
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    // Request successful, process the response
-                    var response = JSON.parse(xhr.responseText);
-                    if (response.exists) {
-                        emailInput.classList.add('is-invalid');
-                        emailFeedback.textContent = 'Email is already registered with another account.';
-                        resolve(false);
+        if (emailInput.value.trim() === '') {
+            emailInput.classList.add('is-invalid');
+            emailFeedback.textContent = 'Email is required.';
+            return false;
+        } else if (!emailRegex.test(emailInput.value.trim())) {
+            emailInput.classList.add('is-invalid');
+            emailFeedback.textContent = 'Invalid email format.';
+            return false;
+        }
+        else {
+            // Make an AJAX request to check if the ID exists in the database
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Request successful, process the response
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.exists) {
+                            emailInput.classList.add('is-invalid');
+                            emailFeedback.textContent = 'Email is already registered with another account.';
+                            resolve(false);
+                        } else {
+                            // validID = true;
+                            emailInput.classList.remove('is-invalid');
+                            emailInput.classList.add('is-valid');
+                            emailFeedback.textContent = '';
+                            resolve(true);
+                        }
                     } else {
-                        // validID = true;
-                        emailInput.classList.remove('is-invalid');
-                        emailInput.classList.add('is-valid');
-                        emailFeedback.textContent = '';
-                        resolve(true);
+                        // Request failed, handle the error
+                        console.error('Request failed with status ' + xhr.status);
                     }
-                } else {
-                    // Request failed, handle the error
-                    console.error('Request failed with status ' + xhr.status);
                 }
-            }
-        };
+            };
 
-        xhr.open('GET', 'query_email.php?email=' + email, true);
-        xhr.send();
+            xhr.open('GET', 'query_email.php?email=' + email, true);
+            xhr.send();
 
-    }
-    // else {
-    //     emailInput.classList.remove('is-invalid');
-    //     emailFeedback.textContent = '';
-    //     return true;
-    // }
+        }
+        // else {
+        //     emailInput.classList.remove('is-invalid');
+        //     emailFeedback.textContent = '';
+        //     return true;
+        // }
 
-});
+    });
 }
 
 
 // Validate ID
 function validateId() {
     return new Promise((resolve, reject) => {
-    var id = idInput.value.trim();
+        var id = idInput.value.trim();
 
-    if (id === '') {
-        idInput.classList.add('is-invalid');
-        idFeedback.textContent = 'ID is required.';
-        resolve(false);
-    }
-    else if (id.length !== 8 && id.length !== 9) {
-        idInput.classList.add('is-invalid');
-        idFeedback.textContent = 'ID must have 8 or 9 characters.';
-        resolve(false);
-    }
+        if (id === '') {
+            idInput.classList.add('is-invalid');
+            idFeedback.textContent = 'ID is required.';
+            resolve(false);
+        }
+        else if (id.length !== 8 && id.length !== 9) {
+            idInput.classList.add('is-invalid');
+            idFeedback.textContent = 'ID must have 8 or 9 characters.';
+            resolve(false);
+        }
 
-    else {
-        // Make an AJAX request to check if the ID exists in the database
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    // Request successful, process the response
-                    var response = JSON.parse(xhr.responseText);
-                    if (response.exists) {
-                        idInput.classList.add('is-invalid');
-                        idFeedback.textContent = 'ID already exists.';
-                        resolve(false);
+        else {
+            // Make an AJAX request to check if the ID exists in the database
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Request successful, process the response
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.exists) {
+                            idInput.classList.add('is-invalid');
+                            idFeedback.textContent = 'ID already exists.';
+                            resolve(false);
+                        } else {
+                            // validID = true;
+                            idInput.classList.remove('is-invalid');
+                            idInput.classList.add('is-valid');
+                            idFeedback.textContent = '';
+                            resolve(true);
+                        }
                     } else {
-                        // validID = true;
-                        idInput.classList.remove('is-invalid');
-                        idInput.classList.add('is-valid');
-                        idFeedback.textContent = '';
-                        resolve(true);
+                        // Request failed, handle the error
+                        console.error('Request failed with status ' + xhr.status);
                     }
-                } else {
-                    // Request failed, handle the error
-                    console.error('Request failed with status ' + xhr.status);
                 }
-            }
-        };
+            };
 
-        xhr.open('GET', 'query_id.php?id=' + id, true);
-        xhr.send();
+            xhr.open('GET', 'query_id.php?id=' + id, true);
+            xhr.send();
 
-    }
+        }
     });
 }
 
@@ -772,6 +787,20 @@ var profile = '';
 let imageData;
 
 // WHEN NEXT BUTTON IS CLICKED
+
+
+
+// Retrieve the personalDetails object from localStorage
+const personalDetailsJSON = localStorage.getItem('personalDetails');
+const personalDetails = JSON.parse(personalDetailsJSON);
+
+var fullName_per = '' ;
+var fname_per='';
+var mname_per='';
+var lname_per='';
+var sex_per = '';
+var birthdate_per = '';
+
 nextButton.addEventListener('click', function() {
     // Validate First Name, Last Name, and Date of Birth
     const isFirstNameValid = validateFirstName();
@@ -780,7 +809,6 @@ nextButton.addEventListener('click', function() {
     const isSexValid = validateSex();
 
     console.error('is there a file', thereisFile);
-
 
     // Check if all required fields are valid
     if (isFirstNameValid && isLastNameValid && isBirthdateValid && isSexValid) {
@@ -794,11 +822,20 @@ nextButton.addEventListener('click', function() {
         };
 
         localStorage.setItem('personalDetails', JSON.stringify(personalDetails));
+        // Retrieve  personal
+         fullName_per = personalDetails.firstName + ' ' + personalDetails.middleName + ' ' + personalDetails.lastName;
+         fname_per=personalDetails.firstName;
+        mname_per=personalDetails.middleName;
+         lname_per=personalDetails.lastName;
+         sex_per = personalDetails.sex;
+         birthdate_per = personalDetails.birthdate;
+
+
 
         // Retrieve the currentImage from localStorage
-         profile = currentImage || 'assets/img/no-profile.png';
+        profile = currentImage || 'assets/img/no-profile.png';
 
-         const fallbackImage = 'assets/img/no-profile.png';
+        const fallbackImage = 'assets/img/no-profile.png';
         if (!thereisFile){
             fetch(fallbackImage)
                 .then(response => response.blob())
@@ -860,56 +897,77 @@ prevButton2.addEventListener('click', function() {
 
 });
 
+
+// Retrieve the workDetails object from localStorage
+const workDetailsJSON = localStorage.getItem('workDetails');
+const workDetails = JSON.parse(workDetailsJSON);
+
+// Retrieve  workDetails
+var department_work = '';
+var appdate_work = '';
+var vacation_work = '';
+var sick_work = '';
+var force_work = '';
+var spl_work = '';
+
 // WHEN NEXT BUTTON2 IS CLICKED
 nextButton2.addEventListener('click', function() {
     // Validate Department, Appointment Date, Credit Balance (V,S,F,SPL)
     (async function() {
         const isIDValid = await validateId();
-    const isDepartmentValid = validateDept();
-    const isAppDateValid = validateAppDate();
-    const isVacationValid = validateVacation();
-    const isSickValid = validateSick();
-    const isForceValid = validateForce();
-    const isSplValid = validateSpl();
+        const isDepartmentValid = validateDept();
+        const isAppDateValid = validateAppDate();
+        const isVacationValid = validateVacation();
+        const isSickValid = validateSick();
+        const isForceValid = validateForce();
+        const isSplValid = validateSpl();
 
-    // Check if all required fields are valid
-    if (isIDValid && isDepartmentValid && isAppDateValid && isVacationValid && isSickValid && isForceValid && isSplValid) {
-
-
-        // Save the entered values to localStorage
-        const workDetails = {
-            id: idInput.value,
-            department: deptSelect.value,
-            appdate: apptdateInput.value,
-            vacation: vacationInput.value,
-            sick: sickInput.value,
-            force: forceInput.value,
-            spl: splInput.value
-        };
-
-        localStorage.setItem('workDetails', JSON.stringify(workDetails));
+        // Check if all required fields are valid
+        if (isIDValid && isDepartmentValid && isAppDateValid && isVacationValid && isSickValid && isForceValid && isSplValid) {
 
 
-        // Show the prev section (Personal Information)
-        accountSection.style.display = 'block';
-        workSection.style.display = 'none';
+            // Save the entered values to localStorage
+            const workDetails = {
+                id: idInput.value,
+                department: deptSelect.value,
+                appdate: apptdateInput.value,
+                vacation: vacationInput.value,
+                sick: sickInput.value,
+                force: forceInput.value,
+                spl: splInput.value
+            };
 
-    // Update num to check
-    c2Element.innerHTML = '<span class="material-symbols-rounded">done</span>';
+            localStorage.setItem('workDetails', JSON.stringify(workDetails));
 
-        // Apply styles to element with ID #c3
-        c3Element.style.borderColor = 'var(--color-p1)';
-        c3Element.style.backgroundColor = 'var(--color-p1)';
-        c3Element.style.color = '#ffffff';
-        l3Element.style.fontWeight = 'bold';
-        l3Element.style.color = 'var(--color-p1)';
-
-
-        l2Element.style.fontWeight = 'normal';
-        l2Element.style.color = '#999';
+            // Retrieve  workDetails
+             department_work = workDetails.department;
+             appdate_work = workDetails.appdate;
+             vacation_work = workDetails.vacation;
+             sick_work = workDetails.sick;
+             force_work =workDetails.force;
+             spl_work = workDetails.spl;
 
 
-    }
+            // Show the prev section (Personal Information)
+            accountSection.style.display = 'block';
+            workSection.style.display = 'none';
+
+            // Update num to check
+            c2Element.innerHTML = '<span class="material-symbols-rounded">done</span>';
+
+            // Apply styles to element with ID #c3
+            c3Element.style.borderColor = 'var(--color-p1)';
+            c3Element.style.backgroundColor = 'var(--color-p1)';
+            c3Element.style.color = '#ffffff';
+            l3Element.style.fontWeight = 'bold';
+            l3Element.style.color = 'var(--color-p1)';
+
+
+            l2Element.style.fontWeight = 'normal';
+            l2Element.style.color = '#999';
+
+
+        }
 
     })();
 });
@@ -937,27 +995,7 @@ prevButton3.addEventListener('click', function() {
 
 });
 
-// Retrieve the personalDetails object from localStorage
-const personalDetailsJSON = localStorage.getItem('personalDetails');
-const personalDetails = JSON.parse(personalDetailsJSON);
 
-// Retrieve  personalDetails
-const fullName = personalDetails.firstName + ' ' + personalDetails.middleName + ' ' + personalDetails.lastName ;
-const sex = personalDetails.sex;
-const birthdate = personalDetails.birthdate;
-
-// Retrieve the workDetails object from localStorage
-const workDetailsJSON = localStorage.getItem('workDetails');
-const workDetails = JSON.parse(workDetailsJSON);
-
-
-// Retrieve  workDetails
-const department = workDetails.department;
-const appdate = workDetails.appdate;
-const vacation = workDetails.vacation;
-const sick = workDetails.sick;
-const force =workDetails.force;
-const spl = workDetails.spl;
 
 
 // Retrieve the accountDetails object from localStorage
@@ -972,74 +1010,74 @@ var password_acc = '';
 nextButton3.addEventListener('click',function(){
     // ValidateEmail
     (async function() {
-    const isEmailValid = await validateEmail();
+        const isEmailValid = await validateEmail();
 
-    if (isEmailValid){
-        const accountDetails = {
-            email: emailInput.value,
-            password: passwordInput.value
-        };
+        if (isEmailValid){
+            const accountDetails = {
+                email: emailInput.value,
+                password: passwordInput.value
+            };
 
-        localStorage.setItem('accountDetails', JSON.stringify(accountDetails));
-        // Update num to check
-        c3Element.innerHTML = '<span class="material-symbols-rounded">done</span>';
-        // Retrieve  accountDetails
-         email_acc = accountDetails.email;
-         password_acc = accountDetails.password;
+            localStorage.setItem('accountDetails', JSON.stringify(accountDetails));
+            // Update num to check
+            c3Element.innerHTML = '<span class="material-symbols-rounded">done</span>';
+            // Retrieve  accountDetails
+            email_acc = accountDetails.email;
+            password_acc = accountDetails.password;
 
-        reviewID.innerHTML = idInput.value;
-        reviewName.innerHTML =  fullName;
+            reviewID.innerHTML = idInput.value;
+            reviewName.innerHTML =  fullName_per;
 
-    if (sex==='F'){
-        reviewSex.innerHTML = 'Female';
-        }else{
-        reviewSex.innerHTML = 'Male';
-        }
-
-        reviewBirth.innerHTML = birthdate;
-
-
-
-        // Make an AJAX request to execute the MySQL query
-        var xhr = new XMLHttpRequest();
-        var departmentId = department;
-
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    // Request successful, process the response
-                    var response = xhr.responseText;
-                    // Set the innerHTML of the element
-                    reviewDepartment.innerHTML = response;
-                } else {
-                    // Request failed, handle the error
-                    console.error('Request failed with status ' + xhr.status);
-                }
+            if (sex_per==='F'){
+                reviewSex.innerHTML = 'Female';
+            }else{
+                reviewSex.innerHTML = 'Male';
             }
-        };
 
-        xhr.open('GET', 'query.php?department=' + departmentId, true);
-        xhr.send();
+            reviewBirth.innerHTML = birthdate_per;
 
 
-        reviewProfile.src = profile;
-        reviewAppDate.innerHTML = appdate;
 
-        reviewVacation.innerHTML = vacation;
+            // Make an AJAX request to execute the MySQL query
+            var xhr = new XMLHttpRequest();
+            var departmentId = department_work;
 
-        reviewSick.innerHTML = sick;
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Request successful, process the response
+                        var response = xhr.responseText;
+                        // Set the innerHTML of the element
+                        reviewDepartment.innerHTML = response;
+                    } else {
+                        // Request failed, handle the error
+                        console.error('Request failed with status ' + xhr.status);
+                    }
+                }
+            };
 
-        reviewForce.innerHTML = force;
+            xhr.open('GET', 'query.php?department=' + departmentId, true);
+            xhr.send();
 
-        reviewSpl.innerHTML = spl;
 
-        reviewEmail.innerHTML = email_acc;
+            reviewProfile.src = profile;
+            reviewAppDate.innerHTML = appdate_work;
 
-        reviewPassword.innerHTML = password_acc;
+            reviewVacation.innerHTML = vacation_work;
 
-        $('#ReviewModal').modal('show');
+            reviewSick.innerHTML = sick_work;
 
-    }
+            reviewForce.innerHTML = force_work;
+
+            reviewSpl.innerHTML = spl_work;
+
+            reviewEmail.innerHTML = email_acc;
+
+            reviewPassword.innerHTML = password_acc;
+
+            $('#ReviewModal').modal('show');
+
+        }
     })();
 });
 
@@ -1050,65 +1088,6 @@ $('#ReviewModal').on('hidden.bs.modal', function () {
 
 
 //ADD EMPLOYEE (SERVER-SIDE)
-// $('#addDepartmentButton').click(function() {
-//
-//     console.error('employees_image:',imageData)
-//     const employeeData = {
-//         employees_image:imageData ,
-//         employees_uid: idInput.value,
-//         employees_FirstName: personalDetails.firstName ,
-//         employees_MiddleName: personalDetails.middleName,
-//         employees_LastName:personalDetails.lastName,
-//         employees_sex:sex,
-//         employees_birthdate:birthdate,
-//         employees_Department:department,
-//         employees_appointmentDate:appdate,
-//         Leave_Vacation:vacation,
-//         Leave_Sick:sick,
-//         Leave_Force:force,
-//         Leave_Special:spl,
-//         employees_Email:email_acc,
-//         employees_Password:password_acc
-//     };
-//
-//     // Send the employee data to the PHP file using an AJAX request
-//     $.ajax({
-//         url: 'add_employee.php',
-//         method: 'POST',
-//         data: { employeeData: employeeData },
-//         success: function(response) {
-//             // Show the success alert
-//             $('#successAlert').removeClass('d-none').addClass('show').html('<i class="bi-check-circle-fill me-2"></i><strong>Success!</strong> New employee has been added.');
-//
-//             // // Close the success alert after 3 seconds
-//             // setTimeout(function() {
-//             //     $('#successAlert').removeClass('show').addClass('d-none');
-//             // }, 3000);
-//             //
-//             // // Go to employees.php after a short delay
-//             // setTimeout(function() {
-//             //     window.location.href = 'employees.php';
-//             // }, 3000);
-//         },
-//         error: function() {
-//             // Show the error alert
-//             $('#errorAlert').removeClass('d-none').addClass('show').html('<i class="bi-exclamation-octagon-fill me-2"></i><strong>Error!</strong> An error occurred while assigning the employee as admin.');
-//
-//             // Close the error alert after 3 seconds
-//             setTimeout(function() {
-//                 $('#errorAlert').removeClass('show').addClass('d-none');
-//             }, 3000);
-//
-//             // Go to employees.php after a short delay
-//             setTimeout(function() {
-//                 window.location.href = 'employees.php';
-//             }, 2000);
-//         }
-//     });
-//     // Close the modal
-//     $('#ReviewModal').modal('hide');
-//
-// });
 $('#addDepartmentButton').click(function() {
     const reader = new FileReader();
 
@@ -1129,17 +1108,17 @@ $('#addDepartmentButton').click(function() {
         const formData = new FormData();
         formData.append('employees_image', file);
         formData.append('employees_uid', idInput.value);
-        formData.append('employees_FirstName', personalDetails.firstName);
-        formData.append('employees_MiddleName', personalDetails.middleName);
-        formData.append('employees_LastName', personalDetails.lastName);
-        formData.append('employees_sex', sex);
-        formData.append('employees_birthdate', birthdate);
-        formData.append('employees_Department', department);
-        formData.append('employees_appointmentDate', appdate);
-        formData.append('Leave_Vacation', vacation);
-        formData.append('Leave_Sick', sick);
-        formData.append('Leave_Force', force);
-        formData.append('Leave_Special', spl);
+        formData.append('employees_FirstName', fname_per);
+        formData.append('employees_MiddleName', mname_per);
+        formData.append('employees_LastName', lname_per);
+        formData.append('employees_sex', sex_per);
+        formData.append('employees_birthdate', birthdate_per);
+        formData.append('employees_Department', department_work);
+        formData.append('employees_appointmentDate', appdate_work);
+        formData.append('Leave_Vacation', vacation_work);
+        formData.append('Leave_Sick', sick_work);
+        formData.append('Leave_Force', force_work);
+        formData.append('Leave_Special', spl_work);
         formData.append('employees_Email', email_acc);
         formData.append('employees_Password', password_acc);
 
@@ -1156,11 +1135,16 @@ $('#addDepartmentButton').click(function() {
 
                 // Close the modal
                 $('#ReviewModal').modal('hide');
-
-                // Go to employees.php after a short delay
+                //
+                // Close the error alert after 3 seconds
                 setTimeout(function() {
-                    window.location.href = 'employees.php';
+                    $('#successAlert').removeClass('show').addClass('d-none');
                 }, 2000);
+
+                // // Go to employees.php after a short delay
+                // setTimeout(function() {
+                //     window.location.href = 'employees.php';
+                // }, 2000);
             },
             error: function() {
                 // Show the error alert

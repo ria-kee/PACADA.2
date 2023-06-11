@@ -9,6 +9,8 @@
 <script src="js/bootstrap/datatables.min.js"></script>
 <!-- CUSTOM CSS -->
 <link rel="stylesheet" href="css/style_add_employee.css">
+<!--CSS FOR SIDE MODAL-->
+<link href="https://staging.appcropolis.com/functions/preview/appcropolis/amk-source/main.css" rel="stylesheet">
 
 <!--EXPORT-->
 <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
@@ -267,7 +269,7 @@
 
 
     <!-- REVIEW MODAL -->
-    <div class="modal fade" id="ReviewModal" tabindex="-1">
+    <div class="modal fade"  id="ReviewModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

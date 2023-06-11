@@ -63,7 +63,7 @@
     </div>
     <div class="tablead">
         <div class="table-top">
-            <h3 class="title"><b>ARCHIVED DEPARTMENTS</b></h3>
+            <h3 class="title"><b>INACTIVE DEPARTMENTS</b></h3>
             <div class="buttons-right">
                 <div class="activate">
                     <button class="activateall" data-toggle="modal" data-target="#ActivateAll" id="activateAllButton" title="Activate all selected"> <h2><i class="bi bi-building-check"></i> </h2></button>

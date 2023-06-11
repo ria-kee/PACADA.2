@@ -34,5 +34,6 @@
     <orderEntry type="library" name="dataTables.select" level="application" />
     <orderEntry type="library" name="jquery.dataTables" level="application" />
     <orderEntry type="library" name="select.dataTables" level="application" />
+    <orderEntry type="library" name="main" level="application" />
   </component>
 </module>

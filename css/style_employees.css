@@ -1,16 +1,148 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
 
-/*!*MODAL*!*/
-/*#sex {*/
-/*    margin-top: -7px;*/
-/*    width: 100%;*/
-/*    height: 33.5px;*/
-/*    border-radius:0.25rem;*/
 
-/*}*/
-/*.personalInfoSection h3{*/
-/*    color: var(--color-p1);*/
-/*}*/
+
+
+#formFile {
+    display: none;
+}
+
+#Editsex {
+    margin-top: -7px;
+    width: 100%;
+    height: 35px;
+    border-radius:0.25rem;
+
+}
+
+#Editdepartment {
+    margin-top: -7px;
+    width: 100%;
+    height: 35px;
+    border-radius:0.25rem;
+
+}
+
+.purple{
+    color: var(--color-p1);
+}
+
+.purple:hover{
+    color: var(--color-p3);
+}
+
+.purple:active{
+    color: var(--color-p3);
+}
+
+
+#ViewModal .modal-dialog{
+    width: 400px;
+}
+
+#EditEmployee .modal-dialog{
+    max-width: 700px; /* Adjust the width as needed */
+    width: 100%; /* Optional: Set a percentage width if needed */
+}
+
+#ViewModal span{
+    font-size: 14px;
+}
+
+#ViewModal .material-symbols-rounded{
+    font-size: 25px;
+}
+
+#EditEmployee .modal-body .material-symbols-rounded{
+    font-size: 15px;
+}
+
+
+#ViewModal label{
+    font-size: 14px;
+
+}
+.text-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+
+
+.edit-upload{
+    width: 100px;
+    position: relative;
+    margin: auto;
+}
+.edit-upload img{
+    border-radius: 50%;
+    border: 3px solid var(--color-p1);
+}
+
+
+.edit-upload .round{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: var(--color-p1);
+    width: 32px;
+    height: 32px;
+    line-height: 33px;
+    text-align: center;
+    border-radius: 50%;
+    overflow: hidden;
+    padding-top: 5px;
+}
+
+.edit-upload .round input[type = "file"]{
+    position: absolute;
+    transform: scale(2);
+    opacity: 0;
+}
+.edit-upload .round input[type=file]:hover + #boot-icon {
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+.upload {
+    display: grid;
+    grid-template-columns: repeat(1, 2fr);
+    /*border: 2px solid red;*/
+    place-items: center;
+    padding: 10px;
+}
+
+
+#image{
+    border-radius: 50%;
+}
+
+
+
+
+.upload .upload-placeholder{
+    border: 2px solid #e0e0e0;
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+    margin-bottom: 10px;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    overflow: hidden;
+}
+
+.upload .upload-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintain aspect ratio and fill the container */
+}
 
 
 
@@ -41,6 +173,14 @@
     pointer-events: auto;
 }
 
+
+#UpdateEmployee[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    cursor: no-drop;
+    pointer-events: auto;
+}
 
 
 
