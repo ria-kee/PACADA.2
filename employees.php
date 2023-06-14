@@ -267,8 +267,8 @@
                         <div class="round">
                             <form id="photo" enctype="multipart/form-data">
                                 <label for="formFile">
-                                    <input class="form-control" type="file" id="formFile">
-                                    <span id="boot-icon" class="bi bi-camera-fill" style="font-size: 1.5rem;color: #fff"></span>
+                                    <input class="form-control edit-input" type="file" id="formFile">
+                                    <span id="boot-icon" class="bi bi-camera-fill" title="Upload Image" style="font-size: 1.5rem;color: #fff"></span>
                                 </label>
                             </form>
                         </div>
@@ -276,6 +276,12 @@
                     <div class="text-center">
                         <span id="image-invalid-feedback" class="text-danger"></span>
                     </div>
+                    <div class="text-center">
+                        <span class="underline edit-input" title="Remove Image" style="display: block;">Remove</span>
+                    </div>
+
+
+
 
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
@@ -352,16 +358,7 @@
                                         <input type="date" id="edit_appptdate" class="form-control edit-input">
                                         <span id="appdate-invalid-feedback" class="text-danger"></span>
                                     </div>
-
-
-
                                 </div>
-
-
-
-
-
-
                                 <h3 style="color: var(--color-b3) ; margin-top: 10px"><b>Credit Balance</b></h3>
                                 <hr class="mt-1 mb-1" id="divider"/>
                                 <div class="row">
@@ -372,7 +369,6 @@
                                             <span id="vacation-invalid-feedback" class="text-danger"></span>
                                         </div>
                                     </div>
-
                                     <div class="col-md-6 mb-3">
                                         <label for="edit_sick" class="form-label">Sick Leave</label>
                                         <input type="number"  step=".001" min="0.000" class="form-control edit-input" id="edit_sick" placeholder="Enter Sick Leave Credit" value="0.000" >
@@ -380,7 +376,6 @@
                                             <span id="sick-invalid-feedback" class="text-danger"></span>
                                         </div>
                                     </div>
-
                                     <div class="col-md-6 mb-3">
                                         <label for="edit_force" class="form-label">Force Leave</label>
                                         <input type="number" step=".001" min="0.000" max="3" class="form-control edit-input" id="edit_force" placeholder="Enter Force Leave Credit" value="0.000">
@@ -388,7 +383,6 @@
                                             <span id="force-invalid-feedback" class="text-danger"></span>
                                         </div>
                                     </div>
-
                                     <div class="col-md-6 mb-3">
                                         <label for="edit_spl" class="form-label">Special Leave</label>
                                         <input type="number" step=".001" min="0.000" class="form-control edit-input" id="edit_spl" placeholder="Enter Special Leave Credit" value="0.000">
@@ -396,29 +390,13 @@
                                             <span id="spl-invalid-feedback" class="text-danger"></span>
                                         </div>
                                     </div>
-
                                     <input type="number" class="form-control" id="edit_uid" placeholder="uID" style="display: none">
-
                                 </div>
-
                             </form>
-
-
                         </div>
 <!--                        <div class="tab-pane fade" id="nav-account" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>-->
                     </div>
-
-
-
-
-
-
                 </form>
-
-
-
-
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

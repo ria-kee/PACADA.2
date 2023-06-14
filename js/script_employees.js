@@ -184,9 +184,12 @@ $(document).on('click', '.view-button', function() {
 });
 
 
+
+var defaultImage;
 //EDIT MODAL
 $(document).on('click', '.edit-button', function() {
     var image = $(this).data('image');
+    defaultImage = image;
     // PERSONAL
     var fname = $(this).data('fname');
     var mname = $(this).data('mname');
@@ -202,8 +205,6 @@ $(document).on('click', '.edit-button', function() {
     var spl = $(this).data('spl');
 
     var emp = $(this).data('empid');
-
-
 
     $('#preview-image').attr('src', 'data:image/jpeg;base64,' + image);
     $('#fname').val(fname);
@@ -246,7 +247,6 @@ $('.edit-input').on('input', function() {
         $('#UpdateEmployee').prop('disabled', true);
     }
 });
-
 
 
 // EDIT MODAL VALIDATION
@@ -517,10 +517,83 @@ $('.edit-input').on('input', function() {
 
 
 
+// defaultImage
+let blob;
+let thereisFile = false;
+let uploaded;
+let currentImage;
+let isImageValid = false;
+
+// Form File Input Change Event
+imageInput.addEventListener('change', function() {
+
+    const file = this.files[0];
+    const fallbackImage = 'assets/img/no-profile.png';
+
+    if (file) {
+        const fileSize = file.size / (1024 * 1024); // Convert file size to MB
+        const fileExtension = file.name.split('.').pop().toLowerCase();
+
+        // Check if file is an image, within size limit, and has a valid extension
+        if (
+            file.type.startsWith('image/') &&
+            fileSize <= 5 &&
+            (fileExtension === 'jpg' ||
+                fileExtension === 'jpeg' ||
+                fileExtension === 'png' ||
+                fileExtension === 'gif')
+        ) {
+            const reader = new FileReader();
+
+            reader.addEventListener('load', function () {
+                imagePreview.src = this.result;
+                imageFeedback.textContent = ''; // Clear any previous error message
+                currentImage = this.result; // Update the current image variable
+            });
+
+            reader.readAsDataURL(file);
+
+            thereisFile =true;
+            uploaded=file;
+            isImageValid = true;
+
+        } else {
+            // Display error message for invalid file type, size, or extension
+            imageFeedback.textContent = 'Please select a valid image file (up to 5MB).';
+            formFile.value = ''; // Reset the file input
+            if (currentImage) {
+                imagePreview.src = currentImage; // Restore the previous image
+            } else {
+                imagePreview.src = 'assets/img/no-profile.png'; // Display default image
+            }
+        }
+    }
+    else {
+        // If no file selected, reset the preview image and clear any previous error message
+        imagePreview.src = 'data:image/jpeg;base64,' + defaultImage;
+        imageFeedback.textContent = '';
+        currentImage = ''; // Reset the current image variable
+        thereisFile =false;
+    }
+
+
+});
+
+
+
+
+
+
+
 $(document).ready(function() {
+
     $('#UpdateEmployee').click(function () {
+        let imageData = uploaded;
         const emp = $(this).data('emp');
+
         // Validate Inputs
+        const isImageChanged = thereisFile;
+        const isUploadedImageValid = isImageValid;
         const isFirstNameValid = validateFirstName();
         const isLastNameValid = validateLastName();
         const isBirthdateValid = validateBirthdate();
@@ -532,7 +605,76 @@ $(document).ready(function() {
         const isForceValid = validateForce();
         const isSplValid = validateSpl();
 
-        if (isFirstNameValid && isLastNameValid && isBirthdateValid && isSexValid && isDepartmentValid && isAppDateValid && isVacationValid && isSickValid && isForceValid && isSplValid) {
+
+
+        if (isUploadedImageValid && isImageChanged && isFirstNameValid && isLastNameValid && isBirthdateValid && isSexValid && isDepartmentValid && isAppDateValid && isVacationValid && isSickValid && isForceValid && isSplValid) {
+            const reader = new FileReader();
+
+
+            reader.onload = function(event) {
+                const arrayBuffer = event.target.result;
+
+                // Convert the ArrayBuffer to a Blob
+                const imageBlob = new Blob([arrayBuffer], { type: imageData.type });
+
+                // Retrieve the file name from the File object
+                const fileName = imageData.name;
+                console.error('blob:', imageBlob);
+                // Create a File object with the Blob and set the name
+                const files = new File([imageBlob], fileName, { type: imageData.type });
+
+                console.error('employees_image:', files);
+                // Create a new FormData object
+                const formData = new FormData();
+                formData.append('uid', uid.value);
+                formData.append('employees_image', files);
+                formData.append('employees_FirstName', firstNameInput.value);
+                formData.append('employees_MiddleName', middleNameInput.value);
+                formData.append('employees_LastName', lastNameInput.value);
+                formData.append('employees_sex', sexSelect.value);
+                formData.append('employees_birthdate', birthdateInput.value);
+                formData.append('employees_Department', deptSelect.value);
+                formData.append('employees_appointmentDate', apptdateInput.value);
+                formData.append('Leave_Vacation', vacationInput.value);
+                formData.append('Leave_Sick', sickInput.value);
+                formData.append('Leave_Force', forceInput.value);
+                formData.append('Leave_Special', splInput.value);
+
+                // Send the employee data to the PHP file using an AJAX request
+                $.ajax({
+                    url: 'update_employee_with_image.php',
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        // Show the success alert
+                        $('#successAlert').removeClass('d-none').addClass('show').html('<i class="bi-check-circle-fill me-2"></i><strong>Success!</strong> Employee <strong>' + emp + '</strong> has been updated successfully.');
+                        $('#EditEmployee').modal('hide');
+                        $('#empTable').DataTable().ajax.reload();
+                        // Close the success alert after 3 seconds
+                        setTimeout(function () {
+                            $('#successAlert').removeClass('show').addClass('d-none');
+                        }, 3000);
+
+                    },
+                    error: function () {
+                        // Handle the error response
+                        console.error('An error occurred while updating the employee');
+                        // Show the error alert
+                        $('#errorAlert').removeClass('d-none').addClass('show').html('<i class="bi-exclamation-octagon-fill me-2"></i><strong>Error!</strong> An error occurred while updating the employee <strong>' + emp + '</strong>.');
+                        $('#EditEmployee').modal('hide');
+                        // Close the error alert after 3 seconds
+                        setTimeout(function () {
+                            $('#errorAlert').removeClass('show').addClass('d-none');
+                        }, 3000);
+                    }
+                });
+            };
+            // Start reading the image file as ArrayBuffer
+            reader.readAsArrayBuffer(imageData);
+        }
+        else if (isUploadedImageValid && isFirstNameValid && isLastNameValid && isBirthdateValid && isSexValid && isDepartmentValid && isAppDateValid && isVacationValid && isSickValid && isForceValid && isSplValid) {
 
             const formData = new FormData();
             formData.append('uid', uid.value);
@@ -580,6 +722,7 @@ $(document).ready(function() {
             });
 
         }
+
     });
 
 });
