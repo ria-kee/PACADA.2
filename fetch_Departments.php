@@ -58,7 +58,7 @@ while ($row = mysqli_fetch_assoc($query)) {
     $subarray[] = $row['dept_uid'];
     $subarray[] = $row['dept_Description'];
     $subarray[] = '<button type="button" id="edit" class="btn btn-sm btn-secondary edit-button" data-toggle="modal" data-target="#EditDept" data-deptid="'.$row['uID'].'"><i class="bi bi-pencil-fill"></i> Edit</button>
-                   <button type="button" id="remove" class="btn btn-sm btn-danger remove-button" data-toggle="modal" data-target="#RemoveDept" data-id="'.$row['uID'].'" data-acronyms="'.$row['dept_uid'].'"  data-department="'.$row['dept_Description'].'"><i class="bi bi-building-slash"></i> Deactivate</button>';
+                   <button type="button" id="remove" class="btn btn-sm btn-danger remove-button" data-toggle="modal" data-target="#RemoveDept" data-id="'.$row['uID'].'" data-acronyms="'.$row['dept_uid'].'"  data-department="'.$row['dept_Description'].'"><i class="bi bi-building-slash"></i> Deact</button>';
     $data[] = $subarray;
 }
 

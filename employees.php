@@ -276,8 +276,8 @@
                     <div class="text-center">
                         <span id="image-invalid-feedback" class="text-danger"></span>
                     </div>
-                    <div class="text-center">
-                        <span class="underline edit-input" title="Remove Image" style="display: block;">Remove</span>
+                    <div class="text-center underline">
+                        <span  id="RemoveImage" title="Remove Image">Remove Image</span>
                     </div>
 
 
@@ -407,6 +407,28 @@
 </div>
 
 
+
+<!--REMOVE EMPLOYEE MODAL-->
+<div class="modal fade" id="EmployeeArchiveModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="material-symbols-rounded">inventory_2</span>
+                <h1 class="modal-title" id="confirmModalLabel">Confirm Deactivation</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h3>Are you sure you want to deactivate <b><span id="empname"></span></b> ?</h3>
+                <h5 style="font-family: 'Poppins Light'">You can view the inactive employees by clicking the "Archive" button.</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="yes" onclick="">Yes, Deactivate</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

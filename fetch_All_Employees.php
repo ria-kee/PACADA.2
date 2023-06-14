@@ -164,9 +164,9 @@ while ($row = mysqli_fetch_assoc($query)) {
     
 
     <button type="button" id="archive" class="btn btn-sm btn-danger archive-button" data-toggle="modal" data-target="#confirmModal" 
-        data-uID='.$row['uID'].'" 
+        data-uid="'.$review_ID.'"
         data-empname="'.$empName.'"
-    ><i class="bi bi-person-dash-fill"></i> Remove</button>';
+    ><i class="bi bi-person-dash-fill"></i> Deact</button>';
 
     $data[] = $subarray;
 }

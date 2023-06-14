@@ -206,8 +206,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h3>Are you sure you want to archive Department: <b><span id="deptName"></span></b>?</h3>
-                <h5 style="font-family: 'Poppins Light'">You can view the deactivated departments by clicking the "Archive" button.</h5>
+                <h3>Are you sure you want to deactivate Department: <b><span id="deptName"></span></b>?</h3>
+                <h5 style="font-family: 'Poppins Light'">You can view the inactive departments by clicking the "Archive" button.</h5>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

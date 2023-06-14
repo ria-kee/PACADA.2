@@ -82,18 +82,35 @@ $sql .= " LIMIT $start, $pageLength";
 $query = mysqli_query($conn, $sql);
 
 while ($row = mysqli_fetch_assoc($query)) {
+
+    $empName = ucwords(strtolower($row['employees_FirstName'])) . ' ';
+
+    if (!empty($row['employees_MiddleName'])) {
+        $empName .= strtoupper(substr($row['employees_MiddleName'], 0, 1)) . '. ';
+    }
+
+    $empName .= ucwords(strtolower($row['employees_LastName']));    $review_Image = $row['employees_image'];
+
+
+
+
     $subarray = array();
     $subarray[] = '<input class="form-check-input" type="checkbox" value="'.$row['uID'].'" data-id="'.$row['uID'].'" >';
 
+
+
+
+
     $subarray[] = strtoupper($row['employees_uid']);
     $subarray[] = $row['dept_uid']; // Fetching department name from the join
-    $subarray[] = ucwords(strtolower($row['employees_FirstName'])) . ' ' . strtoupper(substr($row['employees_MiddleName'], 0, 1)) . '. ' . ucwords(strtolower($row['employees_LastName']));
-    $empName = ucwords(strtolower($row['employees_FirstName'])) . ' ' . strtoupper(substr($row['employees_MiddleName'], 0, 1)) . '. ' . ucwords(strtolower($row['employees_LastName']));
+    $subarray[] = $empName;
     $subarray[] = $row['Leave_Vacation'];
     $subarray[] = $row['Leave_Sick'];
     $subarray[] = $row['Leave_Force'];
     $subarray[] = $row['Leave_Special'];
-    $subarray[] = '<button type="button" id="remove"  class="btn btn-sm btn-danger remove-button" data-toggle="modal" data-target="#DeleteEmp" data-id="'.$row['uID'].'" data-empid="'.$row['employees_uid'].'" data-empname="'.$empName.'"><i class="bi bi-person-dash-fill"></i> Remove</button>';
+    $subarray[] = '
+    <button type="button" id="activate" class="btn btn-sm btn-success activate-button" data-toggle="modal" data-target="#ActivateEmp" data-act_id="'.$row['uID'].'"  data-id="'.$row['uID'].'" data-empid="'.$row['employees_uid'].'" data-empname="'.$empName.'"><i class="bi bi-person-check-fill"></i> Activate</button>
+    <button type="button" id="remove"  class="btn btn-sm btn-danger remove-button" data-toggle="modal" data-target="#DeleteEmp" data-id="'.$row['uID'].'" data-empid="'.$row['employees_uid'].'" data-empname="'.$empName.'"><i class="bi bi-person-x-fill"></i> Remove</button>';
 
     $data[] = $subarray;
 }

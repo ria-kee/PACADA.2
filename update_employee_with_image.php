@@ -119,8 +119,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $response = ['success' => false, 'message' => 'Invalid request method.'];
 }
 
-//// Remove the uploaded temporary file
-//unlink($targetFileName);
+// Remove the uploaded temporary file
+unlink($targetFileName);
 
 // close the database connection
 $conn->close();

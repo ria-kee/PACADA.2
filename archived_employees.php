@@ -99,7 +99,7 @@
 </div>
 
 
-<!--Delete DEPT MODAL-->
+<!--Delete EMP MODAL-->
 <div class="modal fade" id="DeleteEmp" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -110,7 +110,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h3>Are you sure you want to <b class="text-danger">permanently delete</b> <b><span id="deptName"></span></b>?</h3>
+                <h3>Are you sure you want to <b class="text-danger">permanently delete</b> <b><span id="empName"></span></b>?</h3>
                 <h5 style="font-family: 'Poppins Light'">This action cannot be undone.</h5>
             </div>
             <div class="modal-footer">
@@ -120,7 +120,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="modal fade" id="DeleteAll" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
      aria-hidden="true">
@@ -144,108 +143,49 @@
 </div>
 
 
-
-<!--VIEW EMPLOYEE-->
-<div class="modal fade" id="ReviewModal" tabindex="-1">
-    <div class="modal-dialog">
+<!--ACTIVATE EMP MODAL-->
+<div class="modal fade" id="ActivateAll" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <span class="material-symbols-rounded">info</span>
-                <h1 class="modal-title" style="margin-left: 10px;">Employee Preview</h1>
+                <span class="material-symbols-rounded">done_outline</span>
+                <h1 class="modal-title" id="confirmModalLabel"> Confirm Activation</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="form-group">
-
-                        <div class="upload">
-                            <div class="upload-placeholder">
-                                <img id="review-preview-image" src="assets/img/no-profile.png" alt="Placeholder Image">
-                            </div>
-                        </div>
-                        <div class="row">
-
-                            <div style="text-align: center;">
-                                <span type="text" id="review_fullname">Name</span>
-                            </div>
-                            <div class="row">
-                                <div style="text-align: center; margin-bottom: 20px">
-                                    <span type="text" id="review_department">Department</span>    |    <span type="text" id="review_id" >ID</span>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 mb-3" style="text-align: center;  margin: 0;">
-                                <label for="review_email" class="form-label"><b>Email: </b></label>
-                                <span type="text"  id="review_email">email</span>
-                            </div>
-<!--                            <div class="col-md-12 mb-3" style="text-align: center; margin: 0;">-->
-<!--                                <label for="review_password" class="form-label"><b>Password: </b></label>-->
-<!--                                <span type="text" id="review_password">Password</span>-->
-<!--                            </div>-->
-                        </div>
-
-                        <!--divider-->
-                        <hr  class="mt-1 mb-1" id="divider"/>
-
-                        <div class="row" style = "margin-top: 25px;" >
-                            <div class="col-md-6 mb-3">
-                                <label for="review_sex" class="form-label" ><b>Sex: </b></label>
-                                <span type="text"  id="review_sex">Sex</span>
-
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="review_birthdate" class="form-label"><b>Date of Birth: </b></label>
-                                <span type="text"  id="review_birthdate">Date of Birth</span>
-                            </div>
-                        </div>
-
-
-                        <!--divider-->
-                        <hr  class="mt-1 mb-1" id="divider"/>
-
-                        <div class="row">
-                            <div class="col-md-12 mb-3" style="text-align: center;">
-                                <label for="review_appdate" class="form-label"><b>Appointment Date: </b></label>
-                                <span type="text"  id="review_appdate">Appointment Date</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="review_vacation" class="form-label"><b>Vacation Leave: </b></label>
-                                <span type="text"  id="review_vacation">Vacation</span>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="review_sick" class="form-label"><b>Sick Leave: </b></label>
-                                <span type="text"  id="review_sick">Sick</span>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="review_force" class="form-label"><b>Force Leave: </b></label>
-                                <span type="text" id="review_force">Force</span>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="review_spl" class="form-label"><b>Special Leave: </b></label>
-                                <span type="text"  id="review_spl">SPL</span>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                </form>
+                <h3>Are you sure you want to <b class="text-success">activate</b> selected Employees?</h3>
+                <h5 style="font-family: 'Poppins Light'">When activated, selected employees will be displayed in the "Active Employees" table.</h5>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" id="activate-all-yes" class="btn btn-success" onclick="">Yes, Activate</button>
             </div>
         </div>
     </div>
 </div>
 
+
+<div class="modal fade" id="ActivateEmp" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="material-symbols-rounded">done_outline</span>
+                <h1 class="modal-title" id="confirmModalLabel"> Confirm Activation</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h3>Are you sure you want to <b class="text-success">activate</b> <b><span id="act_empName"></span></b> ?</h3>
+                <h5 style="font-family: 'Poppins Light'">When activated, the employee will be displayed in the "Active Employees" table.</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" id="activate-yes" class="btn btn-success" onclick="">Yes, Activate</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

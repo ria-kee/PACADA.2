@@ -32,6 +32,7 @@ $(document).ready(function() {
     $('.dataTables_filter').hide();
 
     var deleteAllButton = $('#deleteAllButton');
+    var activateAllButton = $('#activateAllButton');
     var selectedData = []; // Array to store the selected data
 
     // Function to check the checkbox state and enable/disable the button
@@ -41,8 +42,10 @@ $(document).ready(function() {
 
         if (checkedCount === 0) {
             deleteAllButton.prop('disabled', true); // Disable the button
+            activateAllButton.prop('disabled', true); // Disable the button
         } else {
             deleteAllButton.prop('disabled', false); // Enable the button
+            activateAllButton.prop('disabled', false); // Enable the button
         }
     }
 
@@ -72,6 +75,8 @@ $(document).ready(function() {
         selectedData = getSelectedValues(); // Update the selectedData array
     });
 
+
+    // DELETE ALL
     deleteAllButton.on('click', function() {
         // Clear any previous values
         $('#selectedValues').empty();
@@ -80,7 +85,7 @@ $(document).ready(function() {
         if (selectedData.length > 0) {
             for (var i = 0; i < selectedData.length; i++) {
                 var value = selectedData[i];
-                var row = $('<div>').text('id: ' + value.ID);
+                var row = $('<div>').text('Employee ID: ' + value.ID);
                 $('#selectedValues').append(row);
             }
 
@@ -93,20 +98,20 @@ $(document).ready(function() {
         // Array to store the department IDs to be deleted
         var empIdsToDelete = [];
 
-        // Extract the department IDs from selectedData, ignoring the value 0
+        // Extract the employee IDs from selectedData, ignoring the value 0
         for (var i = 0; i < selectedData.length; i++) {
-            var deptUid = selectedData[i].deptUid;
-            if (deptUid !== '0') {
-                empIdsToDelete.push(deptUid);
+            var ID = selectedData[i].ID;
+            if (ID !== '0') {
+                empIdsToDelete.push(ID);
             }
         }
 
 
         // Perform the deletion action using the empIdsToDelete array
         $.ajax({
-            url: 'delete_departments.php',
+            url: 'delete_employees.php',
             type: 'POST',
-            data: { deptIds: empIdsToDelete },
+            data: { empIds: empIdsToDelete },
             success: function(response) {
                 // Show the success alert
                 $('#successAlert').removeClass('d-none').addClass('show').html('<i class="bi-check-circle-fill me-2"></i><strong>Success!</strong> ' + response);
@@ -127,7 +132,7 @@ $(document).ready(function() {
                 $('#errorAlert').removeClass('d-none').addClass('show').html('<i class="bi-exclamation-octagon-fill me-2"></i><strong>Error!</strong> ' + xhr.responseText);
 
                 // Close the modal
-                $('#RemoveDept').modal('hide');
+                $('#DeleteAll').modal('hide');
                 // Uncheck the selectAllCheckbox
                 $('#selectAllCheckbox').prop('checked', false);
 
@@ -152,23 +157,104 @@ $(document).ready(function() {
 
 
 
-    var id ='';
-    var empid = '';
-    var empname = '';
+    // ACTIVATE ALL
 
-    //DELETE A DEPARTMENT
+    activateAllButton.on('click', function() {
+        // Clear any previous values
+        $('#selectedValues').empty();
+
+        // Display the selected values
+        if (selectedData.length > 0) {
+            for (var i = 0; i < selectedData.length; i++) {
+                var value = selectedData[i];
+                var row = $('<div>').text('Employee ID: ' + value.ID);
+                $('#selectedValues').append(row);
+            }
+
+            // Show the modal
+            $('#ActivateAll').modal('show');
+        }
+    });
+
+$('#activate-all-yes').on('click', function() {
+    // Array to store the department IDs to be deleted
+    var EmpIdsToActivate = [];
+
+    // Extract the department IDs from selectedData, ignoring the value 0
+    for (var i = 0; i < selectedData.length; i++) {
+        var ID = selectedData[i].ID;
+        if (ID !== '0') {
+            EmpIdsToActivate.push(ID);
+        }
+    }
+    console.error('EmpIdsToActivate',EmpIdsToActivate);
+
+
+    // Perform the activation action using the deptIdsToActivate array
+    $.ajax({
+        url: 'activate_employees.php',
+        type: 'POST',
+        data: { empIds: EmpIdsToActivate },
+        success: function(response) {
+            // Show the success alert
+            $('#successAlert').removeClass('d-none').addClass('show').html('<i class="bi-check-circle-fill me-2"></i><strong>Success!</strong> ' + response);
+            $('#empTable').DataTable().ajax.reload();
+
+            // Close the modal
+            $('#ActivateAll').modal('hide');
+            // Uncheck the selectAllCheckbox
+            $('#selectAllCheckbox').prop('checked', false);
+
+            // Close the success alert after 3 seconds
+            setTimeout(function() {
+                $('#successAlert').removeClass('show').addClass('d-none');
+            }, 3000);
+        },
+        error: function(xhr, status, error) {
+            // Show the error alert with the custom error message
+            $('#errorAlert').removeClass('d-none').addClass('show').html('<i class="bi-exclamation-octagon-fill me-2"></i><strong>Error!</strong> ' + xhr.responseText);
+
+            // Close the modal
+            $('#ActivateAll').modal('hide');
+            // Uncheck the selectAllCheckbox
+            $('#selectAllCheckbox').prop('checked', false);
+
+            // Close the error alert after 5 seconds
+            setTimeout(function() {
+                $('#errorAlert').removeClass('show').addClass('d-none');
+            }, 5000);
+        }
+    });
+
+    // Close the modal or perform any other necessary actions
+    $('#ActivateAll').modal('hide');
+    // Uncheck the selectAllCheckbox
+    $('#selectAllCheckbox').prop('checked', false);
+
+});
+
+
+
+
+
+
+
+
+    var id;
+    var empid;
+    var empname;
+
+
+    //DELETE AN EMPLOYEE
     $(document).on('click', '.remove-button', function() {
         id = $(this).data('id');
         empid = $(this).data('empid');
         empname = $(this).data('empname');
 
 
-        $('#deptName').text(empid + " : " + empname);
+        $('#empName').text(empid + " : " + empname);
         $('#DeleteEmp').modal('show');
     });
-
-
-
     $('#yess').on('click', function() {
         $.ajax({
             url: 'delete_employee.php',
@@ -209,17 +295,64 @@ $(document).ready(function() {
         $('#DeleteEmp').modal('hide');
     });
 
-    // Function to check the checkbox state and enable/disable the button
-    function checkCheckboxState() {
-        var checkboxes = $('#empTable').find('.form-check-input');
-        var checkedCount = checkboxes.filter(':checked').length;
-        var rowCount = empTable.rows().count(); // Get the number of rows in the DataTable
 
-        if (checkedCount === 0 || rowCount === 0) {
-            deleteAllButton.prop('disabled', true); // Disable the button
-        } else {
-            deleteAllButton.prop('disabled', false); // Enable the button
-        }
-    }
+    // ACTIVATE AN EMPLOYEE
+    $(document).on('click', '.activate-button', function() {
+        id = $(this).data('id');
+        empid = $(this).data('empid');
+        empname = $(this).data('empname');
+
+        $('#act_empName').text(empid + ": " + empname);
+        $('#ActivateEmp').modal('show');
+    });
+
+
+    $('#activate-yes').on('click', function() {
+        $.ajax({
+            url: 'activate_employee.php',
+            type: 'POST',
+            data: { uID: id, empname: empname },
+            success: function(response) {
+                // Show the success alert
+                $('#successAlert').removeClass('d-none').addClass('show').html('<i class="bi-check-circle-fill me-2"></i><strong>Success!</strong> ' + response);
+                $('#empTable').DataTable().ajax.reload();
+
+                // Close the modal
+                $('#ActivateEmp').modal('hide');
+                // Uncheck the selectAllCheckbox
+                $('#selectAllCheckbox').prop('checked', false);
+
+                // Close the success alert after 3 seconds
+                setTimeout(function() {
+                    $('#successAlert').removeClass('show').addClass('d-none');
+                }, 3000);
+            },
+            error: function(xhr, status, error) {
+                // Show the error alert with the custom error message
+                $('#errorAlert').removeClass('d-none').addClass('show').html('<i class="bi-exclamation-octagon-fill me-2"></i><strong>Error!</strong> ' + xhr.responseText);
+
+                // Close the modal
+                $('#ActivateEmp').modal('hide');
+                // Uncheck the selectAllCheckbox
+                $('#selectAllCheckbox').prop('checked', false);
+
+                // Close the error alert after 5 seconds
+                setTimeout(function() {
+                    $('#errorAlert').removeClass('show').addClass('d-none');
+                }, 5000);
+            }
+        });
+
+        // Close the modal
+        $('#ActivateEmp').modal('hide');
+    });
+
+
+
 
 });
+
+
+
+
+
