@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Time-Off</title>
     <link rel="icon" href="assets/PACADA/PACADA.png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="css/style_dashboard.css">
 </head>
 <body>
@@ -19,53 +19,64 @@
         <?php include_once "header_userInfo.php"?>
     </div>
     <aside>
-            <div class="top">
-                <div class="logo">
-                    <img src="assets/PACADA/PACADA.png" alt="PACADA icon">
-                    <h2 >PACADA</h2>
-                </div>
-                <div class="close" id="close-btn">
-                    <span class="material-symbols-rounded">close</span>
-                </div>
+        <?php
+        $isSuperAdmin = $_SESSION['is_superadmin'] ?? 0; // Get the value of $_SESSION['is_superadmin'] or set it to 0 if not set
+
+        if ($isSuperAdmin === 0) {
+            // User is not a super admin, hide the link
+            $linkStyle = 'display: none;';
+        } else {
+            // User is a super admin, show the link
+            $linkStyle = '';
+        }
+        ?>
+        <div class="top">
+            <div class="logo">
+                <img src="assets/PACADA/PACADA.png" alt="PACADA icon">
+                <h2 >PACADA</h2>
             </div>
-            <div class="sidebar">
-                <a href="dashboard.php" >
-                    <span class="material-symbols-rounded">grid_view</span>
-                    <h3>Dashboard</h3>
-                </a>
-
-                <a href="departments.php" >
-                    <span class="material-symbols-rounded">domain</span>
-                    <h3>Departments</h3>
-                </a>
-
-                <a href="employees.php" >
-                    <span class="material-symbols-rounded">badge</span>
-                    <h3>Employees</h3>
-                    <!--                                <span class="material-symbols-rounded">expand_more</span>-->
-                </a>
-
-                <a href="leave.php" >
-                    <span class="material-symbols-rounded">event_upcoming</span>
-                    <h3>Leave</h3>
-                </a>
-
-                <a href="timeOff.php" class="active">
-                    <span class="material-symbols-rounded">work_history</span>
-                    <h3>Time-Off</h3>
-                </a>
-
-                <a href="admins.php">
-                    <span class="material-symbols-rounded">manage_accounts</span>
-                    <h3>Admins</h3>
-                </a>
-                <a href="profile.php">
-                    <span class="material-symbols-rounded">person</span>
-                    <h3>Profile</h3>
-                </a>
-                <a href="logout.php">
-                    <span class="material-symbols-rounded">logout</span>
-                    <h3>Logout</h3>
-                </a>
+            <div class="close" id="close-btn">
+                <i class="material-symbols-rounded">close</i>
             </div>
-        </aside>
+        </div>
+
+        <div class="sidebar">
+            <a href="dashboard.php" >
+                <span class="material-symbols-rounded">grid_view</span>
+                <h3>Dashboard</h3>
+            </a>
+
+            <a href="departments.php">
+                <span class="material-symbols-rounded">domain</span>
+                <h3>Departments</h3>
+            </a>
+
+            <a href="employees.php">
+                <span class="material-symbols-rounded">badge</span>
+                <h3>Employees</h3>
+            </a>
+
+            <a href="leave.php">
+                <span class="material-symbols-rounded">event_upcoming</span>
+                <h3>Leave</h3>
+            </a>
+
+            <a href="timeOff.php" class="active">
+                <span class="material-symbols-rounded">work_history</span>
+                <h3>Time-Off</h3>
+            </a>
+
+            <a href="admins.php" style="<?php echo $linkStyle; ?>">
+                <span class="material-symbols-rounded">manage_accounts</span>
+                <h3>Admins</h3>
+            </a>
+            <a href="profile.php">
+                <span class="material-symbols-rounded">person</span>
+                <h3>Profile</h3>
+            </a>
+            <a href="logout.php">
+                <span class="material-symbols-rounded">logout</span>
+                <h3>Logout</h3>
+            </a>
+        </div>
+    </aside>

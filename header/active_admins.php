@@ -26,6 +26,20 @@
         <?php include_once "header_userInfo.php"?>
     </div>
     <aside>
+
+        <?php
+
+        $isSuperAdmin = $_SESSION['is_superadmin'] ?? 0; // Get the value of $_SESSION['is_superadmin'] or set it to 0 if not set
+
+        if ($isSuperAdmin === 0) {
+            // User is not a super admin, hide the link
+            $linkStyle = 'display: none;';
+        } else {
+            // User is a super admin, show the link
+            $linkStyle = '';
+        }
+        ?>
+
             <div class="top">
                 <div class="logo">
                     <img src="assets/PACADA/PACADA.png" alt="PACADA icon">
@@ -62,7 +76,7 @@
                     <h3>Time-Off</h3>
                 </a>
 
-                <a href="admins.php" class="active">
+                <a href="admins.php" class="active" style="<?php echo $linkStyle; ?>">
                     <span class="material-symbols-rounded">manage_accounts</span>
                     <h3>Admins</h3>
                 </a>

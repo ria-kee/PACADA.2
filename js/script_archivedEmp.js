@@ -106,7 +106,6 @@ $(document).ready(function() {
             }
         }
 
-
         // Perform the deletion action using the empIdsToDelete array
         $.ajax({
             url: 'delete_employees.php',
@@ -305,6 +304,7 @@ $('#activate-all-yes').on('click', function() {
         $('#act_empName').text(empid + ": " + empname);
         $('#ActivateEmp').modal('show');
     });
+
 
 
     $('#activate-yes').on('click', function() {

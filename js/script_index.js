@@ -47,4 +47,3 @@ setInterval(moveSlider, 3000);
 
 
 
-

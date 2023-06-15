@@ -1,4 +1,13 @@
-<?php include_once "header/active_dashboard.php";?>
+<?php
+session_start();
+if (!isset($_SESSION['admin_uID'])) {
+// Redirect the user to the login page or show access denied message
+header('Location: error.401.php');
+exit();
+}
+?>
+
+<?php include "header/active_dashboard.php";?>
 
 <!--MAIN-->
 
@@ -260,6 +269,9 @@
                             </div>
                         </div>
 
+                            <script>
+                                var adminFirstName = "<?php echo $_SESSION['admin_FirstName']; ?>";
+                            </script>
                             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                             <script src="js/script_dashboard.js"></script>
 
@@ -290,5 +302,4 @@
                                 setInterval(updateTime, 1000); // Refresh the time every second
                             </script>
 
-                    </body>
-                </html>
+

@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+// Redirect the user to the login page or show access denied message
+    header('Location: error.401.php');
+    exit();
+}
+?>
 <!-- jQuery CDN Library -->
 <script src="js/bootstrap/jquery-3.6.0.min.js"></script>
 <!-- BOOTSTRAP LIBRARY -->

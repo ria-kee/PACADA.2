@@ -1,24 +1,5 @@
-
-// window.onload = function() {
-//     var randomText = document.getElementById('randomText');
-//     var texts = [
-//         'Have a nice day at work.',
-//         'Enjoy your day!',
-//         'Stay productive!',
-//         'Make it a great day!',
-//         'Wishing you a successful day.',
-//         'Hope you have an amazing day!',
-//         'Stay focused and motivated!',
-//         'May your day be filled with success.',
-//         'Sending positive vibes for your day!',
-//         'Remember to take breaks and relax.'
-//     ];
-//
-//     var randomIndex = Math.floor(Math.random() * texts.length);
-//     randomText.textContent = texts[randomIndex];
-// };
-
 window.onload = function() {
+
     var randomText = document.getElementById('randomText');
     var texts = [
         'Have a nice day at work.',
@@ -40,10 +21,8 @@ window.onload = function() {
     randomText.textContent = texts[randomIndex];
 };
 
-
-
 // Set the name variable
-var name = "Jaz";
+var name = adminFirstName;
 
 // Array of greetings
 var greetings = [
