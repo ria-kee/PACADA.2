@@ -95,6 +95,8 @@ body{
 }
 
 
+
+
 a{
     color: var(--color-input);
 }
@@ -139,6 +141,10 @@ small{
     height:  2.8rem;
     border-radius: 50%;
     overflow: hidden;
+    cursor: pointer;
+}
+
+.profile-photo:hover{
     cursor: pointer;
 }
 
@@ -296,13 +302,7 @@ main{
     padding: 10px; /* Add padding for better visibility */
 }
 
-.profile{
-    justify-self: end ;
-    display: flex;
-    gap: 1rem;
-    text-align: right;
-    color: var(--color-light);
-}
+
 
 .profile .text-muted{
     color: var(--color-light);
@@ -550,7 +550,7 @@ main .recent-leaves a:hover{
 
 /* ================== RIGHT ===================== */
 .right{
-    margin-top: 1.4rem;
+    margin-top: 4.4rem;
 }
 
 .right .top{
@@ -566,7 +566,7 @@ main .recent-leaves a:hover{
 
 /* ================== RECENT UPDATES ===================== */
 .right .recent-updates{
-    margin-top: 6.7rem;
+    margin-top: 2.7rem;
 }
 .right .recent-updates h2{
     margin-bottom: 0.8rem;

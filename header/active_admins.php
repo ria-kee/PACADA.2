@@ -16,8 +16,8 @@
 
     <link rel="stylesheet" href="css/style_dashboard.css">
 </head>
-<body>
-<div class="container">
+<body style="z-index: -3; position: relative">
+<div class="container" style="z-index: -2; position: relative">
     <div class="background"></div>
     <div class="header header-grid">
         <div class="location">

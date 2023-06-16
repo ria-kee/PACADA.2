@@ -158,7 +158,7 @@ exit();
 
                              <!---------------END OF MAIN--------------->
 
-                                <div class="right">
+                                <div class="right" style="z-index: -5">
                                 <!---------------START OF RECENT UPDATES--------------->
                                 <div class="recent-updates">
                                     <h2>Recent Updates</h2>
@@ -269,10 +269,11 @@ exit();
                             </div>
                         </div>
 
-                            <script>
-                                var adminFirstName = "<?php echo $_SESSION['admin_FirstName']; ?>";
-                            </script>
-                            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                    <script>
+                        var adminFirstName = "<?php echo explode(' ', $_SESSION['admin_FirstName'])[0]; ?>";
+                    </script>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                             <script src="js/script_dashboard.js"></script>
 
 

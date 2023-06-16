@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="css/style_dashboard.css">
 </head>
-<body>
-<div class="container">
+<body style="z-index: -3; position: relative">
+<div class="container" style="z-index: -2; position: relative">
     <div class="background"></div>
     <div class="header header-grid">
         <div class="location">
