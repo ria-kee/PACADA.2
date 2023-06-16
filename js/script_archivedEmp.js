@@ -7,7 +7,7 @@ $(document).ready(function() {
         lengthChange: false,
         order: [],
         ajax: {
-            url: 'fetch_ArchivedEmp.php',
+            url: 'inc.fetch_ArchivedEmp.php',
             type: 'post'
         },
         createdRow: function(row, data, dataIndex) {
@@ -108,7 +108,7 @@ $(document).ready(function() {
 
         // Perform the deletion action using the empIdsToDelete array
         $.ajax({
-            url: 'delete_employees.php',
+            url: 'inc.delete_employees.php',
             type: 'POST',
             data: { empIds: empIdsToDelete },
             success: function(response) {
@@ -191,7 +191,7 @@ $('#activate-all-yes').on('click', function() {
 
     // Perform the activation action using the deptIdsToActivate array
     $.ajax({
-        url: 'activate_employees.php',
+        url: 'inc.activate_employees.php',
         type: 'POST',
         data: { empIds: EmpIdsToActivate },
         success: function(response) {
@@ -256,7 +256,7 @@ $('#activate-all-yes').on('click', function() {
     });
     $('#yess').on('click', function() {
         $.ajax({
-            url: 'delete_employee.php',
+            url: 'inc.delete_employee.php',
             type: 'POST',
             data: { id: id, empid: empid, empname: empname },
             success: function(response) {
@@ -309,7 +309,7 @@ $('#activate-all-yes').on('click', function() {
 
     $('#activate-yes').on('click', function() {
         $.ajax({
-            url: 'activate_employee.php',
+            url: 'inc.activate_employee.php',
             type: 'POST',
             data: { uID: id, empname: empname },
             success: function(response) {

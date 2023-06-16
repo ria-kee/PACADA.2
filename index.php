@@ -71,7 +71,7 @@
             </div>
 
 
-            <form action="index.php" autocomplete="off" class="sign-up-form">
+            <form id="password-reset-form" action="inc.password-reset-link.php" method="post" autocomplete="off" class="sign-up-form">
                 <div class="logo">
                     <img src="assets/PACADA/PACADA.png" alt="PACADA Logo" />
                     <h3>PACADA</h3>
@@ -79,14 +79,34 @@
 
                 <div class="heading">
                     <h2>Forgot Password</h2>
-                    <h6>Please enter your email and we'll send a link to reset it. </h6>
+                    <h6>Please enter your email, and we'll send a link to reset it. </h6>
                 </div>
+
+
+
+                    <div class="error d-none text-danger" id="phpmailer-error" style="flex-direction: column;">
+                        <span class="material-symbols-rounded" style="font-size: 30px;">error</span> <br>
+                        <span id="phpmailer-error-text"></span>
+                    </div>
+
+
+
+                <div class="success d-none text-success" id="phpmailer-success">
+                    <span class="material-symbols-rounded" style="font-size: 30px;">check_circle</span> <br>
+                    <span>Reset Link has been sent.<br>
+                        <h6 style="font-size: 10px; font-weight: lighter"> Please check your inbox or spam.</h6></span>
+                </div>
+
+
+
                 <!--FORGOT PASSWORD FORM-->
                 <div class="actual-form">
 
                     <div class="input-wrap">
                         <input
+                            id="reset-email"
                             type="email"
+                            name="email"
                             class="input-field"
                             autocomplete="off"
                             required
@@ -96,7 +116,7 @@
 
 
 
-                    <input type="submit" value="Send Password Reset Link" class="sign-btn" />
+                    <input type="submit" id="reset-submit" name="password_reset_link" value="Send Password Reset Link" class="sign-btn" />
 
                     <p class="text">
                         Already settled your account?
@@ -111,7 +131,7 @@
             <div class="images-wrapper">
                 <img src="assets/img/image1.png" class="image img-1 show" alt="Manage Employee Leave Credits" />
                 <img src="assets/img/image2.png" class="image img-2" alt="Monitor Employee Leave Records" />
-                <img src="assets/img/image3.png" class="image img-3" alt="" />
+                <img src="assets/img/image3.png" class="image img-3" alt="Track Employee Time-off" />
             </div>
 
             <div class="text-slider">
@@ -135,6 +155,7 @@
 </main>
 
 <!-- Javascript file -->
+<script src="js/script_password-reset-link.js"></script>
 <script src="js/script_index.js"></script>
 <script src="js/script_login.js"></script>
 </body>

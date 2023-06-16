@@ -7,7 +7,7 @@ var deptTable = $('#deptTable').DataTable({
     lengthChange: false,
     order: [],
     ajax: {
-        url: 'fetch_Departments.php',
+        url: 'inc.fetch_Departments.php',
         type: 'post'
     },
     createdRow: function (row, data, dataIndex) {
@@ -139,7 +139,7 @@ addDeptModal.addEventListener('hidden.bs.modal', function() {
 
 function validateAcronym(acronym) {
     return $.ajax({
-        url: 'validate_department.php',
+        url: 'inc.validate_department.php',
         type: 'POST',
         data: { acronym: acronym },
         dataType: 'json'
@@ -176,7 +176,7 @@ addDepartmentButton.addEventListener('click', function() {
 
                     // Perform the AJAX request to add the department
                     $.ajax({
-                        url: 'add_department.php',
+                        url: 'inc.add_department.php',
                         type: 'POST',
                         data: {
                             acronym: acronym,
@@ -252,7 +252,7 @@ acronymInput.addEventListener('input', function() {
 
 function validateUpdatingAcronym(acronym) {
     return $.ajax({
-        url: 'validateUpdatingAcronym.php',
+        url: 'inc.validateUpdatingAcronym.php',
         type: 'POST',
         data: { acronym: acronym },
         dataType: 'json'
@@ -283,7 +283,7 @@ $(document).on('click', '.edit-button', function() {
 
     // AJAX call to fetch department details
     $.ajax({
-        url: 'find_department.php',
+        url: 'inc.find_department.php',
         type: 'POST',
         data: {deptId: deptId},
         dataType: 'json',
@@ -342,7 +342,7 @@ updateButton.addEventListener('click',function (){
                         edit_acronym.classList.add('is-valid');
 
                         $.ajax({
-                            url: 'update_department.php',
+                            url: 'inc.update_department.php',
                             type: 'POST',
                             data: {
                                 acronym: acronym,
@@ -384,7 +384,7 @@ updateButton.addEventListener('click',function (){
                     }
                     else {
                         $.ajax({
-                            url: 'update_department.php',
+                            url: 'inc.update_department.php',
                             type: 'POST',
                             data: {
                                 acronym: acronym,
@@ -491,7 +491,7 @@ $(document).on('click', '#RemoveDept .btn-danger', function() {
 
     // Perform the AJAX request to remove the admin
     $.ajax({
-        url: 'remove_department.php',
+        url: 'inc.remove_department.php',
         type: 'POST',
         data: { uID: UID },
         success: function(response) {

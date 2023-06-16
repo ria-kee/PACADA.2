@@ -7,7 +7,7 @@ $(document).ready(function() {
         lengthChange: false,
         order: [],
         ajax: {
-            url: 'fetch_ArchivedDept.php',
+            url: 'inc.fetch_ArchivedDept.php',
             type: 'post'
         },
         createdRow: function(row, data, dataIndex) {
@@ -113,7 +113,7 @@ $(document).ready(function() {
 
         // Perform the deletion action using the deptIdsToDelete array
         $.ajax({
-            url: 'delete_departments.php',
+            url: 'inc.delete_departments.php',
             type: 'POST',
             data: { deptIds: deptIdsToDelete },
             success: function(response) {
@@ -190,7 +190,7 @@ $(document).ready(function() {
 
         // Perform the activation action using the deptIdsToActivate array
         $.ajax({
-            url: 'activate_departments.php',
+            url: 'inc.activate_departments.php',
             type: 'POST',
             data: { deptIds: deptIdsToActivate },
             success: function(response) {
@@ -261,7 +261,7 @@ $(document).ready(function() {
     });
     $('#yess').on('click', function() {
         $.ajax({
-            url: 'delete_department.php',
+            url: 'inc.delete_department.php',
             type: 'POST',
             data: { uID: deptUid, acronym: acronyms },
             success: function(response) {
@@ -317,7 +317,7 @@ $(document).ready(function() {
 
     $('#activate-yes').on('click', function() {
         $.ajax({
-            url: 'activate_department.php',
+            url: 'inc.activate_department.php',
             type: 'POST',
             data: { uID: act_deptUid, acronym: act_acronyms },
             success: function(response) {

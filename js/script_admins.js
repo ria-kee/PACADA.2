@@ -7,7 +7,7 @@ var table = $('#adminTable').DataTable({
     lengthChange: false,
     order: [],
     ajax: {
-        url: 'fetch_AdminsData.php',
+        url: 'inc.fetch_AdminsData.php',
         type: 'post'
     },
     createdRow: function (row, data, dataIndex) {
@@ -139,7 +139,7 @@ departmentSelect.addEventListener('change', function () {
     if (selectedDepartment !== null && selectedDepartment !== "0") {
         // Make an AJAX request to retrieve the employees for the selected department
         $.ajax({
-            url: 'fetch_employees.php',
+            url: 'inc.fetch_employees.php',
             type: 'POST',
             data: { department: selectedDepartment },
             dataType: 'json',
@@ -279,7 +279,7 @@ $('#addAdminButton').click(function() {
     if (isValidEmployee) {
         // Perform the AJAX request to update the employee's is_admin value
         $.ajax({
-            url: 'add_admin.php',
+            url: 'inc.add_admin.php',
             type: 'POST',
             data: { employeeID: employeeID, isAdmin: 1 },
             success: function(response) {
@@ -335,7 +335,7 @@ $(document).on('click', '#confirmModal .btn-danger', function() {
     var employeeID = $('#confirmModal').data('employeeid');
     // Perform the AJAX request to remove the admin
     $.ajax({
-        url: 'remove_admin.php',
+        url: 'inc.remove_admin.php',
         type: 'POST',
         data: { employees_ID: employeeID },
         success: function(response) {

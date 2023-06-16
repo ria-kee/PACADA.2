@@ -41,7 +41,7 @@ $('#Department').on('change', function() {
     var selectedDepartment = $(this).val();
 
     // Update the Ajax URL with the selected department
-    empTable.ajax.url('fetch_All_Employees.php?department=' + selectedDepartment).load();
+    empTable.ajax.url('inc.fetch_All_Employees.php?department=' + selectedDepartment).load();
 });
 
 var empTable = $('#empTable').DataTable({
@@ -52,7 +52,7 @@ var empTable = $('#empTable').DataTable({
     lengthChange: false,
     order: [],
     ajax: {
-        url: 'fetch_All_Employees.php',
+        url: 'inc.fetch_All_Employees.php',
         type: 'post',
     },
     columnDefs: [{
@@ -664,7 +664,7 @@ $(document).ready(function() {
 
                 // Send the employee data to the PHP file using an AJAX request
                 $.ajax({
-                    url: 'update_employee_with_image.php',
+                    url: 'inc.update_employee_with_image.php',
                     method: 'POST',
                     data: formData,
                     processData: false,
@@ -714,7 +714,7 @@ $(document).ready(function() {
 
             // Send the employee data to the PHP file using an AJAX request
             $.ajax({
-                url: 'update_employee.php',
+                url: 'inc.update_employee.php',
                 method: 'POST',
                 data: formData,
                 processData: false,
@@ -775,7 +775,7 @@ $(document).on('click', '#EmployeeArchiveModal #yes', function() {
 
     // Perform the AJAX request to remove the admin
     $.ajax({
-        url: 'remove_employee.php',
+        url: 'inc.remove_employee.php',
         type: 'POST',
         data: { uID: UID },
         success: function(response) {

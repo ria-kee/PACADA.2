@@ -419,7 +419,7 @@ function validateEmail(){
                 }
             };
 
-            xhr.open('GET', 'query_email.php?email=' + email, true);
+            xhr.open('GET', 'inc.query_email.php?email=' + email, true);
             xhr.send();
 
         }
@@ -475,7 +475,7 @@ function validateId() {
                 }
             };
 
-            xhr.open('GET', 'query_id.php?id=' + id, true);
+            xhr.open('GET', 'inc.query_id.php?id=' + id, true);
             xhr.send();
 
         }
@@ -1056,7 +1056,7 @@ nextButton3.addEventListener('click',function(){
                 }
             };
 
-            xhr.open('GET', 'query.php?department=' + departmentId, true);
+            xhr.open('GET', 'inc.query.php?department=' + departmentId, true);
             xhr.send();
 
 
@@ -1124,7 +1124,7 @@ $('#addDepartmentButton').click(function() {
 
         // Send the employee data to the PHP file using an AJAX request
         $.ajax({
-            url: 'add_employee.php',
+            url: 'inc.add_employee.php',
             method: 'POST',
             data: formData,
             processData: false,
