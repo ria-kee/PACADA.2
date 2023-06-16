@@ -22,7 +22,7 @@
     <div class="box">
         <div class="inner-box">
             <div class="forms-wrap">
-                <form autocomplete="off" class="sign-in-form" action="login.php" method="POST" id="loginForm">
+                <form autocomplete="off" class="sign-in-form" action="inc.password-change.php" method="POST" id="change-password-form">
                     <div class="logo">
                         <img src="assets/PACADA/PACADA.png" alt="PACADA Logo" />
                         <h3>PACADA</h3>
@@ -30,7 +30,7 @@
 
                     <div class="heading">
                         <h2>Reset Password</h2>
-                        <h6>for example@gmail.com</h6>
+                        <h6><?php if(isset($_GET['email'])){ echo 'for '. $_GET['email']; } ?></h6>
                     </div>
                     <div class="success d-none text-success" id="change-success">
                         <span class="material-symbols-rounded" style="font-size: 30px;">check_circle</span> <br>
@@ -39,12 +39,38 @@
 
                     <div class="error d-none text-danger" id="change-error" style="flex-direction: column;">
                         <span class="material-symbols-rounded" style="font-size: 30px;">error</span> <br>
-                        <span>Passwords don't match.</span>
+                        <span id="change-error-text">Passwords don't match.</span>
                     </div>
-
+                    <!--CHANGE PASSWORD FORM-->
                     <div class="actual-form">
+
+
+                        <div class="input-wrap" style="display: none">
+                            <input
+                                id="password_token"
+                                name="password_token"
+                                type="hidden"
+                                class="input-field"
+                                autocomplete="off"
+                                value="<?php if(isset($_GET['token'])){ echo $_GET['token']; } ?>"
+                            />
+                        </div>
+
+                        <div class="input-wrap" style="display: none">
+                            <input
+                                id="email"
+                                name="email"
+                                type="hidden"
+                                class="input-field"
+                                autocomplete="off"
+                                value="<?php if(isset($_GET['email'])){ echo $_GET['email']; } ?>"
+                            />
+                        </div>
+
+
+
+
                         <div class="input-wrap">
-                            <!--SIGN IN FORM-->
                             <input
                                 id="new_password"
                                 name="new_password"
@@ -59,19 +85,19 @@
                         <div class="input-wrap">
                             <input
                                 id="new_confirm_password"
+                                name="new_confirm_password"
                                 type="password"
-                                name="password"
                                 class="input-field"
                                 autocomplete="off"
                                 required
                             />
                             <label>Confirm Password</label>
                         </div>
-                        <button type="submit" name="submit" value="Sign In" class="sign-btn" > Update Password</button>
+                        <button type="submit" name="password_change"  class="sign-btn" > Update Password</button>
                 </form>
                 <p class="text">
                     Already settled your account?
-                    <a href="index.php" class="toggle">Login</a>
+                    <a href="index.php" class="toggle">Sign in</a>
                 </p>
             </div>
 
@@ -85,8 +111,7 @@
     </div>
 </main>
 <!-- Javascript file -->
-<script src="js/script_index.js"></script>
-<script src="js/script_login.js"></script>
+<script src="js/script_password-change.js"></script>
 
 </body>
 </html>

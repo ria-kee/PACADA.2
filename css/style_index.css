@@ -10,6 +10,14 @@
   --bs-success-rgb: 25,135,84;
 }
 
+#reset-submit[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: no-drop;
+  pointer-events: auto;
+  opacity: 0.5;
+}
 
 
 .error.d-none{
