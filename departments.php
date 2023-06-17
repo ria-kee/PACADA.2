@@ -2,7 +2,7 @@
 session_start();
 $allowedPages = ['dashboard.php', 'employees.php', 'leave.php',
                  'timeOff.php', 'admins.php', 'profile.php',
-                 'archived_departments.php', 'archived_employees.php']; // List of allowed pages
+                 'archived_departments.php', 'archived_employees.php', 'logout.php']; // List of allowed pages
 
 $currentFile = basename($_SERVER['PHP_SELF']); // Get the name of the current PHP file
 
@@ -172,7 +172,7 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
 </div>
 
 <!-- EDIT DEPT MODAL -->
-<div class="modal fade" id="EditDept" tabindex="-1">
+<div class="modal fade" id="EditDept" tabindex="1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -239,4 +239,10 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
 
 
 <!-- JAVASCRIPT -->
+<script>
+    document.body.appendChild(document.getElementById('AddDept'));
+    document.body.appendChild(document.getElementById('EditDept'));
+    document.body.appendChild(document.getElementById('RemoveDept'));
+</script>
 <script src="js/script_departments.js"></script>
+

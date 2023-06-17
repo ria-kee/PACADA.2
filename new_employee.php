@@ -1,7 +1,14 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id'])) {
-// Redirect the user to the login page or show access denied message
+$allowedPages = ['dashboard.php', 'departments.php', 'leave.php',
+    'timeOff.php', 'admins.php', 'profile.php',
+    'archived_departments.php', 'archived_employees.php']; // List of allowed pages
+
+$currentFile = basename($_SERVER['PHP_SELF']); // Get the name of the current PHP file
+
+// Check if the user is not logged in and the current page is not in the allowed pages list
+if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
+    // Redirect the user to the login page or show access denied message
     header('Location: error.401.php');
     exit();
 }
@@ -381,4 +388,7 @@ if (!isset($_SESSION['user_id'])) {
 
 
 <!-- JAVASCRIPT -->
+    <script>
+        document.body.appendChild(document.getElementById('ReviewModal'));
+    </script>
 <script src="js/script_add_employee.js"></script>

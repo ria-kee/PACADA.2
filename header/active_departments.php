@@ -74,9 +74,51 @@
                 <span class="material-symbols-rounded">person</span>
                 <h3>Profile</h3>
             </a>
-            <a href="logout.php">
+            <a href="#" id="logoutLink">
                 <span class="material-symbols-rounded">logout</span>
                 <h3>Logout</h3>
             </a>
         </div>
     </aside>
+
+
+    <!--LOGOUTMODAL-->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #DF4759">
+                    <span class="material-symbols-rounded">logout</span>
+                    <h1 class="modal-title" id="confirmModalLabel">Confirm Log Out</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h3>Do you really want to log out?</h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="button" id="confirmLogout" class="btn btn-danger" onclick="">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.getElementById("logoutLink").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+
+            // Show the confirmation modal
+            $('#confirmationModal').modal('show');
+        });
+
+        document.getElementById("confirmLogout").addEventListener("click", function() {
+            // Redirect to the logout page
+            window.location.href = "logout.php";
+        });
+    </script>
+
+
+    <script>
+        document.body.appendChild(document.getElementById('confirmationModal'));
+    </script>

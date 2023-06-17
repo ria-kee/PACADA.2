@@ -6,8 +6,14 @@ header('Location: error.401.php');
 exit();
 }
 ?>
+<!-- jQuery CDN Library -->
+<script src="js/bootstrap/jquery-3.6.0.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<script src="js/bootstrap/bootstrap.bundle.min.js"></script>
 
 <?php include "header/active_dashboard.php";?>
+
 
 <!--MAIN-->
 
@@ -115,7 +121,7 @@ exit();
                                                 <th></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody style="font-size: 14px">
                                             <tr>
                                                 <td>1</td>
                                                 <td>Juan Dela Cruz</td>

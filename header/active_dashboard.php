@@ -7,8 +7,11 @@
     <title>Dashboard</title>
     <link rel="icon" href="assets/PACADA/PACADA.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
     <link rel="stylesheet" href="css/style_dashboard.css">
 </head>
+
+
 <body style="z-index: -3; position: relative">
 <div class="container" style="z-index: -2; position: relative">
         <div class="background"></div>
@@ -74,9 +77,55 @@
             <span class="material-symbols-rounded">person</span>
             <h3>Profile</h3>
         </a>
-        <a href="logout.php">
+        <a href="#" id="logoutLink">
             <span class="material-symbols-rounded">logout</span>
             <h3>Logout</h3>
         </a>
     </div>
 </aside>
+
+    <!--LOGOUTMODAL-->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #DF4759">
+                    <span class="material-symbols-rounded">logout</span>
+                    <h1 class="modal-title" id="confirmModalLabel">Confirm Log Out</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h3>Do you really want to log out?</h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="button" id="confirmLogout" class="btn btn-danger" onclick="">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.getElementById("logoutLink").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+            console.error('clicked');
+
+
+            // Show the confirmation modal
+            $('#confirmationModal').modal('show');
+
+
+
+        });
+
+        document.getElementById("confirmLogout").addEventListener("click", function() {
+            // Redirect to the logout page
+            window.location.href = "logout.php";
+        });
+    </script>
+
+
+    <script>
+        document.body.appendChild(document.getElementById('confirmationModal'));
+    </script>

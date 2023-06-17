@@ -1,6 +1,4 @@
 
-<?php include_once "header/active_logout.php";?>
-
 <?php
 session_start();
 

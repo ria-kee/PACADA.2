@@ -452,4 +452,9 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
 
 
 <!-- JAVASCRIPT -->
+<script>
+    document.body.appendChild(document.getElementById('ViewModal'));
+    document.body.appendChild(document.getElementById('EditEmployee'));
+    document.body.appendChild(document.getElementById('EmployeeArchiveModal'));
+</script>
 <script src="js/script_employees.js"></script>
