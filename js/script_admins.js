@@ -95,7 +95,6 @@ $('#pdfExport').click(function() {
 $('#excelExport').click(function() {
     table.button('.buttons-excel').trigger();
     console.log('Export Excel clicked');
-
 });
 
 

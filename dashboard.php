@@ -264,7 +264,7 @@ exit();
                                             <div class="right">
                                                 <div class="info">
                                                     <h3>Add Leave Credits</h3>
-                                                    <small class="text-muted">Click to record employee's leave</small>
+                                                    <small class="text-muted">Click to record DTR</small>
                                                 </div>
                                             </div>
                                         </div>

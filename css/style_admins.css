@@ -155,7 +155,7 @@
     background-color: var(--color-light);
     width: min-content;
     height: 7rem;
-    border-radius: var(--border-radius-3);
+    border-radius: var(--border-radius-2);
     padding: 10px 15px 10px 15px;
     box-shadow: var(--box-shadow);
 }

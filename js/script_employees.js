@@ -524,7 +524,6 @@ $('.edit-input').on('input', function() {
 }
 
 
-
 // defaultImage
 let imageData;
 let blob;

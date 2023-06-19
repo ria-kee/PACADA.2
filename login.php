@@ -29,6 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 session_start();
                 $_SESSION['admin_uID'] = $row['uID'];
                 $_SESSION['admin_FirstName'] = $row['employees_FirstName'];
+                $_SESSION['admin_MiddleName'] = $row['employees_MiddleName'];
+                $_SESSION['admin_LastName'] = $row['employees_LastName'];
+                $_SESSION['admin_email'] = $row['employees_Email'];
                 $_SESSION['admin_Profile'] = $row['employees_image'];
                 $_SESSION['is_superadmin'] = $row['is_superadmin'];
         } else {

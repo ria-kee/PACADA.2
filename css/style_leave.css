@@ -221,7 +221,14 @@
 }
 
 .form-select{
-    width:15rem;
+    width:12rem;
+    border-radius: var(--border-radius-2);
+    height: 40px;
+}
+
+
+.date{
+    width:12rem;
     border-radius: var(--border-radius-2);
     height: 40px;
 }
@@ -272,6 +279,28 @@
     cursor: pointer;
     box-shadow: var(--box-shadow);
 }
+
+#quick-action{
+    background-color: var(--color-s2);
+    color: var(--color-light);
+}
+
+#quick-action:hover{
+    background-color: var(--color-s1);
+    box-shadow: none;
+}
+
+#quick-action:focus {
+    outline: 0;
+    box-shadow: 0 0 0 .25rem rgba(165,165,85,.25);
+}
+
+
+#quick-dropdown a:hover{
+    background-color: #edeedf;
+}
+
+
 
 .button1:hover{
     background-color: var(--color-s1);
@@ -348,22 +377,28 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     background-color: var(--color-light);
     width: min-content;
     height: 7rem;
-    border-radius: var(--border-radius-3);
+    border-radius: var(--border-radius-2);
     padding: 10px 15px 10px 15px;
     box-shadow: var(--box-shadow);
 }
+
+/* Example: Making the first and third div elements span two columns */
+.grid-container > div:nth-child(3) {
+    grid-column: span 2;
+}
+
 
 
 
 .grid-container .grid-item .search {
     display: flex;
     height: 40px;
-    width: calc(100vw - 74.5rem);
+    width: calc(100vw - 88rem);
     padding: 5px;
     border-radius: var(--border-radius-2);
     background-color: var(--color-p2);
@@ -391,6 +426,7 @@
     font-weight: 300;
     width: 100px;
     height: 30px;
+
 }
 
 .dropdown {
@@ -400,6 +436,11 @@
     /*width: 160px;*/
     /*height: 40px;*/
 }
+
+
+
+
+
 
 .actions{
     display: grid;
