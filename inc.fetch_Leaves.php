@@ -14,7 +14,7 @@ if (isset($_GET['department'])) {
 
 
     if ($selectedDepartment != 0) {
-        $sql .= " AND employees.employees_Department = '$selectedDepartment'";
+        $sql .= " AND leaves.employees_Department = '$selectedDepartment'";
 
     }
 } else {
@@ -38,6 +38,18 @@ if (isset($_POST['search']['value'])) {
     $sql .= " OR leaves.Remarks LIKE '%" . $search_value . "%') ";
 }
 
+// Retrieve the date range values from the AJAX request
+$fromDate = $_POST['fromDate'];
+$toDate = $_POST['toDate'];
+
+// Modify the SQL query to include the date range filter if the inputs are not empty
+if (!empty($fromDate) && !empty($toDate)) {
+    $sql .= " AND leaves.Leave_Date >= '$fromDate' AND leaves.Leave_Date <= '$toDate'";
+} elseif (!empty($fromDate)) {
+    $sql .= " AND leaves.Leave_Date >= '$fromDate'";
+} elseif (!empty($toDate)) {
+    $sql .= " AND leaves.Leave_Date <= '$toDate'";
+}
 
 if (isset($_POST['order'])) {
     $column = $_POST['order'][0]['column'];
@@ -76,6 +88,9 @@ if (isset($_POST['order'])) {
     // Default sorting by Leave_Date
     $sql .= " ORDER BY leaves.Leave_Date";
 }
+
+
+
 
 $data = array();
 $query = mysqli_query($conn, $sql);

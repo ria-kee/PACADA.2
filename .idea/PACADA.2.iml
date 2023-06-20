@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/composer/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/composer/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpmailer/phpmailer" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

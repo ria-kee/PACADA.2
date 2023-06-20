@@ -4,7 +4,7 @@ $('#Department').on('change', function() {
     var selectedDepartment = $(this).val();
 
     // Update the Ajax URL with the selected department
-    leaveTable.ajax.url('inc.fetch_All_Employees.php?department=' + selectedDepartment).load();
+    leaveTable.ajax.url('inc.fetch_Leaves.php?department=' + selectedDepartment).load();
 });
 
 var leaveTable = $('#leaveTable').DataTable({
@@ -17,6 +17,11 @@ var leaveTable = $('#leaveTable').DataTable({
     ajax: {
         url: 'inc.fetch_Leaves.php',
         type: 'post',
+        data: function (d) {
+            // Add the from-date and to-date values to the AJAX request
+            d.fromDate = document.getElementById('from-date').value;
+            d.toDate = document.getElementById('to-date').value;
+        }
     },
     columnDefs: [{
         targets: [5],
@@ -117,3 +122,40 @@ $(document).ready(function() {
     });
 });
 $('.dataTables_filter').hide();
+
+
+
+
+$(document).ready(function() {
+    // Get the "from-date" and "to-date" input elements
+    var fromDate = document.getElementById("from-date");
+    var toDate = document.getElementById("to-date");
+
+    // Set the minimum selectable date for "to-date" based on "from-date"
+    fromDate.addEventListener("change", function() {
+        toDate.min = fromDate.value;
+    });
+
+    // Handle the case where "from-date" is null but "to-date" has a value
+    toDate.addEventListener("change", function() {
+        if (fromDate.value === "" && toDate.value !== "") {
+            fromDate.value = toDate.value;
+        }
+    });
+});
+
+
+var fromDateInput = document.getElementById('from-date');
+var toDateInput = document.getElementById('to-date');
+
+// Add event listeners to the date inputs
+fromDateInput.addEventListener('change', handleDateRangeChange);
+toDateInput.addEventListener('change', handleDateRangeChange);
+
+function handleDateRangeChange() {
+    var fromDate = fromDateInput.value;
+    var toDate = toDateInput.value;
+
+    // Trigger DataTable search with the date range values
+    leaveTable.column(0).search(fromDate + ' - ' + toDate).draw();
+}
