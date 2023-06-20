@@ -6,9 +6,12 @@ $start = $_POST['start'];
 if (isset($_GET['department'])) {
     $selectedDepartment = $_GET['department'];
 
-    $sql = "SELECT employees.*,departments.dept_uid, TIMESTAMPDIFF(YEAR, employees.employees_birthdate, CURDATE()) AS age FROM employees
-LEFT JOIN departments ON employees.employees_Department = departments.uid
-WHERE employees.is_superadmin = 0 AND employees.is_active = 1";
+    $sql = "SELECT leaves.*, employees.employees_FirstName, employees.employees_MiddleName, employees.employees_LastName, departments.dept_uid 
+        FROM leaves 
+        LEFT JOIN employees ON leaves.Employee_ID = employees.uID 
+        LEFT JOIN departments ON employees.employees_Department = departments.uID 
+        WHERE employees.is_active = 1";
+
 
     if ($selectedDepartment != 0) {
         $sql .= " AND employees.employees_Department = '$selectedDepartment'";
@@ -16,62 +19,62 @@ WHERE employees.is_superadmin = 0 AND employees.is_active = 1";
     }
 } else {
 // Handle the case when 'department' is not set
-    $sql = "SELECT employees.*, departments.dept_uid, TIMESTAMPDIFF(YEAR, employees.employees_birthdate, CURDATE()) AS age FROM employees
-LEFT JOIN departments ON employees.employees_Department = departments.uid
-WHERE employees.is_superadmin = 0 AND employees.is_active = 1";
+    $sql = "SELECT leaves.*, employees.employees_FirstName, employees.employees_MiddleName, employees.employees_LastName, departments.dept_uid 
+        FROM leaves 
+        LEFT JOIN employees ON leaves.Employee_ID = employees.uID 
+        LEFT JOIN departments ON employees.employees_Department = departments.uID 
+        WHERE employees.is_active = 1";
 }
 
 if (isset($_POST['search']['value'])) {
     $search_value = $_POST['search']['value'];
-    $sql .= " AND (employees.employees_uid LIKE '%" . $search_value . "%' ";
-    $sql .= " OR employees.employees_FirstName LIKE '%" . $search_value . "%' ";
-    $sql .= " OR employees.employees_MiddleName LIKE '%" . $search_value . "%' ";
-    $sql .= " OR employees.employees_LastName LIKE '%" . $search_value . "%' ";
-    $sql .= " OR employees.employees_sex LIKE '%" . $search_value . "%' ";
-    $sql .= " OR employees.employees_Department LIKE '%" . $search_value . "%' ";
-    $sql .= " OR employees.Leave_Vacation LIKE '%" . $search_value . "%' ";
-    $sql .= " OR employees.Leave_Sick LIKE '%" . $search_value . "%' ";
-    $sql .= " OR employees.Leave_Force LIKE '%" . $search_value . "%' ";
-    $sql .= " OR employees.Leave_Special LIKE '%" . $search_value . "%') ";
+    $sql .= " AND (leaves.Leave_Date LIKE '%" . $search_value . "%' ";
+    $sql .= " OR CONCAT(UCASE(employees.employees_FirstName), ' ', 
+                         IF(employees.employees_MiddleName != '', CONCAT(UCASE(SUBSTRING(employees.employees_MiddleName, 1, 1)), '.'), ''), ' ', 
+                         UCASE(employees.employees_LastName)) LIKE '%" . $search_value . "%' ";
+    $sql .= " OR departments.dept_uid LIKE '%" . $search_value . "%' ";
+    $sql .= " OR leaves.Leave_Type LIKE '%" . $search_value . "%' ";
+    $sql .= " OR leaves.Created_At LIKE '%" . $search_value . "%' ";
+    $sql .= " OR leaves.Remarks LIKE '%" . $search_value . "%') ";
 }
+
 
 if (isset($_POST['order'])) {
     $column = $_POST['order'][0]['column'];
     $order = $_POST['order'][0]['dir'];
 
-// Add a switch statement to map the column index to the corresponding column name
+    // Add a switch statement to map the column index to the corresponding column name
     switch ($column) {
         case 0:
-            $column = 'employees.employees_uid';
+            $orderBy = "leaves.Leave_Date";
             break;
         case 1:
-            $column = 'employees.employees_Department';
+            $orderBy = "CONCAT(UCASE(employees.employees_FirstName), ' ', 
+                              IF(employees.employees_MiddleName != '', CONCAT(UCASE(SUBSTRING(employees.employees_MiddleName, 1, 1)), '.'), ''), ' ', 
+                              UCASE(employees.employees_LastName))";
             break;
         case 2:
-            $column = 'CONCAT(UCASE(employees.employees_FirstName), " ", IF(employees.employees_MiddleName != "", CONCAT(UCASE(SUBSTRING(employees.employees_MiddleName, 1, 1)), "."), ""), " ", UCASE(employees.employees_LastName))';
+            $orderBy = "departments.dept_uid";
             break;
         case 3:
-            $column = 'employees.Leave_Vacation';
+            $orderBy = "leaves.Leave_Type";
             break;
         case 4:
-            $column = 'employees.Leave_Sick';
+            $orderBy = "leaves.Created_At";
             break;
         case 5:
-            $column = 'employees.Leave_Force';
+            $orderBy = "leaves.Remarks";
             break;
-        case 6:
-            $column = 'employees.Leave_Special';
-            break;
-
-// Use employees.employees_uid as the default column
         default:
-            $column = 'employees.employees_uid';
+            $orderBy = "leaves.Leave_Date";
             break;
     }
 
-    $sql .= " ORDER BY " . $column . " " . $order;
-} else {
-    $sql .= " ORDER BY employees.employees_Department ASC";
+    // Add the order by clause to the SQL query
+    $sql .= " ORDER BY $orderBy $order";
+}else {
+    // Default sorting by Leave_Date
+    $sql .= " ORDER BY leaves.Leave_Date";
 }
 
 $data = array();
@@ -96,78 +99,15 @@ while ($row = mysqli_fetch_assoc($query)) {
     if (!empty($row['employees_MiddleName'])) {
         $empName .= strtoupper(substr($row['employees_MiddleName'], 0, 1)) . '. ';
     }
+    $empName .= ucwords(strtolower($row['employees_LastName']));
 
-    $empName .= ucwords(strtolower($row['employees_LastName']));    $review_Image = $row['employees_image'];
-    $review_Name = $empName;
-    $review_Department = $row['dept_uid'];
-    $review_Uid = strtoupper($row['employees_uid']);
-    $review_Email = $row['employees_Email'];
-    $review_Sex =$row['employees_sex'];
-    $review_Age =$row['age'];
-    $review_AppDate = $row['employees_appointmentDate'];
-    $review_Vacation = $row['Leave_Vacation'];
-    $review_Sick = $row['Leave_Sick'];
-    $review_Force =  $row['Leave_Force'];
-    $review_SPL =  $row['Leave_Special'];
-    $review_birth =  $row['employees_birthdate'];
-
-    $review_ID = $row['uID'];
-    $review_fname = ucwords(strtolower($row['employees_FirstName']));
-    $review_mname = ucwords(strtolower($row['employees_MiddleName']));
-    $review_lname = ucwords(strtolower($row['employees_LastName']));
-
-    $review_DepartmentUID = $row['employees_Department'];
     $subarray = array();
-    $subarray[] = strtoupper($row['employees_uid']);
-    $subarray[] = $row['dept_uid']; // Fetching department name from the join
+    $subarray[] = $row['Leave_Date'];
     $subarray[] = $empName;
-    $subarray[] = $row['Leave_Vacation'];
-    $subarray[] = $row['Leave_Sick'];
-    $subarray[] = $row['Leave_Force'];
-    $subarray[] = $row['Leave_Special'];
-    $subarray[] =
-
-        '<button type="button" id="edit" class="btn btn-sm btn-info view-button" data-toggle="modal" data-target="#ViewModal" 
-        data-image="'.$review_Image.'" 
-        data-name="'.$review_Name.'"
-        data-department="'.$review_Department.'"
-        data-uid="'.$review_Uid.'"
-        data-email="'.$review_Email.'"
-        data-sex="'.$review_Sex.'"
-        data-age="'.$review_Age.'"
-        data-appdate="'.$review_AppDate.'"
-        data-vacation="'.$review_Vacation.'"
-        data-sick="'.$review_Sick.'"
-        data-force="'.$review_Force.'"
-        data-spl="'.$review_SPL.'"
-    ><i class="bi bi-info-circle-fill"></i> View</button>
-    
-   
-    <button type="button" id="edit" class="btn btn-sm btn-secondary edit-button" data-toggle="modal" data-target="#EditDept" 
-        data-image="'.$review_Image.'" 
-        data-fname="'.$review_fname.'"
-        data-mname="'.$review_mname.'"
-        data-lname="'.$review_lname.'"
-        data-birthdate ="'.$review_birth.'"
-        data-department = "'.$review_DepartmentUID.'"
-        data-uid="'.$review_ID.'"
-        data-empid="'.$review_Uid.'"
-        data-email="'.$review_Email.'"
-        data-sex="'.$review_Sex.'"
-        data-age="'.$review_Age.'"
-        data-appdate="'.$review_AppDate.'"
-        data-vacation="'.$review_Vacation.'"
-        data-sick="'.$review_Sick.'"
-        data-force="'.$review_Force.'"
-        data-spl="'.$review_SPL.'"
-    ><i class="bi bi-pencil-fill"></i> Edit</button>
-    
-
-    <button type="button" id="archive" class="btn btn-sm btn-danger archive-button" data-toggle="modal" data-target="#confirmModal" 
-        data-uid="'.$review_ID.'"
-        data-empname="'.$empName.'"
-    ><i class="bi bi-person-dash-fill"></i> Deact</button>';
-
+    $subarray[] = $row['dept_uid']; // Fetching department name from the join
+    $subarray[] = $row['Leave_Type'];
+    $subarray[] = $row['Created_At'];
+    $subarray[] = $row['Remarks'];
     $data[] = $subarray;
 }
 

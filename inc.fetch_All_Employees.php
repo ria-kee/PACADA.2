@@ -28,7 +28,7 @@ $sql .= " OR employees.employees_FirstName LIKE '%" . $search_value . "%' ";
 $sql .= " OR employees.employees_MiddleName LIKE '%" . $search_value . "%' ";
 $sql .= " OR employees.employees_LastName LIKE '%" . $search_value . "%' ";
 $sql .= " OR employees.employees_sex LIKE '%" . $search_value . "%' ";
-$sql .= " OR employees.employees_Department LIKE '%" . $search_value . "%' ";
+$sql .= " OR dept_uid LIKE '%" . $search_value . "%' ";
 $sql .= " OR employees.Leave_Vacation LIKE '%" . $search_value . "%' ";
 $sql .= " OR employees.Leave_Sick LIKE '%" . $search_value . "%' ";
 $sql .= " OR employees.Leave_Force LIKE '%" . $search_value . "%' ";
@@ -45,7 +45,7 @@ case 0:
 $column = 'employees.employees_uid';
 break;
 case 1:
-$column = 'employees.employees_Department';
+$column = 'dept_uid';
 break;
 case 2:
 $column = 'CONCAT(UCASE(employees.employees_FirstName), " ", IF(employees.employees_MiddleName != "", CONCAT(UCASE(SUBSTRING(employees.employees_MiddleName, 1, 1)), "."), ""), " ", UCASE(employees.employees_LastName))';
@@ -97,7 +97,8 @@ while ($row = mysqli_fetch_assoc($query)) {
         $empName .= strtoupper(substr($row['employees_MiddleName'], 0, 1)) . '. ';
     }
 
-    $empName .= ucwords(strtolower($row['employees_LastName']));    $review_Image = $row['employees_image'];
+    $empName .= ucwords(strtolower($row['employees_LastName']));
+    $review_Image = $row['employees_image'];
     $review_Name = $empName;
     $review_Department = $row['dept_uid'];
     $review_Uid = strtoupper($row['employees_uid']);
