@@ -140,7 +140,7 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
                                 <span class="material-symbols-rounded" style="font-size: 18px">add_card</span>
                             </a>
                         </li>
-                        <li><a href="#" class="dropdown-item d-flex justify-content-between align-items-center"  id="file-leave">
+                        <li><a href="file_leave.php" class="dropdown-item d-flex justify-content-between align-items-center"  id="file-leave">
                                 <span>File Leave</span>
                                 <span class="material-symbols-rounded" style="font-size: 18px">event</span>
                             </a>
