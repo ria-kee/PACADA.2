@@ -39,9 +39,9 @@ var leaveTable = $('#leaveTable').DataTable({
             },
             filename: function() {
                 var currentDate = new Date().toLocaleDateString('en-PH');
-                return 'Employees - ' + currentDate.replace(/\//g, '-');
+                return 'Filed Leaves - ' + currentDate.replace(/\//g, '-');
             },
-            title: 'Employees'
+            title: 'Filed Leaves'
         },
         {
             extend: 'pdf',
@@ -53,9 +53,9 @@ var leaveTable = $('#leaveTable').DataTable({
             },
             filename: function() {
                 var currentDate = new Date().toLocaleDateString('en-PH');
-                return 'Employees - ' + currentDate.replace(/\//g, '-');
+                return 'Filed Leaves - ' + currentDate.replace(/\//g, '-');
             },
-            title: 'Employees',
+            title: 'Filed Leaves',
             customize: function(doc) {
                 // Set the table alignment to center
                 doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
@@ -107,18 +107,18 @@ var leaveTable = $('#leaveTable').DataTable({
 
 // Export PDF
 $('#pdfExport').click(function() {
-    empTable.button('.buttons-pdf').trigger();
+    leaveTable.button('.buttons-pdf').trigger();
     console.log('Export PDF clicked');
 });
 // Export Excel
 $('#excelExport').click(function() {
-    empTable.button('.buttons-excel').trigger();
+    leaveTable.button('.buttons-excel').trigger();
     console.log('Export Excel clicked');
 });
 $(document).ready(function() {
 
     $('.searchField').on('keyup', function() {
-        empTable.search(this.value).draw();
+        leaveTable.search(this.value).draw();
     });
 });
 $('.dataTables_filter').hide();

@@ -10,7 +10,7 @@ if (isset($_GET['department'])) {
         FROM leaves 
         LEFT JOIN employees ON leaves.Employee_ID = employees.uID 
         LEFT JOIN departments ON employees.employees_Department = departments.uID 
-        WHERE employees.is_active = 1";
+        WHERE  employees.is_superadmin = 0 AND employees.is_active = 1";
 
 
     if ($selectedDepartment != 0) {
@@ -23,7 +23,7 @@ if (isset($_GET['department'])) {
         FROM leaves 
         LEFT JOIN employees ON leaves.Employee_ID = employees.uID 
         LEFT JOIN departments ON employees.employees_Department = departments.uID 
-        WHERE employees.is_active = 1";
+        WHERE employees.is_superadmin = 0 AND employees.is_active = 1";
 }
 
 if (isset($_POST['search']['value'])) {

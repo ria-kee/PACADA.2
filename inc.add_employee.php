@@ -43,9 +43,9 @@ $blobbed = $blob->data;
 // Prepare the SQL statement
 $sql = 'INSERT INTO employees (employees_uid, employees_image, employees_FirstName, employees_MiddleName, employees_LastName,
                       employees_sex, employees_birthdate, employees_Department, employees_appointmentDate,
-                      Leave_Vacation, Leave_Sick, Leave_Force, Leave_Special, employees_Email, employees_Password, 
-                       is_active, is_admin, is_superadmin)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+                      Leave_Vacation, Leave_Sick, Leave_Force, Leave_Special, employees_Email, employees_Password, token,
+                       is_active, is_admin, is_superadmin,credit_updateDate, credit_isUpdated)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)';
 
 // Prepare the statement and bind the parameters
 $stmt = $conn->prepare($sql);
@@ -53,10 +53,15 @@ $stmt = $conn->prepare($sql);
 $is_active = 1;
 $is_admin = 0;
 $is_superadmin = 0;
+date_default_timezone_set('Asia/Manila');
+$timestamp = time();
+$credit_updateDate = date('Y-m-d H:i:s', $timestamp);
+$credit_isUpdated = 0;
+$token = "NULL";
 
 // Bind the values to the placeholders
 $stmt->bind_param(
-    'sssssssisddddssiii',
+    'sssssssisddddsssiiisi',
     $uid,
     $blobbed,
     $firstName,
@@ -72,9 +77,12 @@ $stmt->bind_param(
     $leaveSpecial,
     $email,
     $hashedPassword,
+    $token,
     $is_active,
     $is_admin,
-    $is_superadmin
+    $is_superadmin,
+    $credit_updateDate,
+    $credit_isUpdated
 );
 
 // Execute the statement

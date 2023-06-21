@@ -2,7 +2,7 @@
 session_start();
 $allowedPages = ['dashboard.php', 'departments.php', 'leave.php',
     'timeOff.php', 'admins.php', 'profile.php',
-    'archived_departments.php', 'archived_employees.php']; // List of allowed pages
+    'archived_departments.php', 'credits.php', 'archived_employees.php']; // List of allowed pages
 
 $currentFile = basename($_SERVER['PHP_SELF']); // Get the name of the current PHP file
 

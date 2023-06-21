@@ -2,7 +2,7 @@
 session_start();
 $allowedPages = ['dashboard.php', 'departments.php', 'employees.php',
     'timeOff.php', 'admins.php', 'profile.php',
-    'archived_departments.php', 'archived_employees.php']; // List of allowed pages
+    'archived_departments.php', 'credits.php', 'archived_employees.php']; // List of allowed pages
 
 $currentFile = basename($_SERVER['PHP_SELF']); // Get the name of the current PHP file
 
@@ -135,7 +135,7 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
                         Select Action
                     </button>
                     <ul class="dropdown-menu" id="quick-dropdown" aria-labelledby="dropdownMenuButton">
-                        <li><a href="#" class="dropdown-item d-flex justify-content-between align-items-center"  id="add-credit">
+                        <li><a href="credits.php" class="dropdown-item d-flex justify-content-between align-items-center"  id="add-credit">
                                 <span>Add Credits</span>
                                 <span class="material-symbols-rounded" style="font-size: 18px">add_card</span>
                             </a>
