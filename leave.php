@@ -136,8 +136,8 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
                     </button>
                     <ul class="dropdown-menu" id="quick-dropdown" aria-labelledby="dropdownMenuButton">
                         <li><a href="credits.php" class="dropdown-item d-flex justify-content-between align-items-center"  id="add-credit">
-                                <span>Add Credits</span>
-                                <span class="material-symbols-rounded" style="font-size: 18px">add_card</span>
+                                <span>Record Late</span>
+                                <span class="material-symbols-rounded" style="font-size: 18px">avg_pace</span>
                             </a>
                         </li>
                         <li><a href="file_leave.php" class="dropdown-item d-flex justify-content-between align-items-center"  id="file-leave">
@@ -191,6 +191,7 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
                 <th >Leave Type</th>
                 <th >Created At</th>
                 <th >Remarks</th>
+                <th >Options</th>
 
             </tr>
             </thead>

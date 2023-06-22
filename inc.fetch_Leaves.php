@@ -123,6 +123,15 @@ while ($row = mysqli_fetch_assoc($query)) {
     $subarray[] = $row['Leave_Type'];
     $subarray[] = $row['Created_At'];
     $subarray[] = $row['Remarks'];
+    $subarray[] =
+
+        '<button type="button" id="archive" class="btn btn-sm btn-danger cancel-button" data-toggle="modal" data-target="#confirmModal" 
+        data-uid="'.$row['uID'].'"
+        data-empname="'.$empName.'"
+    ><span class="material-symbols-rounded" style="font-size: 18px">event_busy</span> Cancel</button>';
+
+
+
     $data[] = $subarray;
 }
 

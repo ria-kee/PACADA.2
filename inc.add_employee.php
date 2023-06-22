@@ -55,7 +55,7 @@ $is_admin = 0;
 $is_superadmin = 0;
 date_default_timezone_set('Asia/Manila');
 $timestamp = time();
-$credit_updateDate = date('Y-m-d H:i:s', $timestamp);
+$credit_updateDate = '0000-00-00 00:00:00';
 $credit_isUpdated = 0;
 $token = "NULL";
 

@@ -228,7 +228,7 @@ exit();
                                     <div class="quick-action">
                                         <h2>Quick Actions</h2>
 
-                                        <a href="#">
+                                        <a href="file_leave.php">
                                         <div class="item file-leave">
                                             <div class="icon">
                                                 <span class="material-symbols-rounded">event</span>
@@ -250,21 +250,21 @@ exit();
                                             <div class="right">
                                                 <div class="info">
                                                     <h3>File Time-Off</h3>
-                                                    <small class="text-muted">Click to record employee's leave</small>
+                                                    <small class="text-muted">Click to record employee's time-off</small>
                                                 </div>
                                             </div>
                                         </div>
                                         </a>
 
-                                        <a href="#">
+                                        <a href="credits.php">
                                         <div class="item add-credits">
                                             <div class="icon">
-                                                <span class="material-symbols-rounded">add_card</span>
+                                                <span class="material-symbols-rounded">avg_pace</span>
                                             </div>
                                             <div class="right">
                                                 <div class="info">
-                                                    <h3>Add Leave Credits</h3>
-                                                    <small class="text-muted">Click to record DTR</small>
+                                                    <h3>Record Late</h3>
+                                                    <small class="text-muted">Click here to record monthly late attendance of employees</small>
                                                 </div>
                                             </div>
                                         </div>

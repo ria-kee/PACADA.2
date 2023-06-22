@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
              //Start a session and store user information
                 session_start();
                 $_SESSION['admin_uID'] = $row['uID'];
+                $_SESSION['admin_id'] = $row['employees_uid'];
                 $_SESSION['admin_FirstName'] = $row['employees_FirstName'];
                 $_SESSION['admin_MiddleName'] = $row['employees_MiddleName'];
                 $_SESSION['admin_LastName'] = $row['employees_LastName'];

@@ -97,6 +97,7 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
                 <th rowspan="2">Department</th>
                 <th rowspan="2">Name</th>
                 <th colspan="4">CREDIT BALANCE</th>
+                <th rowspan="2">Remarks</th>
                 <th rowspan="2">Options</th>
             </tr>
             <tr>
@@ -208,4 +209,10 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
 
 
 <!-- JAVASCRIPT -->
+<script>
+    document.body.appendChild(document.getElementById('DeleteEmp'));
+    document.body.appendChild(document.getElementById('DeleteAll'));
+    document.body.appendChild(document.getElementById('ActivateAll'));
+    document.body.appendChild(document.getElementById('ActivateEmp'));
+</script>
 <script src="js/script_archivedEmp.js"></script>

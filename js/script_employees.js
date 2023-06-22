@@ -18,7 +18,7 @@ const vacationInput = document.getElementById('edit_vacation');
 const sickInput = document.getElementById('edit_sick');
 const forceInput = document.getElementById('edit_force');
 const splInput = document.getElementById('edit_spl');
-
+const remarksInput = document.getElementById('remarks');
 
 // SPANS
 const imageFeedback = document.getElementById('image-invalid-feedback');
@@ -56,7 +56,7 @@ var empTable = $('#empTable').DataTable({
         type: 'post',
     },
     columnDefs: [{
-        targets: [7],
+        targets: [8],
         orderable: false,
         className: 'no-export' // Exclude the "Options" column from export
     }],
@@ -202,6 +202,7 @@ $(document).on('click', '.edit-button', function() {
     var sick = $(this).data('sick');
     var force = $(this).data('force');
     var spl = $(this).data('spl');
+    var remarks = $(this).data('remarks');
 
     var emp = $(this).data('empid');
 
@@ -219,6 +220,7 @@ $(document).on('click', '.edit-button', function() {
     $('#edit_sick').val(sick);
     $('#edit_force').val(force);
     $('#edit_spl').val(spl);
+    $('#remarks').val(remarks);
 
     var empUID = $(this).data('uid');
     // Set the empUID value in the modal
@@ -530,7 +532,7 @@ let blob;
 let thereisFile = false;
 let uploaded;
 let currentImage;
-let isImageValid = false;
+let isImageValid = true;
 const fallbackImage = 'assets/img/no-profile.png';
 
 // Form File Input Change Event
@@ -569,6 +571,7 @@ imageInput.addEventListener('change', function() {
 
         } else {
             // Display error message for invalid file type, size, or extension
+            isImageValid = false;
             imageFeedback.textContent = 'Please select a valid image file (up to 5MB).';
             formFile.value = ''; // Reset the file input
             if (currentImage) {
@@ -610,6 +613,8 @@ $(document).ready(function() {
 
     $('#UpdateEmployee').click(function () {
         console.error(imageData);
+        console.error(thereisFile);
+        console.error(isImageValid);
         const emp = $(this).data('emp');
 
         // Validate Inputs
@@ -660,6 +665,7 @@ $(document).ready(function() {
                 formData.append('Leave_Sick', sickInput.value);
                 formData.append('Leave_Force', forceInput.value);
                 formData.append('Leave_Special', splInput.value);
+                formData.append('employees_remarks', remarksInput.value);
 
                 // Send the employee data to the PHP file using an AJAX request
                 $.ajax({
@@ -710,6 +716,7 @@ $(document).ready(function() {
             formData.append('Leave_Sick', sickInput.value);
             formData.append('Leave_Force', forceInput.value);
             formData.append('Leave_Special', splInput.value);
+            formData.append('employees_remarks', remarksInput.value);
 
             // Send the employee data to the PHP file using an AJAX request
             $.ajax({

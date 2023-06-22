@@ -6,7 +6,7 @@ $employeeId = $_GET['employeeId'];
 
 
 // Prepare the SQL query to fetch the employee information based on the employee ID
-$sql = "SELECT  employees_FirstName, employees_MiddleName, employees_LastName,
+$sql = "SELECT  uID, employees_FirstName, employees_MiddleName, employees_LastName,
         employees_Department, employees_image, Leave_Vacation, Leave_Sick, Leave_Force, Leave_Special  FROM employees WHERE uID = '$employeeId'";
 
 // Execute the query

@@ -167,7 +167,7 @@
 
 .dates{
     display: grid;
-    grid-template-columns: repeat(5,auto);
+    grid-template-columns: repeat(4,auto);
     height: min-content;
     border-radius: 5px;
     margin-left: 10px;
@@ -181,10 +181,13 @@
     background-color: var(--color-p3);
     color: white;
     border-radius: 4px;
-    width: 130px;
+    min-width: 130px;
+    max-width: 200px;
     height: min-content;
     padding: 5px;
     margin: 2px;
+    justify-content: space-between; /* Items will be distributed evenly */
+    flex-grow: 1; /* Items will fill the available width */
 }
 
 
@@ -205,9 +208,16 @@
 }
 
 
+#file_submit{
+    border-radius: 4px;
+    background-color: var(--color-p1);
+    float: right;
+}
 
-
-
+#file_submit:hover{
+    background-color: var(--color-p3);
+    box-shadow: none;
+}
 
 .form-select{
     width:32rem;

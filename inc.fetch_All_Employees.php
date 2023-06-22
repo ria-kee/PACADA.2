@@ -111,6 +111,7 @@ while ($row = mysqli_fetch_assoc($query)) {
     $review_Force =  $row['Leave_Force'];
     $review_SPL =  $row['Leave_Special'];
     $review_birth =  $row['employees_birthdate'];
+    $review_remarks =  $row['employees_remarks'];
 
     $review_ID = $row['uID'];
     $review_fname = ucwords(strtolower($row['employees_FirstName']));
@@ -126,6 +127,7 @@ while ($row = mysqli_fetch_assoc($query)) {
     $subarray[] = $row['Leave_Sick'];
     $subarray[] = $row['Leave_Force'];
     $subarray[] = $row['Leave_Special'];
+    $subarray[] = $row['employees_remarks'];
     $subarray[] =
 
     '<button type="button" id="edit" class="btn btn-sm btn-info view-button" data-toggle="modal" data-target="#ViewModal" 
@@ -161,6 +163,7 @@ while ($row = mysqli_fetch_assoc($query)) {
         data-sick="'.$review_Sick.'"
         data-force="'.$review_Force.'"
         data-spl="'.$review_SPL.'"
+        data-remarks="'.$review_remarks.'"
     ><i class="bi bi-pencil-fill"></i> Edit</button>
     
 

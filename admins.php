@@ -204,4 +204,8 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
 </div>
 
 <!-- JAVASCRIPT -->
+<script>
+    document.body.appendChild(document.getElementById('AddAdmin'));
+    document.body.appendChild(document.getElementById('confirmModal'));
+</script>
 <script src="js/script_admins.js"></script>

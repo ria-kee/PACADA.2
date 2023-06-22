@@ -108,6 +108,7 @@ while ($row = mysqli_fetch_assoc($query)) {
     $subarray[] = $row['Leave_Sick'];
     $subarray[] = $row['Leave_Force'];
     $subarray[] = $row['Leave_Special'];
+    $subarray[] = $row['employees_remarks'];
     $subarray[] = '
     <button type="button" id="activate" class="btn btn-sm btn-success activate-button" data-toggle="modal" data-target="#ActivateEmp" data-act_id="'.$row['uID'].'"  data-id="'.$row['uID'].'" data-empid="'.$row['employees_uid'].'" data-empname="'.$empName.'"><i class="bi bi-person-check-fill"></i> Activate</button>
     <button type="button" id="remove"  class="btn btn-sm btn-danger remove-button" data-toggle="modal" data-target="#DeleteEmp" data-id="'.$row['uID'].'" data-empid="'.$row['employees_uid'].'" data-empname="'.$empName.'"><i class="bi bi-person-x-fill"></i> Remove</button>';

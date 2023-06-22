@@ -40,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $leaveSick = $_POST['Leave_Sick'];
         $leaveForce = $_POST['Leave_Force'];
         $leaveSpecial = $_POST['Leave_Special'];
+        $employees_remarks = $_POST['employees_remarks'];
 
         // prepare and execute the query to update the department
         $query = "UPDATE employees SET  employees_FirstName = ?, 
@@ -52,11 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         Leave_Vacation = ?,
                                         Leave_Sick = ?,
                                         Leave_Force = ?,
-                                        Leave_Special = ?
+                                        Leave_Special = ?,
+                                        employees_remarks = ?
                                         WHERE uID = ? ";
         $stmt = $conn->prepare($query);
         $stmt->bind_param(
-            "sssssssssssi",
+            "ssssssssssssi",
             $firstName,
             $middleName,
             $lastName,
@@ -68,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $leaveSick ,
             $leaveForce,
             $leaveSpecial,
+            $employees_remarks,
             $uid
         );
 

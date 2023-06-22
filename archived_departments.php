@@ -195,4 +195,10 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
 
 
 <!-- JAVASCRIPT -->
+<script>
+    document.body.appendChild(document.getElementById('DeleteAll'));
+    document.body.appendChild(document.getElementById('DeleteDept'));
+    document.body.appendChild(document.getElementById('ActivateAll'));
+    document.body.appendChild(document.getElementById('ActivateDept'));
+</script>
 <script src="js/script_archivedDept.js"></script>

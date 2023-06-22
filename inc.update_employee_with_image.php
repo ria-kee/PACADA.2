@@ -42,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $leaveSpecial = $_POST['Leave_Special'];
         // Retrieve the employee image file
         $image = $_FILES['employees_image'];
+        $employees_remarks = $_POST['employees_remarks'];
 
         // Retrieve the original file name
         $blobName = $_FILES['employees_image']['name'];
@@ -71,11 +72,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         Leave_Vacation = ?,
                                         Leave_Sick = ?,
                                         Leave_Force = ?,
-                                        Leave_Special = ?
+                                        Leave_Special = ?,
+                                        employees_remarks = ?
                                         WHERE uID = ? ";
         $stmt = $conn->prepare($query);
         $stmt->bind_param(
-            "ssssssssssssi",
+            "sssssssssssssi",
             $blobbed,
             $firstName,
             $middleName,
@@ -88,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $leaveSick ,
             $leaveForce,
             $leaveSpecial,
+            $employees_remarks,
             $uid
         );
 

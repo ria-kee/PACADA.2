@@ -18,10 +18,10 @@ $(document).ready(function() {
             className: 'text-right',
             orderable: false,
         }, {
-            targets: [1-7], // Adjust the target indices for the "Acronym" and "Department" columns
+            targets: [1-8], // Adjust the target indices for the "Acronym" and "Department" columns
             orderable: true // Enable column ordering for these columns
         }, {
-            targets: [8], // Adjust the target index for the "Options" column
+            targets: [9], // Adjust the target index for the "Options" column
             orderable: false
         }]
     });

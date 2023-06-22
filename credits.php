@@ -6,6 +6,14 @@ $allowedPages = ['dashboard.php', 'departments.php', 'employees.php',
 
 $currentFile = basename($_SERVER['PHP_SELF']); // Get the name of the current PHP file
 
+ include('includes/dbh.inc.php');
+$resetQuery = "UPDATE employees
+                           SET credit_isUpdated = 0
+                           WHERE MONTH(credit_updateDate) <> MONTH(CURRENT_DATE())";
+$resetResult = mysqli_query($conn, $resetQuery);
+
+
+
 // Check if the user is not logged in and the current page is not in the allowed pages list
 if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
     // Redirect the user to the login page or show access denied message
@@ -33,7 +41,7 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/vfs_fonts.js"></script>
 
 
-<?php include_once "header/active_employees.php"; ?>
+<?php include_once "header/active_leave.php"; ?>
 <?php include('includes/dbh.inc.php'); ?>
 
 <div class="whole-container">
@@ -55,7 +63,7 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
         <div class="button-container body-item">
             <div class="grid-item actions">
 
-                <h3><a href="leave.php">Leave</a><i class="bi bi-chevron-right"></i><b style="color: var(--color-p3">Add Credits</b> </h3>
+                <h3><a href="leave.php">Leave</a><i class="bi bi-chevron-right"></i><b style="color: var(--color-p3">Record Late</b> </h3>
             </div>
             <a href="leave.php">
                 <div class="grid-item button2">
@@ -171,8 +179,8 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <span class="material-symbols-rounded">add_card</span>
-                <h1 class="modal-title" style="margin-left: 10px;">Add Credits</h1>
+                <span class="material-symbols-rounded">avg_pace</span>
+                <h1 class="modal-title" style="margin-left: 10px;">Record Late</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -192,11 +200,12 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
 
                     <div class="form-group" style="margin-top: 15px">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="minutesLate" value="0" placeholder="Enter Total Minutes Late">
+                            <input type="number" id="late" min="0" max="0.9" step="0.001" class="form-control" id="minutesLate" value="0.000" placeholder="Enter Total Minutes Late">
                             <div class="input-group-append">
-                                <span class="input-group-text">minutes</span>
+                                <span class="input-group-text">Equiv. Day</span>
                             </div>
                         </div>
+                        <span id="late-invalid-feedback" class="text-danger"></span>
 
                     </div>
 
@@ -209,44 +218,20 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="sick" class="form-label">Accumulated Sick Credits</label>
-                                <input type="text" class="form-control" id="sick" value="1.25"  readonly>
+                                <input type="text" class="form-control" id="sick" value="1.25" readonly>
 
                             </div>
                         </div>
                     </div>
-                    <div class="form-group" style="margin-top: 2px">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="force" class="form-label">Accumulated Force Credits</label>
-                                <input type="text" class="form-control" id="vacation" value="1.25" readonly>
-
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="spl" class="form-label">Accumulated Special Credits</label>
-                                <input type="text" class="form-control" id="sick" value="1.25"  readonly>
-
-                            </div>
-                        </div>
-                    </div>
-
-
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="EditDepartmentButton">Add Credits</button>
+                <button type="button" class="btn btn-primary" id="AddCredits">Add Credits</button>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
 
 <!-- JAVASCRIPT -->
 <script>

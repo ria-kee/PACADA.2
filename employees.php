@@ -152,6 +152,7 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
                 <th rowspan="2">Department</th>
                 <th rowspan="2">Name</th>
                 <th colspan="4">CREDIT BALANCE</th>
+                <th rowspan="2">Remarks</th>
                 <th rowspan="2">Options</th>
             </tr>
             <tr>
@@ -406,6 +407,14 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
                                             <span id="spl-invalid-feedback" class="text-danger"></span>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-12 mb-3">
+                                        <label for="remarks" class="form-label">Remarks</label>
+                                        <input type="text"  class="form-control edit-input" id="remarks" placeholder="Your Remarks" >
+                                    </div>
+
+
+
                                     <input type="number" class="form-control" id="edit_uid" placeholder="uID" style="display: none">
                                 </div>
                             </form>

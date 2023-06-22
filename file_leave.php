@@ -33,7 +33,7 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/vfs_fonts.js"></script>
 
 
-<?php include_once "header/active_employees.php"; ?>
+<?php include_once "header/active_leave.php"; ?>
 <?php include('includes/dbh.inc.php'); ?>
 
 <div class="whole-container">
@@ -108,7 +108,7 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
     </div>
     <div class="tablead">
         <div class="table-top" style="display: flex; justify-content: center;">
-            <h3 style="font-size: 25px; margin-bottom: 15px; text-align: center;"><b class="Datetitle"></b></h3>
+            <h3 style="font-size: 25px; margin-bottom: 15px; text-align: center;"><b class="Datetitle" id="Datetitle"></b></h3>
         </div>
 
         <div id="leave-container" class="leave-container ">
@@ -150,17 +150,21 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
 
             <div id="leave-form" class="leave-item d-none">
                 <form>
+                    <input class="form-control d-none" id="empUID" type="text">
+                    <input class="form-control d-none" id="empDept" type="text">
+
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <label for="leave-type" class="form-label">Type of Leave</label>
                             <select id="leave-type" class="form-select" style="width: 100%; border-radius: 5px !important;" required>
                                 <option value="0" selected disabled>Select Leave Type</option>
-                                <option value="1">Vacation</option>
-                                <option value="2">Sick</option>
-                                <option value="3">Force</option>
-                                <option value="4">Leave</option>
+                                <option value="Vacation">Vacation</option>
+                                <option value="Sick">Sick</option>
+                                <option value="Force">Force</option>
+                                <option value="Special">Special</option>
+                                <option value="Others">Others</option>
                             </select>
-                            <span id="sex-invalid-feedback" class="text-danger"></span>
+                            <span id="invalid-type-feedback" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
@@ -186,11 +190,20 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
 
                     <div class="row" style="margin-top: 20px">
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Remarks</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <label for="remarks">Remarks</label>
+                            <textarea class="form-control" id="remarks" rows="2" maxlength="100"></textarea>
                         </div>
                     </div>
 
+                    <div class="row" style="margin-top: 20px">
+
+                    </div>
+
+
+                    <button type="button" id="file_submit" class="grid-item button2" >
+                        <span class="material-symbols-rounded">event</span>
+                        <h3>File Leave</h3>
+                    </button>
                     </div>
 
             </div>
@@ -200,4 +213,87 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
     </div>
 </div>
 
+
+
+<!-- PREVIEW MODAL -->
+<div class="modal fade" id="LeavePreview" tabindex="1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="material-symbols-rounded">event</span>
+                <h1 class="modal-title" style="margin-left: 10px;">Leave Confirmation</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+
+
+
+                        <div class="employee">
+                            <div class="upload">
+                                <div class="upload-placeholder">
+                                    <img id="preview_image" src="assets/img/no-profile.png">
+                                </div>
+                            </div>
+                            <h3 id="preview_emp"style="font-size: 16px; font-weight: bold; margin-top: 2px "></h3>
+                        </div>
+
+
+                    <div class="row" style="margin-top: 5px">
+
+                        <div class="col-md-12 mb-3">
+                            <label for="preview_type" class="form-label">Leave Type</label>
+                            <input type="text" class="form-control" id="preview_type"  readonly>
+                        </div>
+
+
+                        <div class="col-md-12 mb-3">
+                            <label for="preview_date" class="form-label">Leave Date(s)</label>
+                            <textarea class="form-control" id="preview_date" rows="" readonly></textarea>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <label for="preview_remarks" class="form-label">Remarks</label>
+                            <textarea class="form-control" id="preview_remarks" rows="3" readonly></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row" id="credits-prev">
+                        <div class="col-md-5 mb-3">
+                            <label for="preview_current" id="whatCredit" class="form-label"></label>
+                            <input type="text" class="form-control" id="preview_current"  readonly>
+                            <span id="current-invalid-feedback" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-2 mb-3" style="text-align: center">
+                            <span class="material-symbols-rounded" style="margin-top: 28.5px;">trending_flat</span>
+                        </div>
+
+                        <div class="col-md-5 mb-3">
+                            <label for="preview_updated" id="whatCredit2" class="form-label"></label>
+                            <input type="text" class="form-control" id="preview_updated"  readonly>
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="FileLeaveSubmit">File Leave</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+    document.body.appendChild(document.getElementById('LeavePreview'));
+</script>
 <script src="js/script_file_leave.js"></script>

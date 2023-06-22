@@ -116,6 +116,7 @@ while ($row = mysqli_fetch_assoc($query)) {
     $review_fname = ucwords(strtolower($row['employees_FirstName']));
     $review_mname = ucwords(strtolower($row['employees_MiddleName']));
     $review_lname = ucwords(strtolower($row['employees_LastName']));
+    $creditUpdateDate = date('F d, Y', strtotime($row['credit_updateDate']));
 
     $review_DepartmentUID = $row['employees_Department'];
     $subarray = array();
@@ -126,7 +127,7 @@ while ($row = mysqli_fetch_assoc($query)) {
     $subarray[] = $row['Leave_Sick'];
     $subarray[] = $row['Leave_Force'];
     $subarray[] = $row['Leave_Special'];
-    $subarray[] = $row['credit_updateDate'];
+    $subarray[] = $creditUpdateDate;
     $subarray[] =
 
         '<button type="button" id="add" class="btn btn-sm add-credit" data-toggle="modal" data-target="#AddCredit" 
@@ -134,7 +135,7 @@ while ($row = mysqli_fetch_assoc($query)) {
         data-uid="'.$review_ID.'"
         data-dept="'.$review_Department.'"
         data-empname="'.$empName.'"
-    ><span class="material-symbols-rounded">add_card</span> Add Credits</button>';
+    ><span class="material-symbols-rounded">avg_pace</span> Record Late</button>';
 
     $data[] = $subarray;
 }
