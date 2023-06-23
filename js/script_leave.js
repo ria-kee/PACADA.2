@@ -24,7 +24,7 @@ var leaveTable = $('#leaveTable').DataTable({
         }
     },
     columnDefs: [{
-        targets: [6],
+        targets: [7],
         orderable: false,
         className: 'no-export' // Exclude the "Options" column from export
     }],

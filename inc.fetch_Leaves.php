@@ -122,6 +122,7 @@ while ($row = mysqli_fetch_assoc($query)) {
     $subarray[] = $row['dept_uid']; // Fetching department name from the join
     $subarray[] = $row['Leave_Type'];
     $subarray[] = $row['Created_At'];
+    $subarray[] = $row['filed_by'];
     $subarray[] = $row['Remarks'];
     $subarray[] =
 

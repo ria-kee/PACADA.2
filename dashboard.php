@@ -8,12 +8,135 @@ exit();
 ?>
 <!-- jQuery CDN Library -->
 <script src="js/bootstrap/jquery-3.6.0.min.js"></script>
-
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <script src="js/bootstrap/bootstrap.bundle.min.js"></script>
 
 <?php include "header/active_dashboard.php";?>
+<?php include('includes/dbh.inc.php');
 
+$query = "SELECT TIMESTAMPDIFF(YEAR, employees.employees_birthdate, CURDATE()) AS age, count(*) as number FROM employees GROUP BY age";
+$result = mysqli_query($conn, $query);
+
+
+?>
+
+<?php
+$query_emp = "SELECT Leave_Type, COUNT(*) as number FROM leaves WHERE MONTH(Leave_Date) = MONTH(CURRENT_DATE()) GROUP BY Leave_Type";
+$result_emp = mysqli_query($conn, $query_emp);
+?>
+
+<?php
+$query_dept = "SELECT employees.employees_Department, COUNT(*) AS employee_count, departments.dept_uid
+               FROM employees
+               INNER JOIN departments ON employees.employees_Department = departments.uID
+               GROUP BY employees.employees_Department";
+$result_dept = mysqli_query($conn, $query_dept);
+
+?>
+
+
+
+
+<!--Load the AJAX API-->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart()
+    {
+        var data = google.visualization.arrayToDataTable([
+            ['Gender', 'Number'],
+            <?php
+            while($row = mysqli_fetch_array($result))
+            {
+                echo "['".$row["age"]."', ".$row["number"]."],";
+            }
+            ?>
+        ]);
+
+        var options = {
+            'backgroundColor': 'transparent',
+            'legend': 'none',
+            chartArea: {
+                height: '100%',
+                width: '100%',
+                left: 5,
+            },
+            'width':120,
+            'height':120,
+            pieHole: 0.4
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart_employees'));
+        chart.draw(data, options);
+    }
+</script>
+
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart()
+    {
+        var data = google.visualization.arrayToDataTable([
+            ['Leave_Type', 'Number'],
+            <?php
+            while($row = mysqli_fetch_array($result_emp))
+            {
+                echo "['".$row["Leave_Type"]."', ".$row["number"]."],";
+            }
+            ?>
+        ]);
+
+        var options = {
+            'backgroundColor': 'transparent',
+            'legend': 'none',
+            chartArea: {
+                height: '100%',
+                width: '100%',
+                left: 5,
+            },
+            'width':120,
+            'height':120,
+            pieHole: 0.4
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart_leaves'));
+        chart.draw(data, options);
+    }
+</script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart()
+    {
+        var data = google.visualization.arrayToDataTable([
+            ['Department', 'Number'],
+            <?php
+            while($row = mysqli_fetch_array($result_dept))
+            {
+                echo "['".$row["dept_uid"]."', ".$row["employee_count"]."],";
+            }
+            ?>
+        ]);
+
+        var options = {
+            'backgroundColor': 'transparent',
+            'legend': 'none',
+            chartArea: {
+                height: '100%',
+                width: '100%',
+                left: 5,
+            },
+            'width':120,
+            'height':120,
+            pieHole: 0.4
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart_dept'));
+        chart.draw(data, options);
+    }
+</script>
 
 <!--MAIN-->
 
@@ -42,22 +165,19 @@ exit();
                     <div class="insights">
                         <!---------------START OF LEAVES--------------->
                             <div class="Leaves">
-                                <span class="material-symbols-rounded">analytics</span>
+                                <span class="material-symbols-rounded">event</span>
                                 <div class="middle">
                                     <div class="left">
-                                        <h3>Total Leaves</h3>
-                                        <h1>27</h1>
+                                        <h3>Total Monthly Leaves</h3>
                                     </div>
-                                    <div class="progress">
-                                        <svg>
-                                            <circle cx="38" cy="38" r="36"></circle>
-                                        </svg>
-                                        <div class="number">
-                                            <p>81%</p>
-                                        </div>
-                                    </div>
+                                    <div id="chart_leaves"></div>
                                 </div>
-                                        <small class="text-muted">May 2023</small>
+                                <small class="text-muted">
+                                    <?php
+                                    date_default_timezone_set('Asia/Manila');
+                                    echo date('F Y');
+                                    ?>
+                                </small>
                                     </div>
 
                                 <!---------------END OF LEAVES--------------->
@@ -68,20 +188,14 @@ exit();
                                         <span class="material-symbols-rounded">pie_chart</span>
                                         <div class="middle">
                                             <div class="left">
-                                                <h3>Employees</h3>
-                                                <h1>27</h1>
+                                                <h3>Age of Employees</h3>
                                             </div>
-                                            <div class="progress">
-                                                <svg>
-<                                                       !-- ilan sa bawat department-pie-->
-                                                    <circle cx="38" cy="38" r="36"></circle>
-                                                </svg>
-                                                <div class="number">
-                                                    <p>81%</p>
-                                                </div>
-                                            </div>
+                                            <div id="chart_employees"></div>
                                         </div>
-                                                <small class="text-muted">May 2023</small>
+                                                <small class="text-muted">  <?php
+                                                    date_default_timezone_set('Asia/Manila');
+                                                    echo date('F Y');
+                                                    ?></small>
                                             </div>
 
                                             <!---------------END OF EMPLOYEES--------------->
@@ -92,18 +206,13 @@ exit();
                                                 <div class="middle">
                                                     <div class="left">
                                                         <h3>Departments</h3>
-                                                        <h1>27</h1>
                                                     </div>
-                                                    <div class="progress">
-                                                        <svg>
-                                                            <circle cx="38" cy="38" r="36"></circle>
-                                                        </svg>
-                                                        <div class="number">
-                                                            <p>81%</p>
-                                                        </div>
-                                                    </div>
+                                                    <div id="chart_dept"></div>
                                                 </div>
-                                                        <small class="text-muted">May 2023</small>
+                                                        <small class="text-muted">  <?php
+                                                            date_default_timezone_set('Asia/Manila');
+                                                            echo date('F Y');
+                                                            ?></small>
                                                     </div>
                                                  <!---------------END OF DEPARTMENTS--------------->
                                 </div>
@@ -275,11 +384,13 @@ exit();
                             </div>
                         </div>
 
-                    <script>
-                        var adminFirstName = "<?php echo explode(' ', $_SESSION['admin_FirstName'])[0]; ?>";
-                    </script>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script>
+    var adminFirstName = "<?php echo explode(' ', $_SESSION['admin_FirstName'])[0]; ?>";
+</script>
+
+
                             <script src="js/script_dashboard.js"></script>
 
 

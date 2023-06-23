@@ -190,6 +190,7 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
                 <th >Department</th>
                 <th >Leave Type</th>
                 <th >Created At</th>
+                <th >Filed By</th>
                 <th >Remarks</th>
                 <th >Options</th>
 
