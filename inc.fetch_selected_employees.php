@@ -6,10 +6,10 @@ $departmentId = $_GET['departmentId'];
 
 if ($departmentId==0){
     // Perform the query to retrieve the employees
-    $query = mysqli_query($conn, "SELECT * FROM employees WHERE is_active=1");
+    $query = mysqli_query($conn, "SELECT * FROM employees WHERE is_active=1 AND is_superadmin=0");
 } else{
     // Perform the query to retrieve the employees based on the department ID
-    $query = mysqli_query($conn, "SELECT * FROM employees WHERE employees_Department = '$departmentId' AND is_active=1");
+    $query = mysqli_query($conn, "SELECT * FROM employees WHERE employees_Department = '$departmentId', is_superadmin=0 AND is_active=1");
 
 }
 

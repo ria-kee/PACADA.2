@@ -2,7 +2,7 @@
 session_start();
 $allowedPages = ['dashboard.php', 'departments.php', 'employees.php',
     'leave.php', 'timeOff.php', 'profile.php',
-    'archived_departments.php', 'credits.php', 'archived_employees.php']; // List of allowed pages
+    'archived_departments.php', 'credits.php', 'archived_employees.php', 'view_logs.php']; // List of allowed pages
 
 $currentFile = basename($_SERVER['PHP_SELF']); // Get the name of the current PHP file
 
@@ -81,10 +81,12 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
                 <span class="material-symbols-rounded">add</span>
                 <button>Add Admin</button>
             </div>
+            <a href="view_logs.php">
             <div class="grid-item button2">
                 <span class="material-symbols-rounded">visibility</span>
                 <button>View Logs</button>
             </div>
+            </a>
             <div class="vl"></div>
             <div class="grid-item">
                 <div class="dropdown">

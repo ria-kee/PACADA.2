@@ -232,7 +232,7 @@ $result_dept = mysqli_query($conn, $query_dept);
             </thead>
             <tbody style="font-size: 14px">
             <?php
-            // Assuming you have a database connection in $conn
+
 
             // SQL query to retrieve leave data
             $query_leaves = "SELECT l.*, e.employees_FirstName, e.employees_MiddleName, e.employees_LastName
@@ -275,8 +275,6 @@ $result_dept = mysqli_query($conn, $query_dept);
                 echo "<tr><td colspan='5'>No recent leaves found.</td></tr>";
             }
 
-            // Close the database connection
-            mysqli_close($conn);
             ?>
             </tbody>
         </table>
@@ -291,63 +289,46 @@ $result_dept = mysqli_query($conn, $query_dept);
 
                                 <div class="right" style="z-index: -5">
                                 <!---------------START OF RECENT UPDATES--------------->
-                                <div class="recent-updates">
-                                    <h2>Recent Updates</h2>
-                                    <div class="updates">
+                                    <?php
+                                    // Assuming you have established a MySQL database connection
 
-                                        <div class="update">
-                                            <div class="profile-photo">
-                                                <img src="assets/img/profile-1.jpg">
-                                            </div>
-                                            <div class="message">
-                                                <p><b>Admin1</b> filed leave for employee 3.</p>
-                                                <small class="text-muted">2 minutes ago.</small>
-                                            </div>
-                                        </div>
+                                    // Retrieve the updates from the logs table ordered by createdAt
+                                    $query = "SELECT * FROM logs ORDER BY createdAt DESC LIMIT 5";
+                                    $result = mysqli_query($conn, $query);
 
-                                        <div class="update">
-                                            <div class="profile-photo">
-                                                <img src="assets/img/profile-2.jpg">
-                                            </div>
-                                            <div class="message">
-                                                <p><b>Admin2</b> filed leave for employee 21.</p>
-                                                <small class="text-muted">21 minutes ago.</small>
-                                            </div>
-                                        </div>
+                                    // Generate the HTML markup for the updates
+                                    $html = '<div class="recent-updates">
+            <h2>Recent Updates</h2>
+            <div class="updates">';
 
-                                        <div class="update">
-                                            <div class="profile-photo">
-                                                <img src="assets/img/profile-2.jpg">
-                                            </div>
-                                            <div class="message">
-                                                <p><b>Admin2</b> filed leave for employee 21.</p>
-                                                <small class="text-muted">21 minutes ago.</small>
-                                            </div>
-                                        </div>
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        // Calculate the relative time from the createdAt field
+                                        $createdAt = strtotime($row['createdAt']);
+                                        $currentTime = time();
+                                        $timeDiff = $currentTime - $createdAt;
+                                        $relativeTime = '';
 
+                                        // Retrieve the longblob image from the session variable
+                                        $encodedValue =$_SESSION['admin_Profile'];
 
-                                        <div class="update">
-                                            <div class="profile-photo">
-                                                <img src="assets/img/profile-4.jpg">
-                                            </div>
-                                            <div class="message">
-                                                <p><b>Admin3</b> filed leave for employee 3.</p>
-                                                <small class="text-muted">39 minutes ago.</small>
-                                            </div>
-                                        </div>
-                                        <div class="update">
-                                            <div class="profile-photo">
-                                                <img src="assets/img/profile-4.jpg">
-                                            </div>
-                                            <div class="message">
-                                                <p><b>Admin3</b> filed leave for employee 3.</p>
-                                                <small class="text-muted">39 minutes ago.</small>
-                                            </div>
-                                        </div>
+                                        // Generate the HTML markup for each update
+                                        $html .= '<div class="update">
+                <div class="profile-photo">
+                    <img src="data:image/jpeg;base64,' . $encodedValue . '" alt="Longblob Image">
+                </div>
+                <div class="message">
+                    <p><b>' . $row['admin_Name'] . '</b>'.' '.  $row['admin_Action'].' '.  $row['action_what']  .' '.  $row['action_toWhom'] .'.</p>
+                    <small id="recentupdates" class="text-muted relative" data-createdAt="' . strtotime($row['createdAt']) . '"></small>
+                </div>
+            </div>';
+                                    }
 
+                                    $html .= '</div></div>';
+                                    ?>
 
+                                    <!-- Output the generated HTML markup -->
+                                    <?php echo $html; ?>
 
-                                    </div>
                                     <!---------------END OF RECENT UPDATES--------------->
                                     <!---------------START OF QUICK ACTIONS--------------->
                                     <div class="quick-action">
@@ -435,5 +416,38 @@ $result_dept = mysqli_query($conn, $query_dept);
 
                                 setInterval(updateTime, 1000); // Refresh the time every second
                             </script>
+
+<script>
+    // Function to update relative time for all elements with the 'text-muted' class
+    function updateRelativeTime() {
+        var elements = document.getElementsByClassName('relative');
+        var currentTime = Math.floor(Date.now() / 1000); // Get current time in seconds
+
+        for (var i = 0; i < elements.length; i++) {
+            var createdAt = parseInt(elements[i].getAttribute('data-createdAt'));
+            var timeDiff = currentTime - createdAt;
+            var relativeTime = '';
+
+            if (timeDiff < 60) {
+                relativeTime = timeDiff + ' seconds ago';
+            } else if (timeDiff < 3600) {
+                relativeTime = Math.floor(timeDiff / 60) + ' minutes ago';
+            } else if (timeDiff < 86400) {
+                relativeTime = Math.floor(timeDiff / 3600) + ' hours ago';
+            } else {
+                relativeTime = Math.floor(timeDiff / 86400) + ' days ago';
+            }
+
+            elements[i].textContent = relativeTime;
+        }
+    }
+
+    // Initial update of relative time
+    updateRelativeTime();
+
+    // Update relative time every second (adjust the interval as needed)
+    setInterval(updateRelativeTime, 1000);
+
+</script>
 
 

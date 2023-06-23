@@ -16,7 +16,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // check if the update was successful
         if ($stmt->affected_rows > 0) {
-            echo "Employee is_admin value updated successfully.";
+
+            session_start();
+            $action = 'added';
+            $what = 'admin:';
+
+            $query_log = "INSERT INTO logs (admin_uID, admin_Name, admin_Action, action_what, action_toWhom) VALUES (?, ?, ?, ?, ?)";
+            $stmt_log = $conn->prepare($query_log);
+            $stmt_log->bind_param("issss", $_SESSION['admin_uID'], $_SESSION['admin_FirstName'], $action, $what, $employeeID);
+
+            if ($stmt_log->execute()) {
+                // Department and log entry added successfully
+                $response = ['success' => true];
+            } else {
+                // Failed to add log entry
+                $response = ['success' => false];
+            }
+
+            $stmt_log->close();
+            echo "Employee is assigned as admin successfully.";
         } else {
             echo "Failed to update employee is_admin value.";
         }
