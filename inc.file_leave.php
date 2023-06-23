@@ -40,6 +40,47 @@ foreach ($leaveDates as $leaveDate) {
         echo "Error: " . $errorMessage;
         exit;
     }
+
+    // Log the leave filing
+    if ($result) {
+        $action = 'filed';
+        $what = '';
+
+        // Determine the specific leave type for the log entry
+        if ($leaveType === 'Vacation') {
+            $what = 'Vacation Leave for';
+        } elseif ($leaveType === 'Sick') {
+            $what = 'Sick Leave for';
+        } elseif ($leaveType === 'Force') {
+            $what = 'Force Leave for';
+        } elseif ($leaveType === 'Special') {
+            $what = 'Special Leave for';
+        } else {
+            $what = 'Others Leave for';
+        }
+
+        $query_findEmp = "SELECT employees_uid FROM employees WHERE uID='$employeeID'";
+        $result_found = mysqli_query($conn, $query_findEmp);
+
+        if ($result_found) {
+            $row = mysqli_fetch_assoc($result_found);
+            $emp_id = $row['employees_uid'];
+
+            $query_log = "INSERT INTO logs (admin_uID, admin_Name, admin_Action, action_what, action_toWhom) VALUES (?, ?, ?, ?, ?)";
+            $stmt_log = $conn->prepare($query_log);
+            $stmt_log->bind_param("issss", $_SESSION['admin_uID'], $_SESSION['admin_FirstName'], $action, $what, $emp_id);
+
+            if ($stmt_log->execute()) {
+                // Log entry added successfully
+            } else {
+                // Failed to add log entry
+                $response = ['success' => false, 'message' => 'Failed to add log entry.'];
+                break;
+            }
+
+            $stmt_log->close();
+        }
+    }
 }
 
 // Update the 'employees' table based on the leave type

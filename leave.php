@@ -135,14 +135,15 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
                         Select Action
                     </button>
                     <ul class="dropdown-menu" id="quick-dropdown" aria-labelledby="dropdownMenuButton">
-                        <li><a href="credits.php" class="dropdown-item d-flex justify-content-between align-items-center"  id="add-credit">
-                                <span>Record Late</span>
-                                <span class="material-symbols-rounded" style="font-size: 18px">avg_pace</span>
-                            </a>
-                        </li>
                         <li><a href="file_leave.php" class="dropdown-item d-flex justify-content-between align-items-center"  id="file-leave">
                                 <span>File Leave</span>
                                 <span class="material-symbols-rounded" style="font-size: 18px">event</span>
+                            </a>
+                        </li>
+
+                        <li><a href="credits.php" class="dropdown-item d-flex justify-content-between align-items-center"  id="add-credit">
+                                <span>Record Late</span>
+                                <span class="material-symbols-rounded" style="font-size: 18px">avg_pace</span>
                             </a>
                         </li>
                     </ul>

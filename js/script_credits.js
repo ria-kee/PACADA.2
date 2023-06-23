@@ -104,10 +104,10 @@ const lateInvalidFeedback = document.getElementById('late-invalid-feedback');
 
 var lateisValid =true;
 
+const enteredValue = lateInput.value;
 // RECORD LATE MODAL
 lateInput.addEventListener('change', function() {
     // Retrieve the entered value
-    const enteredValue = lateInput.value;
 
     if(enteredValue < 1){
         var VacationBalance = 1.25;
@@ -136,7 +136,7 @@ $(document).on('click', '#AddCreditModal #AddCredits', function() {
        $.ajax({
            url: 'inc.add_credits.php',
            type: 'POST',
-           data: { uID: UID, vacation: vacationValue, sick:sickValue },
+           data: { uID: UID, vacation: vacationValue, sick:sickValue, late: enteredValue },
            success: function(response) {
                // Show the success alert
                $('#successAlert').removeClass('d-none').addClass('show').html('<i class="bi-check-circle-fill me-2"></i><strong>Success!</strong> ' + 'Credits is updated successfully');

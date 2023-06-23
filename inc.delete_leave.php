@@ -1,6 +1,6 @@
 <?php
 include('includes/dbh.inc.php');
-
+session_start();
 // Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve the department ID and acronym from the POST data
@@ -97,8 +97,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $result_delete = mysqli_query($conn, $sql_delete);
 
             if ($result_delete) {
-                // Return a success message
-                echo "<b>$empname</b> leave is canceled successfully.";
+                // Find the employee's unique ID
+                $query_findEmp = "SELECT employees_uid FROM employees WHERE uID='$empID'";
+                $result_found = mysqli_query($conn, $query_findEmp);
+
+                if ($result_found) {
+                    $row = mysqli_fetch_assoc($result_found);
+                    $emp_id = $row['employees_uid'];
+
+                    // Log the leave cancellation
+                    $action = 'canceled';
+                    $what = $leaveType . ' Leave of';
+
+                    $query_log = "INSERT INTO logs (admin_uID, admin_Name, admin_Action, action_what, action_toWhom) VALUES (?, ?, ?, ?, ?)";
+                    $stmt_log = mysqli_prepare($conn, $query_log);
+                    mysqli_stmt_bind_param($stmt_log, "issss", $_SESSION['admin_uID'], $_SESSION['admin_FirstName'], $action, $what, $emp_id);
+
+                    if (mysqli_stmt_execute($stmt_log)) {
+                        // Return a success message
+                        echo "<b>$empname</b> leave is canceled successfully.";
+                    } else {
+                        // Return an error message
+                        http_response_code(500); // Set the HTTP response code to indicate an error
+                        echo "Failed to cancel leave of $empname: " . mysqli_error($conn);
+                    }
+
+                    mysqli_stmt_close($stmt_log);
+                } else {
+                    // Return an error message
+                    http_response_code(500); // Set the HTTP response code to indicate an error
+                    echo "Failed to find employee: " . mysqli_error($conn);
+                }
             } else {
                 // Return an error message
                 http_response_code(500); // Set the HTTP response code to indicate an error
