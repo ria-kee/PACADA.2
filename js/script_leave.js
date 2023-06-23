@@ -159,3 +159,52 @@ function handleDateRangeChange() {
     // Trigger DataTable search with the date range values
     leaveTable.column(0).search(fromDate + ' - ' + toDate).draw();
 }
+
+// Cancel Leave
+$(document).on('click', '.cancel-button', function() {
+    empname = $(this).data('empname');
+    leave_id =$(this).data('uid');
+    leave = $(this).data('type');
+    empID = $(this).data('empid');
+
+
+    $('#employee').text(empname);
+    $('#cancelLeaveModal').modal('show');
+});
+
+$('#yesCancel').on('click', function() {
+    $.ajax({
+        url: 'inc.delete_leave.php',
+        type: 'POST',
+        data: { id: leave_id, employee: empname, type:leave, employee_id:empID},
+        success: function(response) {
+            // Show the success alert
+            $('#successAlert').removeClass('d-none').addClass('show').html('<i class="bi-check-circle-fill me-2"></i><strong>Success!</strong> ' + response);
+            $('#leaveTable').DataTable().ajax.reload();
+
+            // Close the modal
+            $('#cancelLeaveModal').modal('hide');
+
+
+            // Close the success alert after 3 seconds
+            setTimeout(function() {
+                $('#successAlert').removeClass('show').addClass('d-none');
+            }, 3000);
+        },
+        error: function(xhr, status, error) {
+            // Show the error alert with the custom error message
+            $('#errorAlert').removeClass('d-none').addClass('show').html('<i class="bi-exclamation-octagon-fill me-2"></i><strong>Error!</strong> ' + xhr.responseText);
+
+            // Close the modal
+            $('#cancelLeaveModal').modal('hide');
+
+            // Close the error alert after 5 seconds
+            setTimeout(function() {
+                $('#errorAlert').removeClass('show').addClass('d-none');
+            }, 5000);
+        }
+    });
+
+    // Close the modal
+    $('#DeleteEmp').modal('hide');
+});

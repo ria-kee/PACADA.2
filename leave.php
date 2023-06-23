@@ -203,8 +203,30 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
     </div>
 </div>
 
-
-
+<!-- CANCEL LEAVE MODAL -->
+<div class="modal fade" id="cancelLeaveModal" tabindex="-1" role="dialog" aria-labelledby="cancelLeaveModal"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="material-symbols-rounded">event_busy</span>
+                <h1 class="modal-title" id="confirmModalLabel">Confirm Leave Cancellation</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h3>Are you sure  you want to cancel filed leave for <b><span id="employee"></span></b> ?</h3>
+                <h5 style="font-family: 'Poppins Light'">When canceled, the filed leave will be <b class="text-danger">permanently deleted</b> and any leave credits that had been used will be restored.</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="yesCancel">Yes, Cancel Leave </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- JAVASCRIPT -->
+<script>
+    document.body.appendChild(document.getElementById('cancelLeaveModal'));
+</script>
 <script src="js/script_leave.js"></script>

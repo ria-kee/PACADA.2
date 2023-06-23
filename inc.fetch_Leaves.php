@@ -115,6 +115,7 @@ while ($row = mysqli_fetch_assoc($query)) {
         $empName .= strtoupper(substr($row['employees_MiddleName'], 0, 1)) . '. ';
     }
     $empName .= ucwords(strtolower($row['employees_LastName']));
+    $empID = $row['Employee_ID'];
 
     $subarray = array();
     $subarray[] = $row['Leave_Date'];
@@ -126,9 +127,11 @@ while ($row = mysqli_fetch_assoc($query)) {
     $subarray[] = $row['Remarks'];
     $subarray[] =
 
-        '<button type="button" id="archive" class="btn btn-sm btn-danger cancel-button" data-toggle="modal" data-target="#confirmModal" 
+        '<button type="button" id="archive" class="btn btn-sm btn-danger cancel-button" data-toggle="modal" data-target="#cancelLeaveModal" 
         data-uid="'.$row['uID'].'"
         data-empname="'.$empName.'"
+         data-empID="'.$empID.'"
+        data-type="'.$row['Leave_Type'].'"
     ><span class="material-symbols-rounded" style="font-size: 18px">event_busy</span> Cancel</button>';
 
 
