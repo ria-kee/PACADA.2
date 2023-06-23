@@ -14,6 +14,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result_update = mysqli_query($conn, $sql_update);
 
     if ($result_update) {
+
+        session_start();
+        $action = 'activated';
+        $what = 'department';
+
+        $query_log = "INSERT INTO logs (admin_uID, admin_Name, admin_Action, action_what, action_toWhom) VALUES (?, ?, ?, ?, ?)";
+        $stmt_log = $conn->prepare($query_log);
+        $stmt_log->bind_param("issss", $_SESSION['admin_uID'], $_SESSION['admin_FirstName'], $action, $what, $acronyms);
+
+        if ($stmt_log->execute()) {
+            // Department and log entry added successfully
+            $response = ['success' => true];
+        } else {
+            // Failed to add log entry
+            $response = ['success' => false];
+        }
+
+        $stmt_log->close();
+
         // Return a success message with the department acronym
         echo "$acronyms Department is activated successfully!";
     } else {

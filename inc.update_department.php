@@ -20,6 +20,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // check if any rows were affected
             if ($stmt->affected_rows > 0) {
                 // Department updated successfully
+                session_start();
+                $action = 'edited';
+                $what = 'department';
+
+                $query_log = "INSERT INTO logs (admin_uID, admin_Name, admin_Action, action_what, action_toWhom) VALUES (?, ?, ?, ?, ?)";
+                $stmt_log = $conn->prepare($query_log);
+                $stmt_log->bind_param("issss", $_SESSION['admin_uID'], $_SESSION['admin_FirstName'], $action, $what, $acronym);
+
+                if ($stmt_log->execute()) {
+                    // Department and log entry added successfully
+                    $response = ['success' => true];
+                } else {
+                    // Failed to add log entry
+                    $response = ['success' => false];
+                }
+
+                $stmt_log->close();
+
+
+
+
                 $response = ['success' => true];
             } else {
                 // Department not found or no changes made

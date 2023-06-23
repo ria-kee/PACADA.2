@@ -119,6 +119,7 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
         </div>
         <table id="deptTable" class="table table-striped" style="width:100%">
             <thead class="table-dark">
+                <th>ID</th>
                 <th>Acronym</th>
                 <th>Department</th>
                 <th class="options">Options</th>

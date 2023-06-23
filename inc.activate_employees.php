@@ -1,7 +1,7 @@
 <?php
 
 include('includes/dbh.inc.php');
-
+session_start();
 // Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve the department IDs from the POST data
@@ -18,8 +18,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
-            // Increment the success count
-            $successCount++;
+            $action = 'activated';
+            $what = 'employee';
+
+            $query_findEmp = "SELECT employees_uid FROM employees WHERE uID='$empId'";
+            $result_found = mysqli_query($conn, $query_findEmp);
+
+            if ($result_found) {
+                $row = mysqli_fetch_assoc($result_found);
+                $emp_id = $row['employees_uid'];
+            }
+
+            $query_log = "INSERT INTO logs (admin_uID, admin_Name, admin_Action, action_what, action_toWhom) VALUES (?, ?, ?, ?, ?)";
+            $stmt_log = $conn->prepare($query_log);
+            $stmt_log->bind_param("issss", $_SESSION['admin_uID'], $_SESSION['admin_FirstName'], $action, $what, $emp_id);
+
+            if ($stmt_log->execute()) {
+                // Increment the success count
+                $successCount++;
+            } else {
+                // Increment the error count and store the error message
+                $errorCount++;
+                $errorMessages[] = "Failed to add log entry for department with ID $deptId: " . mysqli_error($conn);
+            }
         } else {
             // Increment the error count and store the error message
             $errorCount++;

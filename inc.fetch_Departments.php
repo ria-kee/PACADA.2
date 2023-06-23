@@ -55,6 +55,7 @@ $query = mysqli_query($conn, $sql);
 while ($row = mysqli_fetch_assoc($query)) {
     // Create a temporary array to store each row's data
     $subarray = array();
+    $subarray[] = $row['uID'];
     $subarray[] = $row['dept_uid'];
     $subarray[] = $row['dept_Description'];
     $subarray[] = '<button type="button" id="edit" class="btn btn-sm btn-secondary edit-button" data-toggle="modal" data-target="#EditDept" data-deptid="'.$row['uID'].'"><i class="bi bi-pencil-fill"></i> Edit</button>

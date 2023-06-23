@@ -54,11 +54,81 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $targetFileName = $targetDirectory . $imageName;
         move_uploaded_file($_FILES['employees_image']['tmp_name'], $targetFileName);
         $imageContent = file_get_contents($targetFileName);
-// Create a Blob object
+        // Create a Blob object
         $blob = new stdClass();
         $blob->type = mime_content_type($targetFileName);
         $blob->data = base64_encode($imageContent);
         $blobbed = $blob->data;
+
+        // Get the existing employee data before updating
+        $existingDataQuery = "SELECT employees_FirstName, employees_MiddleName, employees_LastName, employees_sex, employees_birthdate, employees_Department, employees_appointmentDate, Leave_Vacation, Leave_Sick, Leave_Force, Leave_Special, employees_remarks, employees_image, employees_uid FROM employees WHERE uID = ?";
+        $stmt_existingData = $conn->prepare($existingDataQuery);
+        $stmt_existingData->bind_param("i", $uid);
+        $stmt_existingData->execute();
+        $stmt_existingData->store_result();
+        $stmt_existingData->bind_result(
+            $existingFirstName,
+            $existingMiddleName,
+            $existingLastName,
+            $existingSex,
+            $existingBirthdate,
+            $existingDepartmentId,
+            $existingAppointmentDate,
+            $existingLeaveVacation,
+            $existingLeaveSick,
+            $existingLeaveForce,
+            $existingLeaveSpecial,
+            $existingRemarks,
+            $existingImage,
+            $existingUID
+        );
+        $stmt_existingData->fetch();
+        $stmt_existingData->free_result();
+        $stmt_existingData->close();
+
+        // Prepare an array to store the changes
+        $changes = [];
+
+        // Check each field for changes and add them to the changes array
+        if ($existingFirstName !== $firstName) {
+            $changes[] = "employees_FirstName: {$existingFirstName} -> {$firstName}";
+        }
+        if ($existingMiddleName !== $middleName) {
+            $changes[] = "employees_MiddleName: {$existingMiddleName} -> {$middleName}";
+        }
+        if ($existingLastName !== $lastName) {
+            $changes[] = "employees_LastName: {$existingLastName} -> {$lastName}";
+        }
+        if ($existingSex !== $sex) {
+            $changes[] = "employees_sex: {$existingSex} -> {$sex}";
+        }
+        if ($existingBirthdate !== $birthdate) {
+            $changes[] = "employees_birthdate: {$existingBirthdate} -> {$birthdate}";
+        }
+        if ($existingDepartmentId != $departmentId) {
+            $changes[] = "employees_Department: {$existingDepartmentId} -> {$departmentId}";
+        }
+        if ($existingAppointmentDate !== $appointmentDate) {
+            $changes[] = "employees_appointmentDate: {$existingAppointmentDate} -> {$appointmentDate}";
+        }
+        if ($existingLeaveVacation !== $leaveVacation) {
+            $changes[] = "Leave_Vacation: {$existingLeaveVacation} -> {$leaveVacation}";
+        }
+        if ($existingLeaveSick !== $leaveSick) {
+            $changes[] = "Leave_Sick: {$existingLeaveSick} -> {$leaveSick}";
+        }
+        if ($existingLeaveForce !== $leaveForce) {
+            $changes[] = "Leave_Force: {$existingLeaveForce} -> {$leaveForce}";
+        }
+        if ($existingLeaveSpecial !== $leaveSpecial) {
+            $changes[] = "Leave_Special: {$existingLeaveSpecial} -> {$leaveSpecial}";
+        }
+        if ($existingRemarks !== $employees_remarks) {
+            $changes[] = "employees_remarks: {$existingRemarks} -> {$employees_remarks}";
+        }
+        if ($existingImage !== $blobbed) {
+            $changes[] = "employees_image: Image updated";
+        }
 
         // prepare and execute the query to update the department
         $query = "UPDATE employees SET  employees_image = ?, 
@@ -98,7 +168,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->execute()) {
             // check if any rows were affected
             if ($stmt->affected_rows > 0) {
-                // Department updated successfully
+                // Log the changes
+                if (!empty($changes)) {
+                    session_start();
+                    $action = 'edited';
+                    $toWhom = $existingUID;
+
+                    // Loop through each change and log it
+                    foreach ($changes as $change) {
+                        $query_log = "INSERT INTO logs (admin_uID, admin_Name, admin_Action, action_what, action_toWhom) VALUES (?, ?, ?, ?, ?)";
+                        $stmt_log = $conn->prepare($query_log);
+                        $stmt_log->bind_param("issss", $_SESSION['admin_uID'], $_SESSION['admin_FirstName'], $action, $change, $toWhom);
+
+                        if ($stmt_log->execute()) {
+                            // Log entry added successfully
+                        } else {
+                            // Failed to add log entry
+                            $response = ['success' => false, 'message' => 'Failed to add log entry.'];
+                            break;
+                        }
+
+                        $stmt_log->close();
+                    }
+                }
+
                 $response = ['success' => true];
             } else {
                 // Department not found or no changes made
