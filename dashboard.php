@@ -218,55 +218,71 @@ $result_dept = mysqli_query($conn, $query_dept);
                                 </div>
                                                 <!---------------END OF INSIGHTS--------------->
 
-                                <div class="recent-leaves">
-                                    <h2>Recent Leaves</h2>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Name</th>
-                                                <th>ID</th>
-                                                <th>Date</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody style="font-size: 14px">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Juan Dela Cruz</td>
-                                                <td>JDC-1203</td>
-                                                <td>May 8, 2023</td>
-                                                <td class="primary"><a href="#">Details</a></td>
-                                            </tr>
+    <div class="recent-leaves">
+        <h2>Recent Leaves</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>Leave</th>
+                <th>Date</th>
+                <th>Filed by</th>
+            </tr>
+            </thead>
+            <tbody style="font-size: 14px">
+            <?php
+            // Assuming you have a database connection in $conn
 
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Gregory Del Pilar</td>
-                                                <td>GDP-0314</td>
-                                                <td>May 8, 2023</td>
-                                                <td class="primary"><a href="#">Details</a></td>
-                                            </tr>
+            // SQL query to retrieve leave data
+            $query_leaves = "SELECT l.*, e.employees_FirstName, e.employees_MiddleName, e.employees_LastName
+                             FROM leaves l
+                             INNER JOIN employees e ON l.Employee_ID = e.uID
+                             ORDER BY l.Leave_Date DESC
+                             LIMIT 4";
+            $result_leaves = mysqli_query($conn, $query_leaves);
 
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Crisostomo Magsalin Ibarra</td>
-                                                <td>CMI-1213</td>
-                                                <td>May 8, 2023</td>
-                                                <td class="primary"><a href="#">Details</a></td>
-                                            </tr>
+            // Check if there are any rows returned
+            if (mysqli_num_rows($result_leaves) > 0) {
+                $counter = 1; // Initialize a counter variable
 
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Maria Clara Alba Delos Santos</td>
-                                                <td>MAD-1005</td>
-                                                <td>May 8, 2023</td>
-                                                <td class="primary"><a href="#">Details</a></td>
-                                            </tr>
+                // Iterate through each row
+                while ($row = mysqli_fetch_assoc($result_leaves)) {
+                    $empName = ucwords(strtolower($row['employees_FirstName'])) . ' ';
 
-                                        </tbody>
-                                    </table>
-                                    <a href="#">View All</a>
-                                </div>
+                    if (!empty($row['employees_MiddleName'])) {
+                        $empName .= strtoupper(substr($row['employees_MiddleName'], 0, 1)) . '. ';
+                    }
+
+                    $empName .= ucwords(strtolower($row['employees_LastName']));
+                    $leaveCode = $row['Leave_Type'];
+                    $date = $row['Leave_Date'];
+                    $filed = $row['filed_by'];
+
+                    // Output the table row with leave data
+                    echo "<tr>";
+                    echo "<td>$counter</td>";
+                    echo "<td>$empName</td>";
+                    echo "<td>$leaveCode</td>";
+                    echo "<td>$date</td>";
+                    echo "<td>$filed</td>";
+                    echo "</tr>";
+
+                    $counter++; // Increment the counter
+                }
+            } else {
+                // No leaves found
+                echo "<tr><td colspan='5'>No recent leaves found.</td></tr>";
+            }
+
+            // Close the database connection
+            mysqli_close($conn);
+            ?>
+            </tbody>
+        </table>
+        <a href="leave.php">View All</a>
+    </div>
+
 </div>
                            </main>
 
