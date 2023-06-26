@@ -8,7 +8,7 @@ if (isset($_GET['department'])) {
 
     $sql = "SELECT employees.*,departments.dept_uid, TIMESTAMPDIFF(YEAR, employees.employees_birthdate, CURDATE()) AS age FROM employees
 LEFT JOIN departments ON employees.employees_Department = departments.uid
-WHERE employees.credit_isUpdated = 0 AND employees.is_superadmin = 0 AND employees.is_active = 1";
+WHERE employees.is_superadmin = 0 AND employees.is_active = 1";
 
     if ($selectedDepartment != 0) {
         $sql .= " AND employees.employees_Department = '$selectedDepartment'";
@@ -18,7 +18,7 @@ WHERE employees.credit_isUpdated = 0 AND employees.is_superadmin = 0 AND employe
 // Handle the case when 'department' is not set
     $sql = "SELECT employees.*, departments.dept_uid, TIMESTAMPDIFF(YEAR, employees.employees_birthdate, CURDATE()) AS age FROM employees
 LEFT JOIN departments ON employees.employees_Department = departments.uid
-WHERE employees.credit_isUpdated = 0 AND employees.is_superadmin = 0 AND employees.is_active = 1";
+WHERE employees.is_superadmin = 0 AND employees.is_active = 1";
 }
 
 if (isset($_POST['search']['value'])) {
@@ -27,12 +27,8 @@ if (isset($_POST['search']['value'])) {
     $sql .= " OR employees.employees_FirstName LIKE '%" . $search_value . "%' ";
     $sql .= " OR employees.employees_MiddleName LIKE '%" . $search_value . "%' ";
     $sql .= " OR employees.employees_LastName LIKE '%" . $search_value . "%' ";
-    $sql .= " OR employees.employees_sex LIKE '%" . $search_value . "%' ";
-    $sql .= " OR dept_uid LIKE '%" . $search_value . "%' ";
-    $sql .= " OR employees.Leave_Vacation LIKE '%" . $search_value . "%' ";
-    $sql .= " OR employees.Leave_Sick LIKE '%" . $search_value . "%' ";
-    $sql .= " OR employees.Leave_Force LIKE '%" . $search_value . "%' ";
-    $sql .= " OR employees.Leave_Special LIKE '%" . $search_value . "%') ";
+    $sql .= " OR employees.timeoff_Balance LIKE '%" . $search_value . "%' ";
+    $sql .= " OR employees.timeoff_Remarks LIKE '%" . $search_value . "%') ";
 }
 
 if (isset($_POST['order'])) {
@@ -51,17 +47,12 @@ if (isset($_POST['order'])) {
             $column = 'CONCAT(UCASE(employees.employees_FirstName), " ", IF(employees.employees_MiddleName != "", CONCAT(UCASE(SUBSTRING(employees.employees_MiddleName, 1, 1)), "."), ""), " ", UCASE(employees.employees_LastName))';
             break;
         case 3:
-            $column = 'employees.Leave_Vacation';
+            $column = 'employees.timeoff_Balance';
             break;
         case 4:
-            $column = 'employees.Leave_Sick';
+            $column = 'timeoff_Remarks';
             break;
-        case 5:
-            $column = 'employees.Leave_Force';
-            break;
-        case 6:
-            $column = 'employees.Leave_Special';
-            break;
+
 
 // Use employees.employees_uid as the default column
         default:
@@ -102,41 +93,63 @@ while ($row = mysqli_fetch_assoc($query)) {
     $review_Name = $empName;
     $review_Department = $row['dept_uid'];
     $review_Uid = strtoupper($row['employees_uid']);
-    $review_Email = $row['employees_Email'];
-    $review_Sex =$row['employees_sex'];
-    $review_Age =$row['age'];
-    $review_AppDate = $row['employees_appointmentDate'];
-    $review_Vacation = $row['Leave_Vacation'];
-    $review_Sick = $row['Leave_Sick'];
-    $review_Force =  $row['Leave_Force'];
-    $review_SPL =  $row['Leave_Special'];
-    $review_birth =  $row['employees_birthdate'];
 
+    $timeoff = $row['timeoff_Balance'];
+    $timeoff_remarks = $row['timeoff_Remarks'];
     $review_ID = $row['uID'];
-    $review_fname = ucwords(strtolower($row['employees_FirstName']));
-    $review_mname = ucwords(strtolower($row['employees_MiddleName']));
-    $review_lname = ucwords(strtolower($row['employees_LastName']));
-    $creditUpdateDate = date('F d, Y', strtotime($row['credit_updateDate']));
 
     $review_DepartmentUID = $row['employees_Department'];
+
+    // Extract hours and minutes from the timeoff_Balance
+    $hours = date('H', strtotime($timeoff));
+    $minutes = date('i', strtotime($timeoff));
+
+    if ($hours < 10) {
+        $hours = (int)$hours; // Remove the leading zero
+    }
+
+    $hoursLabel = ($hours < 2) ? 'hour' : 'hours';
+    $minutesLabel = ($minutes < 2) ? 'minute' : 'minutes';
+
+    $hoursAndMinutes = $hours . ' ' . $hoursLabel . ' ' . $minutes . ' ' . $minutesLabel;
+
     $subarray = array();
     $subarray[] = strtoupper($row['employees_uid']);
     $subarray[] = $row['dept_uid']; // Fetching department name from the join
     $subarray[] = $empName;
-    $subarray[] = $row['Leave_Vacation'];
-    $subarray[] = $row['Leave_Sick'];
-    $subarray[] = $row['Leave_Force'];
-    $subarray[] = $row['Leave_Special'];
-    $subarray[] = $creditUpdateDate;
+    $subarray[] = $hoursAndMinutes; // Add the concatenated hours and minutes
+    $subarray[] = $timeoff_remarks;
     $subarray[] =
 
-        '
-        <button type="button" id="add" class="btn btn-sm add-credit" data-toggle="modal" data-target="#AddCredit" 
+
+
+        '<button type="button" id="edit" class="btn btn-sm btn-secondary remarks-button" data-toggle="modal" data-target="#RemarksModal" 
+        data-image="'.$review_Image.'" 
+        data-uid="'.$review_ID.'"
+        data-empid="'.$review_Uid.'"
+        data-time="'.$timeoff.'"
+         data-empname="'.$empName.'"
+         data-dept="'.$review_Department.'"
+        data-remarks="'.$timeoff_remarks.'"
+    ><i class="bi bi-pencil-fill"></i> Edit Remarks</button>
+    
+        <button type="button" id="add" class="btn btn-sm add-credit" data-toggle="modal" data-target="#AddTimeOffModal"  style="margin-top: 5px"
         data-image ="'.$review_Image.'"
         data-uid="'.$review_ID.'"
         data-dept="'.$review_Department.'"
         data-empname="'.$empName.'"
-    ><span class="material-symbols-rounded">avg_pace</span> Record Late</button>';
+        data-credits="'.$timeoff.'"
+    ><span class="material-symbols-rounded">acute</span> Add Time-Off</button>
+    
+    <button type="button" id="claim" class="btn btn-sm  btn-primary claim-button" data-toggle="modal" data-target="#ClaimTimeOffModal"  style="margin-top: 5px"
+        data-image ="'.$review_Image.'"
+        data-uid="'.$review_ID.'"
+        data-dept="'.$review_Department.'"
+        data-empname="'.$empName.'"
+        data-credits="'.$timeoff.'"
+    ><i class="bi bi-hourglass-split"></i> Claim Time-Off</button>
+    
+    ';
 
     $data[] = $subarray;
 }
