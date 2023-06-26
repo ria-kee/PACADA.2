@@ -86,7 +86,7 @@ if (isset($_POST['order'])) {
     $sql .= " ORDER BY $orderBy $order";
 }else {
     // Default sorting by Leave_Date
-    $sql .= " ORDER BY leaves.Leave_Date";
+    $sql .= " ORDER BY leaves.Leave_Date DESC";
 }
 
 

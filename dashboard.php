@@ -348,7 +348,7 @@ $result_dept = mysqli_query($conn, $query_dept);
                                         </div>
                                         </a>
 
-                                        <a href="#">
+                                        <a href="timeOff.php">
                                         <div class="item time-off">
                                             <div class="icon">
                                                 <span class="material-symbols-rounded">acute</span>

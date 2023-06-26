@@ -55,15 +55,40 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
         <div class="button-container body-item">
             <div class="grid-item actions">
 
-                <h3><a href="leave.php">Leave</a><i class="bi bi-chevron-right"></i><b style="color: var(--color-p3">File Leave</b> </h3>
+                <h3><a id="leaveLink"  href="leave.php">Leave</a><i class="bi bi-chevron-right"></i><b style="color: var(--color-p3">File Leave</b> </h3>
             </div>
-            <a href="leave.php">
+            <a onclick="goBack()">
                 <div class="grid-item button2">
                     <span class="material-symbols-rounded">arrow_back</span>
                     <h3>Go Back</h3>
                 </div>
             </a>
         </div>
+
+        <script>
+            function goBack() {
+                var referrer = document.referrer;
+                if (referrer) {
+                    window.location.href = referrer;
+                } else {
+                    // Fallback behavior if there is no referrer
+                    history.back();
+                }
+            }
+
+            var previousLocation = document.referrer;
+            var leaveLink = document.getElementById('leaveLink');
+
+            if (previousLocation.includes('dashboard.php')) {
+                leaveLink.textContent = 'Dashboard';
+                leaveLink.href = 'dashboard.php';
+            } else if (previousLocation.includes('leave.php')) {
+                leaveLink.textContent = 'Leave';
+                leaveLink.href = 'leave.php';
+            }
+        </script>
+
+
         <div class="grid-container body-item">
             <div class="grid-item" style=" display: flex; align-items: center; justify-items: center">
                 <h3 style=" display: flex;  align-items: center; margin: 0;"> <span class="material-symbols-rounded" style="font-size: 20px;margin-right: 5px; color: var(--color-p1);">domain</span> From what department?</h3>

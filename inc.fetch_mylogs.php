@@ -1,18 +1,16 @@
 <?php
 include('includes/dbh.inc.php');
-
+session_start();
 $pageLength = $_POST['length'];
 $start = $_POST['start'];
 
-
-
 $sql = "SELECT logs.*, employees.employees_uid
         FROM logs
-        INNER JOIN employees ON logs.admin_uID = employees.uID";
+        INNER JOIN employees ON logs.admin_uID = employees.uID WHERE admin_uID = {$_SESSION['admin_uID']}";
 
 if (isset($_POST['search']['value'])) {
     $search_value = $_POST['search']['value'];
-    $sql .= " WHERE (employees.employees_uid LIKE '%" . $search_value . "%' ";
+    $sql .= " OR (employees.employees_uid LIKE '%" . $search_value . "%' ";
     $sql .= " OR logs.admin_Name LIKE '%" . $search_value . "%' ";
     $sql .= " OR logs.admin_Action LIKE '%" . $search_value . "%' ";
     $sql .= " OR logs.action_what LIKE '%" . $search_value . "%' ";

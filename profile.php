@@ -84,7 +84,7 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
             echo 'Administrator';
         }
         ?></small>
-    <button type="button" class="btn btn-outline-secondary" id="yes" onclick="" style="margin-top:1rem">View My Logs</button>
+    <a href="my_logs.php"><button type="button" class="btn btn-outline-secondary" id="yes"  style="margin-top:1rem">View My Logs</button></a>
 
     <button type="button" class="btn btn-outline-primary" id="changePassBtn" data-bs-toggle="modal" data-bs-target="#ChangePassModal" style="margin-top: 0.5rem">Change Password</button>
 </div>
