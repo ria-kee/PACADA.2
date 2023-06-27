@@ -10,7 +10,7 @@
     <title>Pacada</title>
 
     <!--Stylesheet-->
-    <link rel="stylesheet" href="css/style_index.css" />
+    <link rel="stylesheet" href="css/style_employee-login.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
 
     <!-- jQuery CDN Library -->
@@ -22,10 +22,10 @@
     <div class="box">
         <div class="inner-box">
             <div class="forms-wrap">
-                <form autocomplete="off" class="sign-in-form" action="login.php" method="POST" id="loginForm">
+                <form autocomplete="off" class="sign-in-form" action="inc.login_employee.php" method="POST" id="loginForm">
                     <div class="logo">
                         <img src="assets/PACADA/PACADA.png" alt="PACADA Logo" />
-                        <h3>PACADA <h3 style="font-weight: lighter; margin-left: 5px"> ADMIN</h3></h3>
+                        <h3>PACADA <h3 style="font-weight: lighter; margin-left: 5px"> EMPLOYEE</h3></h3>
                     </div>
 
                     <div class="heading">
@@ -40,15 +40,15 @@
                     <div class="actual-form">
                         <div class="input-wrap">
                             <!--SIGN IN FORM-->
-                                <input
-                                    id="signIn_email"
-                                    name="email"
-                                    type="email"
-                                    class="input-field"
-                                    autocomplete="off"
-                                    required
-                                />
-                                <label>Email</label>
+                            <input
+                                id="signIn_email"
+                                name="email"
+                                type="email"
+                                class="input-field"
+                                autocomplete="off"
+                                required
+                            />
+                            <label>Email</label>
                         </div>
 
                         <div class="input-wrap">
@@ -74,7 +74,7 @@
             <form id="password-reset-form" action="inc.password-reset-link.php" method="post" autocomplete="off" class="sign-up-form">
                 <div class="logo">
                     <img src="assets/PACADA/PACADA.png" alt="PACADA Logo" />
-                    <h3>PACADA <h3 style="font-weight: lighter; margin-left: 5px"> ADMIN</h3></h3>
+                    <h3>PACADA <h3 style="font-weight: lighter; margin-left: 5px"> EMPLOYEE</h3></h3>
                 </div>
 
                 <div class="heading">
@@ -84,10 +84,10 @@
 
 
 
-                    <div class="error d-none text-danger" id="phpmailer-error" style="flex-direction: column;">
-                        <span class="material-symbols-rounded" style="font-size: 30px;">error</span> <br>
-                        <span id="phpmailer-error-text"></span>
-                    </div>
+                <div class="error d-none text-danger" id="phpmailer-error" style="flex-direction: column;">
+                    <span class="material-symbols-rounded" style="font-size: 30px;">error</span> <br>
+                    <span id="phpmailer-error-text"></span>
+                </div>
 
 
 
@@ -137,9 +137,9 @@
             <div class="text-slider">
                 <div class="text-wrap">
                     <div class="text-group">
-                        <h2>Manage Employee Leave Credits</h2>
-                        <h2>Monitor Employee Leave Records</h2>
-                        <h2>Track Employee Time-Off</h2>
+                        <h2>View Your Leave Credits</h2>
+                        <h2>Monitor Your Leave Records</h2>
+                        <h2>Track Your Time-Off</h2>
                     </div>
                 </div>
 
@@ -155,8 +155,8 @@
 </main>
 
 <!-- Javascript file -->
-<script src="js/script_password-reset-link.js"></script>
-<script src="js/script_index.js"></script>
-<script src="js/script_login.js"></script>
+<script src="js/script_password-reset-link-employee.js"></script>
+<script src="js/script_employee-login.js"></script>
+<script src="js/script_login_employee.js"></script>
 </body>
 </html>

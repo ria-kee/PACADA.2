@@ -62,11 +62,9 @@ $(document).ready(function() {
                     $('#change-success').removeClass('d-none').addClass('show');
                     // Redirect to a login page
                     setTimeout(function() {
-                        window.location.href = 'index.php';
+                        window.location.href = 'employee-login.php';
                         exit();
                     }, 2000);
-
-
 
                 } else {
                     // Display error message
@@ -77,6 +75,7 @@ $(document).ready(function() {
             },
             error: function(xhr, status, error) {
                 // Display error message
+                $('#change-success').removeClass('show').addClass('d-none');
                 $('#change-error').removeClass('d-none').addClass('show');
                 $('#change-error-text').text('Password could not be changed. Error: ' + error);
             }

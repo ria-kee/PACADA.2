@@ -104,11 +104,12 @@ const lateInvalidFeedback = document.getElementById('late-invalid-feedback');
 
 var lateisValid =true;
 
-const enteredValue = lateInput.value;
+
+var enteredValue;
 // RECORD LATE MODAL
 lateInput.addEventListener('change', function() {
     // Retrieve the entered value
-
+    enteredValue = lateInput.value;
     if(enteredValue < 1){
         var VacationBalance = 1.25;
         var SickBalance = 1.25;
@@ -123,6 +124,7 @@ lateInput.addEventListener('change', function() {
         lateInvalidFeedback.textContent = 'the value should be less than 1.';
         lateisValid =false;
     }
+    console.error('enteredValue:'+ enteredValue );
 
 });
 

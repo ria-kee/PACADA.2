@@ -221,7 +221,7 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
 
                     <div class="form-group" style="margin-top: 15px">
                         <div class="input-group">
-                            <input type="number" id="late" min="0" max="0.9" step="0.001" class="form-control" id="minutesLate" value="0.000" placeholder="Enter Total Minutes Late">
+                            <input type="number" id="late" min="0" max="0.9" step="0.001" class="form-control" id="minutesLate" value="0.000" placeholder="">
                             <div class="input-group-append">
                                 <span class="input-group-text">Equiv. Day</span>
                             </div>

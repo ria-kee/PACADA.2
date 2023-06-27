@@ -25,7 +25,7 @@
                 <form autocomplete="off" class="sign-in-form" action="inc.password-change.php" method="POST" id="change-password-form">
                     <div class="logo">
                         <img src="assets/PACADA/PACADA.png" alt="PACADA Logo" />
-                        <h3>PACADA <h3 style="font-weight: lighter; margin-left: 5px"> ADMIN</h3></h3>
+                        <h3>PACADA <h3 style="font-weight: lighter; margin-left: 5px"> EMPLOYEE</h3></h3>
                     </div>
 
                     <div class="heading">
@@ -97,21 +97,21 @@
                 </form>
                 <p class="text">
                     Already settled your account?
-                    <a href="index.php" class="toggle">Sign in</a>
+                    <a href="employee-login.php" class="toggle">Sign in</a>
                 </p>
             </div>
 
         </div>
 
         <div class="carousel">
-            <img class="error_image" src="assets/img/Reset-password.png" alt="Error Image">
+            <img class="error_image" src="assets/img/Reset-password-employee.png" alt="Error Image">
 
         </div>
     </div>
     </div>
 </main>
 <!-- Javascript file -->
-<script src="js/script_password-change.js"></script>
+<script src="js/script_password-change-employee.js"></script>
 
 </body>
 </html>

@@ -54,6 +54,7 @@ var empTable = $('#empTable').DataTable({
     ajax: {
         url: 'inc.fetch_All_Employees.php',
         type: 'post',
+
     },
     columnDefs: [{
         targets: [8],
@@ -137,12 +138,10 @@ var empTable = $('#empTable').DataTable({
 // Export PDF
 $('#pdfExport').click(function() {
     empTable.button('.buttons-pdf').trigger();
-    console.log('Export PDF clicked');
 });
 // Export Excel
 $('#excelExport').click(function() {
     empTable.button('.buttons-excel').trigger();
-    console.log('Export Excel clicked');
 });
 $(document).ready(function() {
 
