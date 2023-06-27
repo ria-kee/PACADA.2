@@ -261,7 +261,7 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-primary"  title="Leave and Time-Off History">View History</button>
+                <button type="button" id="history" class="btn btn-outline-primary"  title="Leave and Time-Off History">View History</button>
             </div>
         </div>
     </div>
@@ -466,4 +466,5 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
     document.body.appendChild(document.getElementById('EditEmployee'));
     document.body.appendChild(document.getElementById('EmployeeArchiveModal'));
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 <script src="js/script_employees.js"></script>

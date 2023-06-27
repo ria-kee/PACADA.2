@@ -166,6 +166,7 @@ $(document).on('click', '.view-button', function() {
     var sick = $(this).data('sick');
     var force = $(this).data('force');
     var spl = $(this).data('spl');
+    var id =  $(this).data('emp');
 
     $('#image').attr('src', 'data:image/jpeg;base64,' + image);
     $('#name').text(name);
@@ -180,8 +181,31 @@ $(document).on('click', '.view-button', function() {
     $('#force').text(force);
     $('#spl').text(spl);
 
+    $('#history').data('name', name);
+    $('#history').data('emp', id);
     $('#ViewModal').modal('show'); // Show the  modal
 });
+
+$('#history').on('click', function() {
+    // Retrieve the 'emp' data associated with the button
+    var empID = $(this).data('emp');
+    var empName = $(this).data('name');
+
+    // Encrypt the employee ID using a secret key
+    var secretKey = 'd0$tP@c@da';
+    var encryptedEmpID = CryptoJS.AES.encrypt(empID.toString(), secretKey).toString();
+
+    // Create the URL with the encrypted employee ID and empName as query parameters
+    var url = 'history.php?employee=' + encodeURIComponent(encryptedEmpID) + '&Name=' + encodeURIComponent(empName);
+
+    // Redirect to the generated URL
+    window.location.href = url;
+});
+
+
+
+
+
 
 
 var defaultImage;
@@ -235,10 +259,11 @@ $(document).on('click', '.edit-button', function() {
     else{
         remove.style.display = 'block';
     }
-
-
     $('#EditEmployee').modal('show'); // Show the  modal
 });
+
+
+
 
 
 $('#UpdateEmployee').prop('disabled', true);

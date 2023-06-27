@@ -143,6 +143,7 @@ while ($row = mysqli_fetch_assoc($query)) {
         data-sick="'.$review_Sick.'"
         data-force="'.$review_Force.'"
         data-spl="'.$review_SPL.'"
+        data-emp="'.$review_ID.'"
     ><i class="bi bi-info-circle-fill"></i> View</button>
     
    

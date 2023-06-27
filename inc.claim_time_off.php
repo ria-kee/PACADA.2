@@ -26,12 +26,13 @@ if (isset($_POST['uID']) && isset($_POST['current']) && isset($_POST['claim']) &
         $action = 'claimed ' . $claim;
         $what = 'time-off credits for';
 
-        $query_findDept = "SELECT employees_uid FROM employees WHERE uID='$uID'";
+        $query_findDept = "SELECT employees_uid, employees_Department FROM employees WHERE uID='$uID'";
         $result_found = mysqli_query($conn, $query_findDept);
 
         if ($result_found) {
             $row = mysqli_fetch_assoc($result_found);
             $employee = $row['employees_uid'];
+            $dept = $row['employees_Department'];
         }
 
         $query_log = "INSERT INTO logs (admin_uID, admin_Name, admin_Action, action_what, action_toWhom) VALUES (?, ?, ?, ?, ?)";
@@ -47,6 +48,20 @@ if (isset($_POST['uID']) && isset($_POST['current']) && isset($_POST['claim']) &
         }
 
         $stmt_log->close();
+
+
+        $query_claim="INSERT INTO timeoff ( claimed_Time, employee_ID, employee_department,filedby_ID, filed_by,remarks) VALUES ( ?, ?, ?, ?, ?,?)";
+        $stmt_claim = $conn->prepare($query_claim);
+        $stmt_claim->bind_param("siiiss", $claim, $uID,$dept,$_SESSION['admin_uID'],  $_SESSION['admin_id'], $remarks );
+
+        if ($stmt_claim->execute()) {
+            // Department and log entry added successfully
+            $response = ['success' => true];
+        } else {
+            // Failed to add log entry
+            $response = ['success' => false];
+        }
+
 
         // Return a success message
         echo "Time-Off Remarks updated successfully!";
