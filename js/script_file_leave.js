@@ -318,25 +318,26 @@ file_submit.addEventListener('click',function(){
 
         if (leaveType === 'Vacation') {
             current = current_vacation;
-            updated = current - days;
+            updated = (current - days).toFixed(3);
+
             $("#preview_current").val(current);
             $("#preview_updated").val(updated);
         }
         else if (leaveType === 'Sick') {
             current = current_sick;
-            updated = current - days;
+            updated = (current - days).toFixed(3);
             $("#preview_current").val(current);
             $("#preview_updated").val(updated);
         }
         else if (leaveType === 'Force') {
             current = current_force;
-            updated = current - days;
+            updated = (current - days).toFixed(3);
             $("#preview_current").val(current);
             $("#preview_updated").val(updated);
         }
         else if (leaveType === 'Special') {
             current = current_spl;
-            updated = current - days;
+            updated = (current - days).toFixed(3);
             $("#preview_current").val(current);
             $("#preview_updated").val(updated);
         }
