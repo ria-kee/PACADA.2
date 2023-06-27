@@ -105,11 +105,14 @@ $result_dept = mysqli_query($conn, $query_dept);
             chartArea: {
                 height: '100%',
                 width: '100%',
-                left: 5,
+                left: 10,
+                top: 10,
+                right:10,
+                bottom:10
             },
             'width':120,
             'height':120,
-            pieHole: 0.4
+            // pieHole: 0.4
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('chart_employees'));
@@ -138,11 +141,15 @@ $result_dept = mysqli_query($conn, $query_dept);
             chartArea: {
                 height: '100%',
                 width: '100%',
-                left: 5,
+                left: 10,
+                top: 10,
+                right:10,
+                bottom:10
+
             },
             'width':120,
             'height':120,
-            pieHole: 0.4
+            // pieHole: 0.4
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('chart_leaves'));
@@ -170,11 +177,14 @@ $result_dept = mysqli_query($conn, $query_dept);
             chartArea: {
                 height: '100%',
                 width: '100%',
-                left: 5,
+                left: 10,
+                top: 10,
+                right:10,
+                bottom:10
             },
             'width':120,
             'height':120,
-            pieHole: 0.4
+            // pieHole: 0.4
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('chart_dept'));
