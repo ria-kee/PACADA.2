@@ -7,12 +7,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $is_admin = 1;
+    $is_superadmin = 1;
 
 
 // Prepare the SQL statement to retrieve the user's credentials from the database
-    $stmt = $conn->prepare('SELECT * FROM employees WHERE employees_Email = ? AND is_admin = ?');
-    $stmt->bind_param('si', $email, $is_admin);
+    $stmt = $conn->prepare('SELECT * FROM employees WHERE employees_Email = ? AND (is_admin = ? OR is_superadmin = ?)');
+    $stmt->bind_param('sii', $email, $is_admin, $is_superadmin);
     $stmt->execute();
+
 
 // Get the result of the query
     $result = $stmt->get_result();

@@ -12,8 +12,6 @@ $resetQuery = "UPDATE employees
                            WHERE MONTH(credit_updateDate) <> MONTH(CURRENT_DATE())";
 $resetResult = mysqli_query($conn, $resetQuery);
 
-
-
 // Check if the user is not logged in and the current page is not in the allowed pages list
 if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
     // Redirect the user to the login page or show access denied message
@@ -21,6 +19,7 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
     exit();
 }
 ?>
+
 <!-- jQuery CDN Library -->
 <script src="js/bootstrap/jquery-3.6.0.min.js"></script>
 <!-- BOOTSTRAP LIBRARY -->

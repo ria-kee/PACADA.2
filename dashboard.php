@@ -15,6 +15,50 @@ exit();
 <?php include "header/active_dashboard.php";?>
 <?php include('includes/dbh.inc.php');
 
+$action = 'reset SPL credits to';
+$what = '3 for a';
+$who = 'System';
+
+// Get the affected employees_uid values
+$affectedEmployeesQuery = "SELECT employees_uid FROM employees WHERE YEAR(credit_updateDate) <> YEAR(CURRENT_DATE())";
+$affectedEmployeesResult = mysqli_query($conn, $affectedEmployeesQuery);
+
+if ($affectedEmployeesResult) {
+    while ($row = mysqli_fetch_assoc($affectedEmployeesResult)) {
+        $employeeID = $row['employees_uid'];
+
+        $query_log = "INSERT INTO logs (admin_uID, admin_Name, admin_Action, action_what, action_toWhom) VALUES (?, ?, ?, ?, ?)";
+        $stmt_log = $conn->prepare($query_log);
+        $stmt_log->bind_param("issss", $who, $who, $action, $what, $employeeID);
+
+        if ($stmt_log->execute()) {
+            // Log entry added successfully for the current employee
+            // Continue with updating the Leave_Special value
+            $resetQuery = "UPDATE employees
+                           SET Leave_Special = 3, credit_updateDate = NOW()
+                           WHERE YEAR(credit_updateDate) <> YEAR(CURRENT_DATE())";
+            $resetResult = mysqli_query($conn, $resetQuery);
+
+            if ($resetResult) {
+                $response = ['success' => true];
+            } else {
+                $response = ['success' => false];
+                break; // Exit the loop on failure
+            }
+        } else {
+            // Failed to add log entry for the current employee
+            $response = ['success' => false];
+            break; // Exit the loop on failure
+        }
+
+        $stmt_log->close();
+    }
+} else {
+    // No affected employees found
+    $response = ['success' => false];
+}
+
+
 $query = "SELECT TIMESTAMPDIFF(YEAR, employees.employees_birthdate, CURDATE()) AS age, count(*) as number FROM employees GROUP BY age";
 $result = mysqli_query($conn, $query);
 
