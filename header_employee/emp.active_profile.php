@@ -55,11 +55,6 @@
             </li>
 
             <li>
-                <a href="employee_timeoff.php"><span class="material-symbols-outlined">
-                                    acute
-                                    </span>Timeoff</a>
-            </li>
-            <li>
                 <a href="employee_history.php" ><span class="material-symbols-outlined">
                                       history
                                       </span>History</a>

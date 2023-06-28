@@ -4148,12 +4148,24 @@ textarea.form-control-lg {
 .nav-pills .nav-link {
     background: 0 0;
     border: 0;
-    border-radius: .25rem;
+    border-radius: 10px 10px 0px 0px;
+    /*border: 1px solid lightgrey;*/
+    color: #80868B;
+
+}
+
+.nav-pills .nav-link:hover{
+    background-color: var(--color-p1);
+    color: #fff;
+    border-color: lightgrey;
 }
 
 .nav-pills .nav-link.active,.nav-pills .show>.nav-link {
-    color: #fff;
-    background-color: #0d6efd;
+    color: var(--color-p1);
+    background-color: #fff;
+    border-color: transparent;
+    font-weight: bold;
+    box-shadow: var(--box-shadow);
 }
 
 .nav-fill .nav-item,.nav-fill>.nav-link {

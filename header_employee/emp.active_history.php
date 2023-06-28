@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="css/bootstrap/datatables.min.css">
     <script src="js/bootstrap/datatables.min.js"></script>
     <!-- CUSTOM CSS -->
-    <link rel="stylesheet" href="css_employee/style_nav.css">
+    <link rel="stylesheet" href="css_employee/style_history.css">
 
     <!--EXPORT-->
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
@@ -54,11 +54,6 @@
                                       </span>Dashboard</a>
             </li>
 
-            <li>
-                <a href="employee_timeoff.php"><span class="material-symbols-outlined">
-                                    acute
-                                    </span>Time</a>
-            </li>
             <li>
                 <a href="employee_history.php" class="active"><span class="material-symbols-outlined">
                                       history
