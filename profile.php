@@ -1,7 +1,7 @@
 <?php
 session_start();
-$allowedPages = ['dashboard.php', 'departments.php', 'employees.php',
-    'leave.php', 'timeOff.php', 'admins.php',
+$allowedPages = ['dashboard.php', 'departments.php', 'employees.php', 'credits.php',
+    'leave.php', 'timeOff.php', 'admins.php', 'new_employee.php', 'file_leave.php', 'my_logs.php',
     'archived_departments.php', 'archived_employees.php','view_logs.php']; // List of allowed pages
 
 $currentFile = basename($_SERVER['PHP_SELF']); // Get the name of the current PHP file
@@ -165,3 +165,4 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
     document.body.appendChild(document.getElementById('ChangePassModal'));
 </script>
 <script src="js/script_profile.js"></script>
+<script src="js/script_session-timeout.js"></script>

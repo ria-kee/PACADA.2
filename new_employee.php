@@ -1,7 +1,7 @@
 <?php
 session_start();
-$allowedPages = ['dashboard.php', 'departments.php', 'leave.php',
-    'timeOff.php', 'admins.php', 'profile.php',
+$allowedPages = ['dashboard.php', 'departments.php', 'leave.php', 'employees.php',
+    'timeOff.php', 'admins.php', 'profile.php', 'file_leave.php', 'my_logs.php',
     'archived_departments.php', 'credits.php', 'archived_employees.php','view_logs.php']; // List of allowed pages
 
 $currentFile = basename($_SERVER['PHP_SELF']); // Get the name of the current PHP file
@@ -392,3 +392,4 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
         document.body.appendChild(document.getElementById('ReviewModal'));
     </script>
 <script src="js/script_add_employee.js"></script>
+<script src="js/script_session-timeout.js"></script>

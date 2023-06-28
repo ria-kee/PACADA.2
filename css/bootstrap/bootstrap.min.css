@@ -23,6 +23,11 @@
     --color-b1:#202020;
     --color-b2:#2f2f2f;
     --color-b3:#3f3f3f;
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+
 
 
     --color-input: #80868B;

@@ -29,6 +29,8 @@ $(document).ready(function() {
             data:{ email: input_email, password: input_password },
             success: function(response) {
 
+                $('#signIn_email').val('');
+                $('#signIn_password').val('');
                 // Successful login, redirect or perform desired action
                 window.location.href = 'employee_dashboard.php';
             },

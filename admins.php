@@ -1,13 +1,18 @@
 <?php
 session_start();
 $allowedPages = ['dashboard.php', 'departments.php', 'employees.php',
-    'leave.php', 'timeOff.php', 'profile.php',
+    'leave.php', 'timeOff.php', 'profile.php', 'new_employee.php', 'file_leave.php', 'my_logs.php',
     'archived_departments.php', 'credits.php', 'archived_employees.php', 'view_logs.php']; // List of allowed pages
 
 $currentFile = basename($_SERVER['PHP_SELF']); // Get the name of the current PHP file
 
 // Check if the user is not logged in and the current page is not in the allowed pages list
 if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
+    // Redirect the user to the login page or show access denied message
+    header('Location: error.401.php');
+    exit();
+}
+if ($_SESSION['is_superadmin'] !== 1) {
     // Redirect the user to the login page or show access denied message
     header('Location: error.401.php');
     exit();
@@ -211,3 +216,4 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
     document.body.appendChild(document.getElementById('confirmModal'));
 </script>
 <script src="js/script_admins.js"></script>
+<script src="js/script_session-timeout.js"></script>

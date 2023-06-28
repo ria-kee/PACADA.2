@@ -1,7 +1,7 @@
 <?php
 session_start();
-$allowedPages = ['dashboard.php', 'departments.php', 'employees.php',
-    'leave.php', 'timeOff.php', 'admins.php',
+$allowedPages = ['dashboard.php', 'departments.php', 'employees.php', 'new_employee.php',
+    'leave.php', 'timeOff.php', 'admins.php', 'file_leave.php', 'my_logs.php',
     'profile.php', 'credits.php', 'archived_departments.php','view_logs.php']; // List of allowed pages
 
 $currentFile = basename($_SERVER['PHP_SELF']); // Get the name of the current PHP file
@@ -216,3 +216,4 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
     document.body.appendChild(document.getElementById('ActivateEmp'));
 </script>
 <script src="js/script_archivedEmp.js"></script>
+<script src="js/script_session-timeout.js"></script>

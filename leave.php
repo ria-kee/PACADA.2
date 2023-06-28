@@ -1,7 +1,7 @@
 <?php
 session_start();
 $allowedPages = ['dashboard.php', 'departments.php', 'employees.php',
-    'timeOff.php', 'admins.php', 'profile.php',
+    'timeOff.php', 'admins.php', 'profile.php', 'new_employee.php', 'my_logs.php', 'file_leave.php',
     'archived_departments.php', 'credits.php', 'archived_employees.php','view_logs.php']; // List of allowed pages
 
 $currentFile = basename($_SERVER['PHP_SELF']); // Get the name of the current PHP file
@@ -231,3 +231,4 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
     document.body.appendChild(document.getElementById('cancelLeaveModal'));
 </script>
 <script src="js/script_leave.js"></script>
+<script src="js/script_session-timeout.js"></script>

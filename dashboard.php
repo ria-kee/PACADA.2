@@ -505,3 +505,6 @@ $result_dept = mysqli_query($conn, $query_dept);
 </script>
 
 
+<script src="js/script_session-timeout.js"></script>
+
+

@@ -9,6 +9,7 @@ $_SESSION = array();
 session_destroy();
 
 // Redirect to the login page
-header("Location: index.php");
+header("Location: employee-login.php");
 exit();
+
 
