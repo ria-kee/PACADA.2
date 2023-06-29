@@ -24,7 +24,7 @@ $('#timeTable').DataTable({
     lengthChange: false,
     order: [],
     ajax: {
-        url: 'inc.fetch_timeoff_history.php',
+        url: 'inc.employee_fetch_timeoff_history.php',
         type: 'post',
     },
     columnDefs: [{

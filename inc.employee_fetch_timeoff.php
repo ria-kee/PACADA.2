@@ -14,22 +14,19 @@ while ($row = mysqli_fetch_assoc($query)) {
     }
     $empName .= ucwords(strtolower($row['employees_LastName']));
 
-    $timeoffBalance = $row['timeoff_Balance'];
-    $timeComponents = explode(':', $timeoffBalance);
-    $hours = (int)$timeComponents[0];
-    $minutes = (int)$timeComponents[1];
+    $claimedTimeParts = explode(':', $row['timeoff_Balance']);
+    $hours = intval($claimedTimeParts[0]);
+    $minutes = intval($claimedTimeParts[1]);
 
-    $formattedTimeoffBalance = '';
-    if ($hours > 0) {
-        $formattedTimeoffBalance .= $hours . ($hours > 1 ? 'hrs ' : 'hr ');
-    }
-    if ($minutes > 0) {
-        $formattedTimeoffBalance .= $minutes . ($minutes > 1 ? 'mins' : 'min');
-    }
+    $hoursLabel = ($hours <= 1) ? 'hr' : 'hrs';
+    $minutesLabel = ($minutes <= 1) ? 'min' : 'mins';
+
+
+
 
     $subarray = array();
     $subarray[] =  $empName;
-    $subarray[] = $formattedTimeoffBalance;
+    $subarray[] = $hours . $hoursLabel . ' ' . $minutes . $minutesLabel;
     $data[] = $subarray;
 }
 

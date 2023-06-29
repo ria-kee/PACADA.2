@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="css/bootstrap/datatables.min.css">
     <script src="js/bootstrap/datatables.min.js"></script>
     <!-- CUSTOM CSS -->
-    <link rel="stylesheet" href="css_employee/style_nav.css">
+    <link rel="stylesheet" href="css_employee/style_employee_profile.css">
 
     <!--EXPORT-->
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>

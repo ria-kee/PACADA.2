@@ -57,6 +57,17 @@
         newInput.value = "";      // Clear the value of new password input
         confirmInput.value = "";  // Clear the value of confirm password input
 
+
+        currentFeedback.textContent = '';
+        currentPasswordInput.classList.remove('is-invalid');
+
+        confirmFeedback.textContent = '';
+        confirmPasswordInput.classList.remove('is-invalid');
+
+
+        newFeedback.textContent = '';
+        newPasswordInput.classList.remove('is-invalid');
+
         currentInput.type = "password";
         newInput.type = "password";
         confirmInput.type = "password";
