@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 include('includes/dbh.inc.php');
 
 $pageLength = $_POST['length'];
@@ -28,6 +31,7 @@ $sql .= " OR employees.employees_FirstName LIKE '%" . $search_value . "%' ";
 $sql .= " OR employees.employees_MiddleName LIKE '%" . $search_value . "%' ";
 $sql .= " OR employees.employees_LastName LIKE '%" . $search_value . "%' ";
 $sql .= " OR employees.employees_sex LIKE '%" . $search_value . "%' ";
+$sql .= " OR employees.employees_type LIKE '%" . $search_value . "%' ";
 $sql .= " OR dept_uid LIKE '%" . $search_value . "%' ";
 $sql .= " OR employees.Leave_Vacation LIKE '%" . $search_value . "%' ";
 $sql .= " OR employees.Leave_Sick LIKE '%" . $search_value . "%' ";
@@ -48,18 +52,21 @@ case 1:
 $column = 'dept_uid';
 break;
 case 2:
-$column = 'CONCAT(UCASE(employees.employees_FirstName), " ", IF(employees.employees_MiddleName != "", CONCAT(UCASE(SUBSTRING(employees.employees_MiddleName, 1, 1)), "."), ""), " ", UCASE(employees.employees_LastName))';
+$column = 'employees_type';
 break;
 case 3:
-$column = 'employees.Leave_Vacation';
+$column = 'CONCAT(UCASE(employees.employees_FirstName), " ", IF(employees.employees_MiddleName != "", CONCAT(UCASE(SUBSTRING(employees.employees_MiddleName, 1, 1)), "."), ""), " ", UCASE(employees.employees_LastName))';
 break;
 case 4:
-$column = 'employees.Leave_Sick';
+$column = 'employees.Leave_Vacation';
 break;
 case 5:
-$column = 'employees.Leave_Force';
+$column = 'employees.Leave_Sick';
 break;
 case 6:
+$column = 'employees.Leave_Force';
+break;
+case 7:
 $column = 'employees.Leave_Special';
 break;
 
@@ -88,7 +95,9 @@ $filtered_rows = $count_all_rows;
 
 $sql .= " LIMIT $start, $pageLength";
 
+
 $query = mysqli_query($conn, $sql);
+
 
 while ($row = mysqli_fetch_assoc($query)) {
     $empName = ucwords(strtolower($row['employees_FirstName'])) . ' ';
@@ -98,6 +107,8 @@ while ($row = mysqli_fetch_assoc($query)) {
     }
 
     $empName .= ucwords(strtolower($row['employees_LastName']));
+
+
     $review_Image = $row['employees_image'];
     $review_Name = $empName;
     $review_Department = $row['dept_uid'];
@@ -112,6 +123,7 @@ while ($row = mysqli_fetch_assoc($query)) {
     $review_SPL =  $row['Leave_Special'];
     $review_birth =  $row['employees_birthdate'];
     $review_remarks =  $row['employees_remarks'];
+    $review_type = $row['employees_type'];
 
     $review_ID = $row['uID'];
     $review_fname = ucwords(strtolower($row['employees_FirstName']));
@@ -120,8 +132,8 @@ while ($row = mysqli_fetch_assoc($query)) {
 
     $review_DepartmentUID = $row['employees_Department'];
     $subarray = array();
-    $subarray[] = strtoupper($row['employees_uid']);
     $subarray[] = $row['dept_uid']; // Fetching department name from the join
+    $subarray[] = $row['employees_type'];
     $subarray[] = $empName;
     $subarray[] = $row['Leave_Vacation'];
     $subarray[] = $row['Leave_Sick'];
@@ -133,6 +145,7 @@ while ($row = mysqli_fetch_assoc($query)) {
     '<button type="button" id="edit" class="btn btn-sm btn-info view-button" data-toggle="modal" data-target="#ViewModal" 
         data-image="'.$review_Image.'" 
         data-name="'.$review_Name.'"
+        data-type="'.$review_type.'"
         data-department="'.$review_Department.'"
         data-uid="'.$review_Uid.'"
         data-email="'.$review_Email.'"
@@ -153,6 +166,7 @@ while ($row = mysqli_fetch_assoc($query)) {
         data-mname="'.$review_mname.'"
         data-lname="'.$review_lname.'"
         data-birthdate ="'.$review_birth.'"
+        data-type="'.$review_type.'"
         data-department = "'.$review_DepartmentUID.'"
         data-uid="'.$review_ID.'"
         data-empid="'.$review_Uid.'"
@@ -176,10 +190,21 @@ while ($row = mysqli_fetch_assoc($query)) {
     $data[] = $subarray;
 }
 
+
 $output = array(
 'data' => $data,
 'draw' => intval($_POST['draw']),
 'recordsTotal' => $count_all_rows,
 'recordsFiltered' => $filtered_rows,
 );
-echo json_encode($output);
+
+// Fix encoding issues, convert non-UTF-8 characters, and encode data into JSON
+$json_output = json_encode($output);
+if ($json_output === false) {
+    // JSON encoding error occurred
+    $json_error = json_last_error_msg();
+    var_dump('JSON Error: ' . $json_error);
+} else {
+    // Output the JSON
+    echo $json_output;
+}

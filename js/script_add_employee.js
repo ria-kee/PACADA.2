@@ -16,6 +16,9 @@ const sickInput = document.getElementById('sick');
 const forceInput = document.getElementById('force');
 const splInput = document.getElementById('spl');
 
+const typeSelect  = document.getElementById('type');
+
+
 // FOR PERSONAL INPUT
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
@@ -28,6 +31,7 @@ const reviewName = document.getElementById('review_fullname');
 const reviewSex = document.getElementById('review_sex');
 const reviewBirth = document.getElementById('review_birthdate');
 const reviewDepartment = document.getElementById('review_department');
+const reviewType  = document.getElementById('review_type');
 const reviewAppDate = document.getElementById('review_appdate');
 const reviewVacation = document.getElementById('review_vacation');
 const reviewSick = document.getElementById('review_sick');
@@ -37,6 +41,7 @@ const reviewEmail = document.getElementById('review_email');
 const reviewPassword = document.getElementById('review_password');
 const reviewID = document.getElementById('review_id');
 const reviewProfile = document.getElementById('review-preview-image');
+
 
 
 // Validation feedback elements
@@ -52,6 +57,7 @@ const sickFeedback = document.getElementById('sick-invalid-feedback');
 const forceFeedback = document.getElementById('force-invalid-feedback');
 const splFeedback = document.getElementById('spl-invalid-feedback');
 const idFeedback = document.getElementById('empID-invalid-feedback');
+const typeFeedback =document.getElementById('type-invalid-feedback');
 
 const emailFeedback = document.getElementById('email-invalid-feedback');
 
@@ -230,31 +236,55 @@ deptSelect.addEventListener('change',function (){
     validateDept();
 
     if(this.value !== '0' && !isDeptIncreaseDone){
-        progress += 8;
+        progress += 6;
         progressIndicator.style.width = progress + '%';
         isDeptIncreaseDone = true;
     }
 
     if (sickInput.value.trim() !== '' && !isSickIncreaseDone) {
-        progress += 8;
+        progress += 6;
         progressIndicator.style.width = progress + '%';
         isSickIncreaseDone = true;
     }
 
     if (splInput.value.trim() !== '' && !isSplIncreaseDone) {
-        progress += 5;
+        progress += 6;
         progressIndicator.style.width = progress + '%';
         isSplIncreaseDone = true;
     }
 
     if(this.value === '0'){
-        progress -= 8;
+        progress -= 6;
         progressIndicator.style.width = progress + '%';
         isDeptIncreaseDone = false;
     }
 
+});
+
+
+// Validate Department Event
+let isTypeIncreaseDone = false;
+typeSelect.addEventListener('change',function (){
+    validateType();
+
+    if(this.value !== '0' && !isTypeIncreaseDone){
+        progress += 6;
+        progressIndicator.style.width = progress + '%';
+        isTypeIncreaseDone = true;
+    }
+
+    if(this.value === '0'){
+        progress -= 6;
+        progressIndicator.style.width = progress + '%';
+        isTypeIncreaseDone = false;
+    }
 
 });
+
+
+
+
+
 
 let isApptdateIncreaseDone = false;
 // Validate Appointment Event
@@ -262,26 +292,26 @@ apptdateInput.addEventListener('change',function (){
     validateAppDate();
 
     if(this.value !== '' && !isApptdateIncreaseDone){
-        progress += 5.5;
+        progress += 6;
         progressIndicator.style.width = progress + '%';
         isApptdateIncreaseDone = true;
     }
 
     if (vacationInput.value.trim() !== '' && !isVacationIncreaseDone) {
-        progress += 5.5;
+        progress += 6;
         progressIndicator.style.width = progress + '%';
         isVacationIncreaseDone = true;
     }
 
 
     if (forceInput.value.trim() !== '' && !isForceIncreaseDone) {
-        progress += 5.5;
+        progress +=6;
         progressIndicator.style.width = progress + '%';
         isForceIncreaseDone = true;
     }
 
     if(this.value === ''){
-        progress -= 5.5;
+        progress -= 6;
         progressIndicator.style.width = progress + '%';
         isApptdateIncreaseDone = false;
     }
@@ -293,12 +323,12 @@ vacationInput.addEventListener('change',function (){
     validateVacation();
 
     if (this.value.trim() !== '' && !isVacationIncreaseDone) {
-        progress += 5.5;
+        progress += 6;
         progressIndicator.style.width = progress + '%';
         isVacationIncreaseDone = true;
     }
     if (this.value.trim() === '') {
-        progress -= 5.5;
+        progress -= 6;
         progressIndicator.style.width = progress + '%';
         isVacationIncreaseDone = false;
     }
@@ -309,12 +339,12 @@ let isSickIncreaseDone = false;
 sickInput.addEventListener('change',function (){
     validateSick();
     if (this.value.trim() !== '' && !isSickIncreaseDone) {
-        progress += 5.5;
+        progress += 6;
         progressIndicator.style.width = progress + '%';
         isSickIncreaseDone = true;
     }
     if (this.value.trim() === '') {
-        progress -= 5.5;
+        progress -= 6;
         progressIndicator.style.width = progress + '%';
         isSickIncreaseDone = false;
     }
@@ -327,12 +357,12 @@ idInput.addEventListener('change', function (){
     validateId();
 
     if (this.value.trim() !== '' && !isIdIncreaseDone) {
-        progress += 5.5;
+        progress += 6;
         progressIndicator.style.width = progress + '%';
         isIdIncreaseDone = true;
     }
     if (this.value.trim() === '') {
-        progress -= 5.5;
+        progress -= 6;
         progressIndicator.style.width = progress + '%';
         isIdIncreaseDone = false;
     }
@@ -344,12 +374,12 @@ let isForceIncreaseDone = false;
 forceInput.addEventListener('change',function (){
     validateForce();
     if (this.value.trim() !== '' && !isForceIncreaseDone) {
-        progress += 5.5;
+        progress += 6;
         progressIndicator.style.width = progress + '%';
         isForceIncreaseDone = true;
     }
     if (this.value.trim() === '') {
-        progress -= 5.5;
+        progress -= 6;
         progressIndicator.style.width = progress + '%';
         isForceIncreaseDone = false;
     }
@@ -360,12 +390,12 @@ let isSplIncreaseDone = false;
 splInput.addEventListener('change',function (){
     validateSpl();
     if (this.value.trim() !== '' && !isSplIncreaseDone) {
-        progress += 5.5;
+        progress += 6;
         progressIndicator.style.width = progress + '%';
         isSplIncreaseDone = true;
     }
     if (this.value.trim() === '') {
-        progress -= 5.5;
+        progress -= 6;
         progressIndicator.style.width = progress + '%';
         isSplIncreaseDone = false;
     }
@@ -596,6 +626,24 @@ function validateDept(){
         return true;
     }
 }
+
+
+// Validate Type Selection
+function validateType(){
+    if (typeSelect.value === '0'){
+        typeSelect.classList.add('is-invalid');
+        typeFeedback.textContent = 'Please select employee type.';
+        return false;
+    } else {
+        typeSelect.classList.remove('is-invalid');
+        typeFeedback.textContent = '';
+        return true;
+    }
+}
+
+
+
+
 
 // Validate Sex Selection
 function validateSex() {
@@ -909,12 +957,14 @@ var vacation_work = '';
 var sick_work = '';
 var force_work = '';
 var spl_work = '';
+var type_work = '';
 
 // WHEN NEXT BUTTON2 IS CLICKED
 nextButton2.addEventListener('click', function() {
     // Validate Department, Appointment Date, Credit Balance (V,S,F,SPL)
     (async function() {
         const isIDValid = await validateId();
+        const isTypeValid = validateType();
         const isDepartmentValid = validateDept();
         const isAppDateValid = validateAppDate();
         const isVacationValid = validateVacation();
@@ -923,12 +973,13 @@ nextButton2.addEventListener('click', function() {
         const isSplValid = validateSpl();
 
         // Check if all required fields are valid
-        if (isIDValid && isDepartmentValid && isAppDateValid && isVacationValid && isSickValid && isForceValid && isSplValid) {
+        if (isTypeValid && isIDValid && isDepartmentValid && isAppDateValid && isVacationValid && isSickValid && isForceValid && isSplValid) {
 
 
             // Save the entered values to localStorage
             const workDetails = {
                 id: idInput.value,
+                type: typeSelect.value,
                 department: deptSelect.value,
                 appdate: apptdateInput.value,
                 vacation: vacationInput.value,
@@ -940,6 +991,7 @@ nextButton2.addEventListener('click', function() {
             localStorage.setItem('workDetails', JSON.stringify(workDetails));
 
             // Retrieve  workDetails
+            type_work = workDetails.type;
              department_work = workDetails.department;
              appdate_work = workDetails.appdate;
              vacation_work = workDetails.vacation;
@@ -1027,6 +1079,7 @@ nextButton3.addEventListener('click',function(){
 
             reviewID.innerHTML = idInput.value;
             reviewName.innerHTML =  fullName_per;
+            reviewType.innerHTML =  type_work + ' Employee';
 
             if (sex_per==='F'){
                 reviewSex.innerHTML = 'Female';
@@ -1113,6 +1166,7 @@ $('#addDepartmentButton').click(function() {
         formData.append('employees_LastName', lname_per);
         formData.append('employees_sex', sex_per);
         formData.append('employees_birthdate', birthdate_per);
+        formData.append('employees_type', type_work);
         formData.append('employees_Department', department_work);
         formData.append('employees_appointmentDate', appdate_work);
         formData.append('Leave_Vacation', vacation_work);

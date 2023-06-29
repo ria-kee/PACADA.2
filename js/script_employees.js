@@ -20,6 +20,8 @@ const forceInput = document.getElementById('edit_force');
 const splInput = document.getElementById('edit_spl');
 const remarksInput = document.getElementById('remarks');
 
+const typeSelect  = document.getElementById('Edittype');
+
 // SPANS
 const imageFeedback = document.getElementById('image-invalid-feedback');
 const firstNameFeedback = document.getElementById('fname-invalid-feedback');
@@ -32,6 +34,7 @@ const vacationFeedback = document.getElementById('vacation-invalid-feedback');
 const sickFeedback = document.getElementById('sick-invalid-feedback');
 const forceFeedback = document.getElementById('force-invalid-feedback');
 const splFeedback = document.getElementById('spl-invalid-feedback');
+const typeFeedback =document.getElementById('type-invalid-feedback');
 
 
 
@@ -53,8 +56,7 @@ var empTable = $('#empTable').DataTable({
     order: [],
     ajax: {
         url: 'inc.fetch_All_Employees.php',
-        type: 'post',
-
+        type: 'post'
     },
     columnDefs: [{
         targets: [8],
@@ -219,6 +221,7 @@ $(document).on('click', '.edit-button', function() {
     var sex = $(this).data('sex');
     var birthdate = $(this).data('birthdate');
     //WORK
+    var type = $(this).data('type');
     var department = $(this).data('department');
     var appdate = $(this).data('appdate');
     var vacation = $(this).data('vacation');
@@ -226,7 +229,6 @@ $(document).on('click', '.edit-button', function() {
     var force = $(this).data('force');
     var spl = $(this).data('spl');
     var remarks = $(this).data('remarks');
-
     var emp = $(this).data('empid');
 
     $('#preview-image').attr('src', 'data:image/jpeg;base64,' + image);
@@ -236,6 +238,7 @@ $(document).on('click', '.edit-button', function() {
     $('#Editsex').val(sex);
     $('#birthdate').val(birthdate);
 
+    $('#Edittype').val(type);
     $('#Editdepartment').val(department);
     $('#edit_appptdate').val(appdate);
 
@@ -458,6 +461,21 @@ $('.edit-input').on('input', function() {
             }
         }
 
+
+        function validateType(){
+            if (typeSelect.value === '0'){
+                typeSelect.classList.add('is-invalid');
+                typeFeedback.textContent = 'Please select employee type.';
+                return false;
+            } else {
+                typeSelect.classList.remove('is-invalid');
+                typeFeedback.textContent = '';
+                return true;
+            }
+        }
+
+
+
         function validateAppDate(){
             const appdate = apptdateInput.value;
             const inputDate = new Date(appdate);
@@ -648,6 +666,7 @@ $(document).ready(function() {
         const isLastNameValid = validateLastName();
         const isBirthdateValid = validateBirthdate();
         const isSexValid = validateSex();
+        const isTypeValid = validateType();
         const isDepartmentValid = validateDept();
         const isAppDateValid = validateAppDate();
         const isVacationValid = validateVacation();
@@ -657,7 +676,7 @@ $(document).ready(function() {
 
 
 
-        if (isUploadedImageValid && isImageChanged && isFirstNameValid && isLastNameValid && isBirthdateValid && isSexValid && isDepartmentValid && isAppDateValid && isVacationValid && isSickValid && isForceValid && isSplValid) {
+        if (isUploadedImageValid && isImageChanged && isFirstNameValid && isLastNameValid && isBirthdateValid && isSexValid && isTypeValid && isDepartmentValid && isAppDateValid && isVacationValid && isSickValid && isForceValid && isSplValid) {
             const reader = new FileReader();
 
 
@@ -684,6 +703,7 @@ $(document).ready(function() {
                 formData.append('employees_sex', sexSelect.value);
                 formData.append('employees_birthdate', birthdateInput.value);
                 formData.append('employees_Department', deptSelect.value);
+                formData.append('employees_type', typeSelect.value);
                 formData.append('employees_appointmentDate', apptdateInput.value);
                 formData.append('Leave_Vacation', vacationInput.value);
                 formData.append('Leave_Sick', sickInput.value);
@@ -725,7 +745,7 @@ $(document).ready(function() {
             // Start reading the image file as ArrayBuffer
             reader.readAsArrayBuffer(imageData);
         }
-        else if (isUploadedImageValid && isFirstNameValid && isLastNameValid && isBirthdateValid && isSexValid && isDepartmentValid && isAppDateValid && isVacationValid && isSickValid && isForceValid && isSplValid) {
+        else if (isUploadedImageValid && isFirstNameValid && isLastNameValid && isBirthdateValid && isSexValid && isTypeValid && isDepartmentValid && isAppDateValid && isVacationValid && isSickValid && isForceValid && isSplValid) {
 
             const formData = new FormData();
             formData.append('uid', uid.value);
@@ -735,6 +755,7 @@ $(document).ready(function() {
             formData.append('employees_sex', sexSelect.value);
             formData.append('employees_birthdate', birthdateInput.value);
             formData.append('employees_Department', deptSelect.value);
+            formData.append('employees_type', typeSelect.value);
             formData.append('employees_appointmentDate', apptdateInput.value);
             formData.append('Leave_Vacation', vacationInput.value);
             formData.append('Leave_Sick', sickInput.value);

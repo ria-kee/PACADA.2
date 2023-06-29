@@ -88,6 +88,14 @@
 
 }
 
+#type {
+    margin-top: -7px;
+    width: 100%;
+    height: 45px;
+    border-radius:0.25rem;
+
+}
+
 .steps .progress{
     position: absolute;
     height: 4px;

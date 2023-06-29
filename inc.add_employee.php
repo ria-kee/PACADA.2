@@ -9,6 +9,7 @@ $middleName = $_POST['employees_MiddleName'];
 $lastName = $_POST['employees_LastName'];
 $sex = $_POST['employees_sex'];
 $birthdate = $_POST['employees_birthdate'];
+$type = $_POST['employees_type'];
 $departmentId = $_POST['employees_Department'];
 $appointmentDate = $_POST['employees_appointmentDate'];
 $leaveVacation = $_POST['Leave_Vacation'];
@@ -42,10 +43,10 @@ $blobbed = $blob->data;
 
 // Prepare the SQL statement
 $sql = 'INSERT INTO employees (employees_uid, employees_image, employees_FirstName, employees_MiddleName, employees_LastName,
-                      employees_sex, employees_birthdate, employees_Department, employees_appointmentDate,
+                      employees_sex, employees_birthdate, employees_type, employees_Department, employees_appointmentDate,
                       Leave_Vacation, Leave_Sick, Leave_Force, Leave_Special, employees_Email, employees_Password, token,
                        is_active, is_admin, is_superadmin,credit_updateDate, credit_isUpdated)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)';
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)';
 
 // Prepare the statement and bind the parameters
 $stmt = $conn->prepare($sql);
@@ -61,7 +62,7 @@ $token = "NULL";
 
 // Bind the values to the placeholders
 $stmt->bind_param(
-    'sssssssisddddsssiiisi',
+    'ssssssssisddddsssiiisi',
     $uid,
     $blobbed,
     $firstName,
@@ -69,6 +70,7 @@ $stmt->bind_param(
     $lastName,
     $sex,
     $birthdate,
+    $type,
     $departmentId,
     $appointmentDate,
     $leaveVacation,

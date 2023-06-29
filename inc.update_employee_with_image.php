@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'employees_sex',
         'employees_birthdate',
         'employees_Department',
+        'employees_type',
         'employees_appointmentDate',
         'Leave_Vacation',
         'Leave_Sick',
@@ -35,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sex = $_POST['employees_sex'];
         $birthdate = $_POST['employees_birthdate'];
         $departmentId = $_POST['employees_Department'];
+        $type = $_POST['employees_type'];
         $appointmentDate = $_POST['employees_appointmentDate'];
         $leaveVacation = $_POST['Leave_Vacation'];
         $leaveSick = $_POST['Leave_Sick'];
@@ -61,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $blobbed = $blob->data;
 
         // Get the existing employee data before updating
-        $existingDataQuery = "SELECT employees_FirstName, employees_MiddleName, employees_LastName, employees_sex, employees_birthdate, employees_Department, employees_appointmentDate, Leave_Vacation, Leave_Sick, Leave_Force, Leave_Special, employees_remarks, employees_image, employees_uid FROM employees WHERE uID = ?";
+        $existingDataQuery = "SELECT employees_FirstName, employees_MiddleName, employees_LastName, employees_sex, employees_birthdate, employees_Department,employees_type, employees_appointmentDate, Leave_Vacation, Leave_Sick, Leave_Force, Leave_Special, employees_remarks, employees_image, employees_uid FROM employees WHERE uID = ?";
         $stmt_existingData = $conn->prepare($existingDataQuery);
         $stmt_existingData->bind_param("i", $uid);
         $stmt_existingData->execute();
@@ -73,6 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $existingSex,
             $existingBirthdate,
             $existingDepartmentId,
+            $existingType,
             $existingAppointmentDate,
             $existingLeaveVacation,
             $existingLeaveSick,
@@ -91,43 +94,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Check each field for changes and add them to the changes array
         if ($existingFirstName !== $firstName) {
-            $changes[] = "employees_FirstName: {$existingFirstName} -> {$firstName}";
+            $changes[] = "First Name: {$existingFirstName} -> {$firstName}";
         }
         if ($existingMiddleName !== $middleName) {
-            $changes[] = "employees_MiddleName: {$existingMiddleName} -> {$middleName}";
+            $changes[] = "Middle Name: {$existingMiddleName} -> {$middleName}";
         }
         if ($existingLastName !== $lastName) {
-            $changes[] = "employees_LastName: {$existingLastName} -> {$lastName}";
+            $changes[] = "Last Name: {$existingLastName} -> {$lastName}";
         }
         if ($existingSex !== $sex) {
-            $changes[] = "employees_sex: {$existingSex} -> {$sex}";
+            $changes[] = "Sex: {$existingSex} -> {$sex}";
         }
         if ($existingBirthdate !== $birthdate) {
-            $changes[] = "employees_birthdate: {$existingBirthdate} -> {$birthdate}";
+            $changes[] = "Birthdate: {$existingBirthdate} -> {$birthdate}";
         }
         if ($existingDepartmentId != $departmentId) {
-            $changes[] = "employees_Department: {$existingDepartmentId} -> {$departmentId}";
+            $changes[] = "Department: {$existingDepartmentId} -> {$departmentId}";
+        }
+        if ($existingType != $type) {
+            $changes[] = "Type: {$existingType} -> {$type}";
         }
         if ($existingAppointmentDate !== $appointmentDate) {
-            $changes[] = "employees_appointmentDate: {$existingAppointmentDate} -> {$appointmentDate}";
+            $changes[] = "Appointment Date: {$existingAppointmentDate} -> {$appointmentDate}";
         }
         if ($existingLeaveVacation !== $leaveVacation) {
-            $changes[] = "Leave_Vacation: {$existingLeaveVacation} -> {$leaveVacation}";
+            $changes[] = "Vacation Leave: {$existingLeaveVacation} -> {$leaveVacation}";
         }
         if ($existingLeaveSick !== $leaveSick) {
-            $changes[] = "Leave_Sick: {$existingLeaveSick} -> {$leaveSick}";
+            $changes[] = "Sick Leave: {$existingLeaveSick} -> {$leaveSick}";
         }
         if ($existingLeaveForce !== $leaveForce) {
-            $changes[] = "Leave_Force: {$existingLeaveForce} -> {$leaveForce}";
+            $changes[] = "Force Leave: {$existingLeaveForce} -> {$leaveForce}";
         }
         if ($existingLeaveSpecial !== $leaveSpecial) {
-            $changes[] = "Leave_Special: {$existingLeaveSpecial} -> {$leaveSpecial}";
+            $changes[] = "Special Leave: {$existingLeaveSpecial} -> {$leaveSpecial}";
         }
         if ($existingRemarks !== $employees_remarks) {
-            $changes[] = "employees_remarks: {$existingRemarks} -> {$employees_remarks}";
+            $changes[] = "employees remarks: {$existingRemarks} -> {$employees_remarks}";
         }
         if ($existingImage !== $blobbed) {
-            $changes[] = "employees_image: Image updated";
+            $changes[] = "employees image: Image updated";
         }
 
         // prepare and execute the query to update the department
@@ -138,6 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         employees_sex = ?,
                                         employees_birthdate = ?,
                                         employees_Department = ?,
+                                        employees_type = ?,
                                         employees_appointmentDate = ?,
                                         Leave_Vacation = ?,
                                         Leave_Sick = ?,
@@ -147,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         WHERE uID = ? ";
         $stmt = $conn->prepare($query);
         $stmt->bind_param(
-            "sssssssssssssi",
+            "ssssssssssssssi",
             $blobbed,
             $firstName,
             $middleName,
@@ -155,6 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sex ,
             $birthdate,
             $departmentId,
+            $type,
             $appointmentDate,
             $leaveVacation,
             $leaveSick ,

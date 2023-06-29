@@ -148,8 +148,8 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
         <table id="empTable" class="table table-striped" style="width:100%">
             <thead class="table-dark">
             <tr>
-                <th rowspan="2">ID</th>
                 <th rowspan="2">Department</th>
+                <th rowspan="2">Type</th>
                 <th rowspan="2">Name</th>
                 <th colspan="4">CREDIT BALANCE</th>
                 <th rowspan="2">Remarks</th>
@@ -353,7 +353,17 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
                             <form>
                                 <div class="row" style="margin-top: 15px">
 
-                                    <div class="col-md-6 mb-3" >
+                                    <div class="col-md-4 mb-3">
+                                        <label for="Edittype" class="form-label">Employee Type</label>
+                                        <select id="Edittype" class="form-select  edit-input">
+                                            <option value="0" selected disabled>Select Type</option>
+                                            <option value="Permanent">Permanent</option>
+                                            <option value="COS">COS</option>
+                                        </select>
+                                        <span id="type-invalid-feedback" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-4 mb-3" >
                                         <label for="Editdepartment" class="form-label">Assign Department</label>
                                         <select id="Editdepartment" class="form-select edit-input">
                                             <option value="0" selected disabled>Select Department</option>
@@ -370,11 +380,13 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
                                         <span id="dept-invalid-feedback" class="text-danger"></span>
                                     </div>
 
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-4 mb-3">
                                         <label for="edit_appptdate">Appointment Date</label>
                                         <input type="date" id="edit_appptdate" class="form-control edit-input">
                                         <span id="appdate-invalid-feedback" class="text-danger"></span>
                                     </div>
+
+
                                 </div>
                                 <h3 style="color: var(--color-b3) ; margin-top: 10px"><b>Credit Balance</b></h3>
                                 <hr class="mt-1 mb-1" id="divider"/>

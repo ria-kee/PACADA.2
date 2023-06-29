@@ -362,16 +362,32 @@ $result_dept = mysqli_query($conn, $query_dept);
                                         $timeDiff = $currentTime - $createdAt;
                                         $relativeTime = '';
 
-                                        // Retrieve the longblob image from the session variable
-                                        $encodedValue =$_SESSION['admin_Profile'];
+                                        // Retrieve the employee_image from the employees table or use default image
+                                        $uID = $row['admin_uID'];
+
+                                        if ($uID === '0') {
+                                            $encodedValue = 'assets/PACADA/system.png';
+                                        } else {
+                                            $encodedValue = $_SESSION['admin_Profile'];
+                                            $employeeQuery = "SELECT employees_image FROM employees WHERE uID = $uID";
+                                            $employeeResult = mysqli_query($conn, $employeeQuery);
+                                            $employeeRow = mysqli_fetch_assoc($employeeResult);
+                                            $encodedValue = $employeeRow['employees_image'];
+                                        }
 
                                         // Generate the HTML markup for each update
                                         $html .= '<div class="update">
-                <div class="profile-photo">
-                    <img src="data:image/jpeg;base64,' . $encodedValue . '" alt="Longblob Image">
-                </div>
+                <div class="profile-photo">';
+
+                                        if ($uID === '0') {
+                                            $html .= '<img src="' . $encodedValue . '" alt="Image">';
+                                        } else {
+                                            $html .= '<img src="data:image/jpeg;base64,' . $encodedValue . '" alt="Image">';
+                                        }
+
+                                        $html .= '</div>
                 <div class="message">
-                    <p><b>' . $row['admin_Name'] . '</b>'.' '.  $row['admin_Action'].' '.  $row['action_what']  .' '.  $row['action_toWhom'] .'.</p>
+                    <p><b>' . $row['admin_Name'] . '</b>' . ' ' .  $row['admin_Action'] . ' ' .  $row['action_what']  . ' ' .  $row['action_toWhom'] . '.</p>
                     <small id="recentupdates" class="text-muted relative" data-createdAt="' . strtotime($row['createdAt']) . '"></small>
                 </div>
             </div>';
@@ -379,6 +395,7 @@ $result_dept = mysqli_query($conn, $query_dept);
 
                                     $html .= '</div></div>';
                                     ?>
+
 
                                     <!-- Output the generated HTML markup -->
                                     <?php echo $html; ?>

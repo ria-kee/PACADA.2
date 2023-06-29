@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'employees_sex',
         'employees_birthdate',
         'employees_Department',
+        'employees_type',
         'employees_appointmentDate',
         'Leave_Vacation',
         'Leave_Sick',
@@ -35,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sex = $_POST['employees_sex'];
         $birthdate = $_POST['employees_birthdate'];
         $departmentId = $_POST['employees_Department'];
+        $type = $_POST['employees_type'];
         $appointmentDate = $_POST['employees_appointmentDate'];
         $leaveVacation = $_POST['Leave_Vacation'];
         $leaveSick = $_POST['Leave_Sick'];
@@ -50,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                          employees_sex,
                          employees_birthdate,
                          employees_Department,
+                         employees_type,
                          employees_appointmentDate,
                          Leave_Vacation,
                          Leave_Sick,
@@ -69,6 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $existingSex,
             $existingBirthdate,
             $existingDepartmentId,
+            $existingType,
             $existingAppointmentDate,
             $existingLeaveVacation,
             $existingLeaveSick,
@@ -82,73 +86,81 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $changes = [];
 
         if ($firstName !== $existingFirstName) {
-            $changes['employees_FirstName'] = [
+            $changes['First Name: '] = [
                 'old' => $existingFirstName,
                 'new' => $firstName
             ];
         }
         if ($middleName !== $existingMiddleName) {
-            $changes['employees_MiddleName'] = [
+            $changes['Middle Name: '] = [
                 'old' => $existingMiddleName,
                 'new' => $middleName
             ];
         }
         if ($lastName !== $existingLastName) {
-            $changes['employees_LastName'] = [
+            $changes['Last Name: '] = [
                 'old' => $existingLastName,
                 'new' => $lastName
             ];
         }
         if ($sex !== $existingSex) {
-            $changes['employees_sex'] = [
+            $changes['Sex: '] = [
                 'old' => $existingSex,
                 'new' => $sex
             ];
         }
         if ($birthdate !== $existingBirthdate) {
-            $changes['employees_birthdate'] = [
+            $changes['Birthdate: '] = [
                 'old' => $existingBirthdate,
                 'new' => $birthdate
             ];
         }
         if ($departmentId != $existingDepartmentId) {
-            $changes['employees_Department'] = [
+            $changes['Department: '] = [
                 'old' => $existingDepartmentId,
                 'new' => $departmentId
             ];
         }
+
+        if ($type != $existingType) {
+            $changes['Type: '] = [
+                'old' => $existingType,
+                'new' => $type
+            ];
+        }
+
         if ($appointmentDate !== $existingAppointmentDate) {
-            $changes['employees_appointmentDate'] = [
+            $changes['Appointment Date: '] = [
                 'old' => $existingAppointmentDate,
                 'new' => $appointmentDate
             ];
         }
         if ($leaveVacation !== $existingLeaveVacation) {
-            $changes['Leave_Vacation'] = [
+            $changes['Vacation Leave: '] = [
                 'old' => $existingLeaveVacation,
                 'new' => $leaveVacation
             ];
         }
         if ($leaveSick !== $existingLeaveSick) {
-            $changes['Leave_Sick'] = [
+            $changes['Sick Leave: '] = [
                 'old' => $existingLeaveSick,
                 'new' => $leaveSick
             ];
         }
         if ($leaveForce !== $existingLeaveForce) {
-            $changes['Leave_Force'] = [
+            $changes['Force Leave: '] = [
                 'old' => $existingLeaveForce,
                 'new' => $leaveForce
             ];
         }
         if ($leaveSpecial !== $existingLeaveSpecial) {
-            $changes['Leave_Special'] = [
+            $changes['Special Leave: '] = [
                 'old' => $existingLeaveSpecial,
                 'new' => $leaveSpecial
             ];
         }
         if ($employees_remarks !== $existingRemarks) {
-            $changes['employees_remarks'] = [
+            $changes['Remarks: '] = [
                 'old' => $existingRemarks,
                 'new' => $employees_remarks
             ];
@@ -161,6 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         employees_sex = ?,
                                         employees_birthdate = ?,
                                         employees_Department = ?,
+                                        employees_type = ?,
                                         employees_appointmentDate = ?,
                                         Leave_Vacation = ?,
                                         Leave_Sick = ?,
@@ -170,13 +183,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         WHERE uID = ? ";
         $stmt = $conn->prepare($query);
         $stmt->bind_param(
-            "ssssssssssssi",
+            "sssssssssssssi",
             $firstName,
             $middleName,
             $lastName,
             $sex,
             $birthdate,
             $departmentId,
+            $type,
             $appointmentDate,
             $leaveVacation,
             $leaveSick,

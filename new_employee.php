@@ -171,13 +171,24 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
             <hr class="mt-1 mb-1" id="divider"/>
             <form>
                 <div class="row">
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-3 mb-3">
                         <label for="empID">ID</label>
                         <input type="text" id="empID" class="form-control"  placeholder="ex.ABC-1213 / ABCD-1213" oninput="autoInputHyphen(event)" autocomplete="off">
                         <span id="empID-invalid-feedback" class="text-danger"></span>
                     </div>
 
-                    <div class="col-md-4 mb-3">
+
+                    <div class="col-md-3 mb-3">
+                        <label for="type" class="form-label">Employee Type</label>
+                        <select id="type" class="form-select">
+                            <option value="0" selected disabled>Select Type</option>
+                            <option value="Permanent">Permanent</option>
+                            <option value="COS">COS</option>
+                        </select>
+                        <span id="type-invalid-feedback" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
                         <label for="Department" class="form-label">Assign Department</label>
                         <select id="dept" class="form-select">
                             <option value="0" selected disabled>Select Department</option>
@@ -194,7 +205,7 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
                         <span id="dept-invalid-feedback" class="text-danger"></span>
                     </div>
 
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-3 mb-3">
                         <label for="apptdate">Appointment Date</label>
                         <input type="date" id="appptdate" class="form-control">
                         <span id="apptdate-invalid-feedback" class="text-danger"></span>
@@ -303,12 +314,13 @@ if (!isset($_SESSION['admin_uID']) && !in_array($currentFile, $allowedPages)) {
                             </div>
                             <div class="row">
 
-                                <div style="text-align: center;">
-                                    <span type="text" id="review_fullname">Name</span>
+                                <div style="text-align: center; margin: unset; padding: unset">
+                                    <span type="text" id="review_fullname" style="text-align: center; margin: unset; padding: unset">Name</span>
                                 </div>
-                            <div class="row">
-                                <div style="text-align: center; margin-bottom: 20px">
+                            <div class="row"  style="margin-left: 2px;">
+                                <div style="text-align: center; padding: unset; margin-right:unset;margin-bottom: 20px">
                                     <span type="text" id="review_department">Department</span>    |    <span type="text" id="review_id" >ID</span>
+                                    <br><i><span type="text" id="review_type" style="font-size: 12px; background-color: #6c757d; padding: 2px 8px; color: #fff; border-radius: var(--border-radius-2)">type</span></i>
                                 </div>
                             </div>
 
