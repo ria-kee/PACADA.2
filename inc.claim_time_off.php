@@ -23,7 +23,18 @@ if (isset($_POST['uID']) && isset($_POST['current']) && isset($_POST['claim']) &
     if ($result_update) {
 
         session_start();
-        $action = 'claimed ' . $claim;
+        $claimTime = explode(':', $claim);
+        $hours = (int)$claimTime[0];
+        $minutes = (int)$claimTime[1];
+
+        $action = 'claimed ';
+
+        if ($hours === 0 && $minutes === 0) {
+            $action .= '0 hr 0 min';
+        } else {
+            $action .= sprintf("%d hr %d min", $hours, $minutes);
+        }
+
         $what = 'time-off credits for';
 
         $query_findDept = "SELECT employees_uid, employees_Department FROM employees WHERE uID='$uID'";
