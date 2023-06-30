@@ -158,5 +158,7 @@
 <script src="js/script_password-reset-link.js"></script>
 <script src="js/script_index.js"></script>
 <script src="js/script_login.js"></script>
+
+<?php include('footer/footer.php');?>
 </body>
 </html>

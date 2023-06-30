@@ -158,5 +158,6 @@
 <script src="js/script_password-reset-link-employee.js"></script>
 <script src="js/script_employee-login.js"></script>
 <script src="js/script_login_employee.js"></script>
+<?php include('footer/footer.php');?>
 </body>
 </html>

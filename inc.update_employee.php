@@ -86,81 +86,81 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $changes = [];
 
         if ($firstName !== $existingFirstName) {
-            $changes['First Name: '] = [
+            $changes['First Name'] = [
                 'old' => $existingFirstName,
                 'new' => $firstName
             ];
         }
         if ($middleName !== $existingMiddleName) {
-            $changes['Middle Name: '] = [
+            $changes['Middle Name'] = [
                 'old' => $existingMiddleName,
                 'new' => $middleName
             ];
         }
         if ($lastName !== $existingLastName) {
-            $changes['Last Name: '] = [
+            $changes['Last Name'] = [
                 'old' => $existingLastName,
                 'new' => $lastName
             ];
         }
         if ($sex !== $existingSex) {
-            $changes['Sex: '] = [
+            $changes['Sex'] = [
                 'old' => $existingSex,
                 'new' => $sex
             ];
         }
         if ($birthdate !== $existingBirthdate) {
-            $changes['Birthdate: '] = [
+            $changes['Birthdate'] = [
                 'old' => $existingBirthdate,
                 'new' => $birthdate
             ];
         }
         if ($departmentId != $existingDepartmentId) {
-            $changes['Department: '] = [
+            $changes['Department'] = [
                 'old' => $existingDepartmentId,
                 'new' => $departmentId
             ];
         }
 
         if ($type != $existingType) {
-            $changes['Type: '] = [
+            $changes['Type'] = [
                 'old' => $existingType,
                 'new' => $type
             ];
         }
 
         if ($appointmentDate !== $existingAppointmentDate) {
-            $changes['Appointment Date: '] = [
+            $changes['Appointment Date'] = [
                 'old' => $existingAppointmentDate,
                 'new' => $appointmentDate
             ];
         }
         if ($leaveVacation !== $existingLeaveVacation) {
-            $changes['Vacation Leave: '] = [
+            $changes['Vacation Leave'] = [
                 'old' => $existingLeaveVacation,
                 'new' => $leaveVacation
             ];
         }
         if ($leaveSick !== $existingLeaveSick) {
-            $changes['Sick Leave: '] = [
+            $changes['Sick Leave'] = [
                 'old' => $existingLeaveSick,
                 'new' => $leaveSick
             ];
         }
         if ($leaveForce !== $existingLeaveForce) {
-            $changes['Force Leave: '] = [
+            $changes['Force Leave'] = [
                 'old' => $existingLeaveForce,
                 'new' => $leaveForce
             ];
         }
         if ($leaveSpecial !== $existingLeaveSpecial) {
-            $changes['Special Leave: '] = [
+            $changes['Special Leave'] = [
                 'old' => $existingLeaveSpecial,
                 'new' => $leaveSpecial
             ];
         }
         if ($employees_remarks !== $existingRemarks) {
-            $changes['Remarks: '] = [
+            $changes['Remarks'] = [
                 'old' => $existingRemarks,
                 'new' => $employees_remarks
             ];

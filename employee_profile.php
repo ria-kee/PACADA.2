@@ -121,3 +121,4 @@ if (!isset($_SESSION['employee_uID']) && !in_array($currentFile, $allowedPages))
 
 
 <script src="js_employee/emp.script_profile.js"></script>
+<script src="js_employee/emp.script_session-timeout.js"></script>

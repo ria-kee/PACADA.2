@@ -124,3 +124,4 @@ if (!isset($_SESSION['employee_uID'])) {
 
     setInterval(updateTime, 1000); // Refresh the time every second
 </script>
+<script src="js_employee/emp.script_session-timeout.js"></script>

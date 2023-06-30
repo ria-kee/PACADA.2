@@ -75,3 +75,4 @@ if (!isset($_SESSION['employee_uID']) && !in_array($currentFile, $allowedPages))
 </div>
 
 <script src="js_employee/emp.script_history.js"></script>
+    <script src="js_employee/emp.script_session-timeout.js"></script>
