@@ -27,9 +27,7 @@ Managing employee leave and time-off can be a complex and time-consuming task fo
 ## Employee Side
 
 - Access and view personal leave and time-off credits
-- View their own profile information
-- Submit leave applications
-- Track the status of leave applications
+- View their leave and time-off history
 
 ## Logs
 
