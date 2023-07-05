@@ -6,16 +6,14 @@ include('includes/dbh.inc.php');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $is_admin = 0;
     $is_superadmin = 0;
     $is_active = 1;
 
 
 // Prepare the SQL statement to retrieve the user's credentials from the database
-    $stmt = $conn->prepare('SELECT * FROM employees WHERE employees_Email = ? AND is_admin = ? AND is_superadmin = ? AND is_active = ?');
-    $stmt->bind_param('siii', $email, $is_admin, $is_superadmin,$is_active );
+    $stmt = $conn->prepare('SELECT * FROM employees WHERE employees_Email = ?  AND is_superadmin = ? AND is_active = ?');
+    $stmt->bind_param('sii', $email,  $is_superadmin,$is_active );
     $stmt->execute();
-
 
 // Get the result of the query
     $result = $stmt->get_result();
