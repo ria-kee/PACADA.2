@@ -19,15 +19,15 @@ function send_password_reset($get_name, $get_email, $token)
         $mail->isSMTP();                                            // Send using SMTP
         $mail->SMTPDebug = SMTP::DEBUG_SERVER;
 
-        $mail->Host = 'smtp.gmail.com';                       // Set the SMTP server to send through
+        $mail->Host = 'smtp.office365.com';                       // Set the SMTP server to send through
         $mail->SMTPAuth = true;                                   // Enable SMTP authentication
-        $mail->Username = 'pacadaservice@gmail.com';               // SMTP username
-        $mail->Password = 'ugifijlmnybgxitp';                       // SMTP password (Use an App Password if 2-Step Verification is enabled)
-        $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption
+        $mail->Username = 'techsupport@region1.dost.gov.ph';               // SMTP username
+        $mail->Password = 'Ma!n@@c!tsm';                       // SMTP password (Use an App Password if 2-Step Verification is enabled)
+        $mail->SMTPSecure = 'STARTTLS';                             // Enable TLS encryption
         $mail->Port = 587;                                    // TCP port to connect to
 
         // Recipients
-        $mail->setFrom('pacadaservice@gmail.com', 'PACADA Support');
+        $mail->setFrom('techsupport@region1.dost.gov.ph', 'PACADA Tech Support');
         $mail->addAddress($get_email);                              // Add a recipient
 
         // Content
@@ -38,7 +38,7 @@ function send_password_reset($get_name, $get_email, $token)
         <h2>Greetings!</h2>
         <h5 style="font-weight: unset">You are receiving this email because we received a password reset request for your account with the email ' . $get_email . '.</h5>
         <br/>
-        <a href="http://localhost/PACADA.2/change-password-employee.php?token=' . $token . '&email=' . $get_email . '" style="color:#5555a5"><b>Reset Password</b></a>
+        <a href="http://192.168.0.138/PACADA.2/change_password.php?token=' . $token . '&email=' . $get_email . '" style="color:#5555a5"><b>Reset Password</b></a>
         ';
 
         $mail->Body = $mail_template;
