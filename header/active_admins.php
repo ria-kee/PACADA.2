@@ -94,7 +94,7 @@
     <!--LOGOUTMODAL-->
     <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
          aria-hidden="true">
-        <div class="modal-dialog " role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #DF4759">
                     <span class="material-symbols-rounded">logout</span>
