@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (isset($_SESSION['employee_uID'])) {
+// Redirect the user to the login page or show access denied message
+    header('Location: employee_dashboard.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
