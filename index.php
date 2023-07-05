@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (isset($_SESSION['admin_uID'])) {
+// Redirect to the dashboard
+    header('Location: dashboard.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
