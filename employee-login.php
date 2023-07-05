@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['employee_uID'])) {
-// Redirect the user to the login page or show access denied message
+// Redirect to dashboard
     header('Location: employee_dashboard.php');
     exit();
 }
