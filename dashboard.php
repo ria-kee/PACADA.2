@@ -59,7 +59,7 @@ if ($affectedEmployeesResult) {
 }
 
 
-$query = "SELECT TIMESTAMPDIFF(YEAR, employees.employees_birthdate, CURDATE()) AS age, count(*) as number FROM employees GROUP BY age";
+$query = "SELECT TIMESTAMPDIFF(YEAR, employees.employees_birthdate, CURDATE()) AS age, count(*) as number FROM employees WHERE employees.is_superadmin = 0 GROUP BY age";
 $result = mysqli_query($conn, $query);
 
 
@@ -74,6 +74,7 @@ $result_emp = mysqli_query($conn, $query_emp);
 $query_dept = "SELECT employees.employees_Department, COUNT(*) AS employee_count, departments.dept_uid
                FROM employees
                INNER JOIN departments ON employees.employees_Department = departments.uID
+               WHERE employees.is_superadmin = 0
                GROUP BY employees.employees_Department";
 $result_dept = mysqli_query($conn, $query_dept);
 
